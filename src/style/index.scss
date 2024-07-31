@@ -1,0 +1,54 @@
+// @import './iconfont.css';
+
+.test {
+  // 可以通过 @apply 多个样式封装整体样式
+  @apply mt-4 ml-4;
+
+  padding-top: 4px;
+  color: red;
+}
+.center {
+  @apply flex items-center justify-center;
+}
+
+:root,
+page {
+  width: 100vw;
+  min-height: 100vh;
+}
+
+view {
+  box-sizing: border-box;
+}
+.border-1 {
+  border: 2rpx solid #eff4f9;
+}
+.border-1-top {
+  border-top: 2rpx solid #eff4f9;
+}
+.border-1-left {
+  border-left: 2rpx solid #eff4f9;
+}
+.border-1-bottom {
+  border-bottom: 2rpx solid #eff4f9;
+}
+.border-1-right {
+  border-right: 2rpx solid #eff4f9;
+}
+.safe-bottom-padding {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+//页面垂直居中
+.col-row-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+}
+.tab-shadow {
+  box-shadow: 0px 0px 16rpx 0px rgba(6, 11, 45, 0.04);
+}

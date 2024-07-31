@@ -1,0 +1,134 @@
+{
+  "globalStyle": {
+    "navigationStyle": "default",
+    "navigationBarTitleText": "uni-vue3",
+    "navigationBarBackgroundColor": "#f8f8f8",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#FFFFFF"
+  },
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^u--(.*)": "uview-plus/components/u-$1/u-$1.vue",
+			"^up-(.*)": "uview-plus/components/u-$1/u-$1.vue",
+	    "^u-([^-].*)": "uview-plus/components/u-$1/u-$1.vue"
+    }
+  },
+  "tabBar": {
+    "color": "#8f9ca2",
+    "selectedColor": "#000",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "blurEffect": "dark",
+    "height": "64px",
+    "fontSize": "14px",
+    "iconWidth": "32px",
+    "spacing": "0px",
+    "list": [
+      {
+        "iconPath": "static/tabbar/home.png",
+        "selectedIconPath": "static/tabbar/home-select.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "iconPath": "static/tabbar/tab1.png",
+        "selectedIconPath": "static/tabbar/tab1-select.png",
+        "pagePath": "pages/task/index",
+        "text": "tab1"
+      },
+      {
+        "iconPath": "static/tabbar/tab2.png",
+        "selectedIconPath": "static/tabbar/tab2-select.png",
+        "pagePath": "pages/waybill/index",
+        "text": "tab2"
+      },
+      {
+        "iconPath": "static/tabbar/user.png",
+        "selectedIconPath": "static/tabbar/user-select.png",
+        "pagePath": "pages/home/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "type": "home",
+      "style": {
+        "navigationBarTitleText": "首页",
+        "navigationStyle": "default"
+      },
+      "needLogin": false
+    },
+    {
+      "path": "pages/home/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "我的",
+        "navigationStyle": "custom"
+      },
+      "needLogin": false
+    },
+    {
+      "path": "pages/login/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "登录",
+        "navigationStyle": "default"
+      },
+      "needLogin": false
+    },
+    {
+      "path": "pages/search/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "搜索",
+        "navigationStyle": "custom"
+      },
+      "needLogin": true
+    },
+    {
+      "path": "pages/search/searchAppoint",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "搜索",
+        "navigationStyle": "custom"
+      },
+      "needLogin": true
+    },
+    {
+      "path": "pages/task/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "任务",
+        "navigationStyle": "default"
+      },
+      "needLogin": false
+    },
+    {
+      "path": "pages/waybill/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "运单",
+        "navigationStyle": "default"
+      },
+      "needLogin": false
+    }
+  ],
+  "subPackages": [
+    {
+      "root": "pages-sub",
+      "pages": [
+        {
+          "path": "orderDetail/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "订单详情",
+            "navigationStyle": "default"
+          }
+        }
+      ]
+    }
+  ]
+}
