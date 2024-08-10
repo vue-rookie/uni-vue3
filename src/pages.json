@@ -101,7 +101,7 @@
       "path": "pages/task/index",
       "type": "page",
       "style": {
-        "navigationBarTitleText": "任务",
+        "navigationBarTitleText": "tab1",
         "navigationStyle": "default"
       },
       "needLogin": false
@@ -110,7 +110,7 @@
       "path": "pages/waybill/index",
       "type": "page",
       "style": {
-        "navigationBarTitleText": "运单",
+        "navigationBarTitleText": "tab2",
         "navigationStyle": "default"
       },
       "needLogin": false

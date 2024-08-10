@@ -33,7 +33,6 @@
 <script setup lang="ts">
 import { useUserStore } from "@/store/user"
 import { usePageScroll } from "@/hooks/usePageScroll"
-const { getPhoneCodeFromWx } = useUserStore()
 const userStore = useUserStore()
 const { onPageScroll, navHeight, opacity } = usePageScroll()
 const agree = ref<boolean>(false)

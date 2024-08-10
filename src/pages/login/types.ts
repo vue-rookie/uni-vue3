@@ -9,9 +9,6 @@ export interface IMiniWxLoginParams {
   /* 临时登录code */
   loginCode: string
 
-  /* 平台 */
-  systemCode: string
-
   /* 获取手机号code */
   telephoneCode: string
 }

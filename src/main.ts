@@ -12,6 +12,7 @@ export function createApp() {
   app.use(routeInterceptor)
   app.use(requestInterceptor)
   app.use(prototypeInterceptor)
+  // 使用uviewPlus组件库
   app.use(uviewPlus)
   return {
     app,

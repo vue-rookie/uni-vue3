@@ -16,14 +16,14 @@ export default function useUpload<T = string>(formData: Record<string, any> = {}
     // 微信小程序在2023年10月17日之后，使用本API需要配置隐私协议
     uni.chooseMedia({
       count: 1,
-      mediaType: ['image'],
+      mediaType: ["image"],
       success: (res) => {
         loading.value = true
         const tempFilePath = res.tempFiles[0].tempFilePath
         uploadFile<T>({ tempFilePath, formData, data, error, loading })
       },
       fail: (err) => {
-        console.log('uni.chooseMedia err->', err)
+        console.log("uni.chooseMedia err->", err)
         error.value = true
       },
     })
@@ -37,7 +37,7 @@ export default function useUpload<T = string>(formData: Record<string, any> = {}
         uploadFile<T>({ tempFilePath, formData, data, error, loading })
       },
       fail: (err) => {
-        console.log('uni.chooseImage err->', err)
+        console.log("uni.chooseImage err->", err)
         error.value = true
       },
     })
@@ -51,13 +51,13 @@ function uploadFile<T>({ tempFilePath, formData, data, error, loading }) {
   uni.uploadFile({
     url: VITE_UPLOAD_BASEURL,
     filePath: tempFilePath,
-    name: 'file',
+    name: "file",
     formData,
     success: (uploadFileRes) => {
       data.value = uploadFileRes.data as T
     },
     fail: (err) => {
-      console.log('uni.uploadFile err->', err)
+      console.log("uni.uploadFile err->", err)
       error.value = true
     },
     complete: () => {
