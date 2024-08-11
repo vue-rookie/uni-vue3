@@ -5,14 +5,10 @@ import { platform } from "@/utils/platform"
 import { setAuthHeaders } from "@/utils/auth"
 export type CustomRequestOptions = UniApp.RequestOptions & {
   query?: Record<string, any>
-  /** 出错时是否隐藏错误提示 */
   hideErrorToast?: boolean
-} & IUniUploadFileOptions // 添加uni.uploadFile参数类型
+} & IUniUploadFileOptions
 
-// 请求基准地址
 const baseUrl = import.meta.env.VITE_SERVER_BASEURL
-
-// 拦截器配置
 const httpInterceptor = {
   // 拦截前触发
   invoke(options: CustomRequestOptions) {
@@ -49,16 +45,12 @@ const httpInterceptor = {
       ...options.header,
     }
     const userStore = useUserStore()
-    // 3. 添加 token 请求头标识
     const { token } = userStore.userInfo as unknown as IUserInfo
-    console.log("token:", token)
     if (token) {
       options.header = {
         ...options.header,
         ...setAuthHeaders(),
       }
-      // options.header.token = `${token}`
-      // options.header.userDeviceIdentify = `${userDeviceIdentify}`
     }
   },
 }

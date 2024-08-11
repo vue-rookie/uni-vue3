@@ -33,3 +33,7 @@ pnpm dev:mp-weixin
 ## 注意
 
 - 如果不想在pages页面中单独引入组件，全局组件可以放到uni-module模块下，这也是符合uni-app easycom的规范
+
+## 联系我
+
+- 需要定制开发微信小程序,+v：qq8181227

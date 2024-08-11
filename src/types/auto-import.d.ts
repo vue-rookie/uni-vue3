@@ -174,14 +174,12 @@ declare module 'vue' {
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
-    readonly useDate: UnwrapRef<typeof import('../hooks/useDate')['useDate']>
     readonly useDisplay: UnwrapRef<typeof import('../hooks/useDisplay')['useDisplay']>
     readonly useInputDataLimit: UnwrapRef<typeof import('../hooks/useInputLimit')['useInputDataLimit']>
     readonly useLocation: UnwrapRef<typeof import('../hooks/useLocation')['useLocation']>
     readonly usePageScroll: UnwrapRef<typeof import('../hooks/usePageScroll')['usePageScroll']>
     readonly useRequest: UnwrapRef<typeof import('../hooks/useRequest')['default']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
-    readonly useTool: UnwrapRef<typeof import('../hooks/useTool')['useTool']>
     readonly useUpload: UnwrapRef<typeof import('../hooks/useUpload')['default']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
@@ -263,14 +261,12 @@ declare module '@vue/runtime-core' {
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
-    readonly useDate: UnwrapRef<typeof import('../hooks/useDate')['useDate']>
     readonly useDisplay: UnwrapRef<typeof import('../hooks/useDisplay')['useDisplay']>
     readonly useInputDataLimit: UnwrapRef<typeof import('../hooks/useInputLimit')['useInputDataLimit']>
     readonly useLocation: UnwrapRef<typeof import('../hooks/useLocation')['useLocation']>
     readonly usePageScroll: UnwrapRef<typeof import('../hooks/usePageScroll')['usePageScroll']>
     readonly useRequest: UnwrapRef<typeof import('../hooks/useRequest')['default']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
-    readonly useTool: UnwrapRef<typeof import('../hooks/useTool')['useTool']>
     readonly useUpload: UnwrapRef<typeof import('../hooks/useUpload')['default']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>

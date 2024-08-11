@@ -1,5 +1,4 @@
 import { emptyDisplay } from "@/config"
-import { getFileInfoByKeyApi } from "@/api/common"
 /**
  * 所有通用展示类的方法
  * @returns
@@ -61,36 +60,10 @@ export const useDisplay = () => {
     const enumSelect = enumMap.find((item) => item.value === value)
     return enumSelect ? enumSelect.type : emptyDisplay
   }
-  /**
-   * 文件key
-   * @param key,key可以是字符串，可以数组
-   */
-  const getFileDiaplay = async (fileKey: string | string[], otherData?: any) => {
-    if (typeof fileKey === "string") {
-      const res = await getFileInfoByKeyApi({ fileKey, ...otherData })
-      if (res.success) {
-        return res.data.url
-      }
-    } else if (Array.isArray(fileKey)) {
-      const urls = []
-      const promises = fileKey.map(async (key) => {
-        const res = await getFileInfoByKeyApi({
-          fileKey: key,
-          ...otherData,
-        })
-        if (res.success) {
-          urls.push(res.data.url)
-        }
-      })
-      await Promise.all(promises)
-      return urls
-    }
-  }
   return {
     getDisPlay,
     getConcatDisplay,
     getEnumDisplay,
     getEnumDisplayType,
-    getFileDiaplay,
   }
 }
