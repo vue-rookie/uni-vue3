@@ -33,6 +33,7 @@ pnpm dev:mp-weixin
 ## 注意
 
 - 如果不想在pages页面中单独引入组件，全局组件可以放到uni-module模块下，这也是符合uni-app easycom的规范
+- 业务ts类型放到对应的pages对应文件type.ts中
 
 ## 联系我
 
