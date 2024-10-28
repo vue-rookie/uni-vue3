@@ -6,8 +6,7 @@ export const useUserStore = defineStore(
   "user",
   () => {
     const userInfo = ref<IUserInfo>({ ...initState })
-    const accountInfo = uni.getAccountInfoSync()
-    const appid = accountInfo.miniProgram.appId
+    const appid = "XXXXX" // 你的appid
     const setUserInfo = (val: IUserInfo) => {
       userInfo.value = val
     }
@@ -51,6 +50,7 @@ export const useUserStore = defineStore(
       isLogined,
       reset,
       appid,
+      loginByWechat,
     }
   },
   {
