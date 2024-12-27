@@ -1,5 +1,4 @@
 /* eslint-disable no-param-reassign */
-import qs from "qs"
 import { useUserStore } from "@/store"
 import { platform } from "@/utils/platform"
 import { setAuthHeaders } from "@/utils/auth"
@@ -14,28 +13,24 @@ const httpInterceptor = {
   invoke(options: CustomRequestOptions) {
     // 接口请求支持通过 query 参数配置 queryString
     if (options.query) {
-      const queryStr = qs.stringify(options.query)
+      const queryStr = new URLSearchParams(options.query).toString()
       if (options.url.includes("?")) {
         options.url += `&${queryStr}`
       } else {
         options.url += `?${queryStr}`
       }
     }
+
     // 非 http 开头需拼接地址
     if (!options.url.startsWith("http")) {
       // #ifdef H5
-      console.log(__VITE_APP_PROXY__)
       if (JSON.parse(__VITE_APP_PROXY__)) {
-        // 啥都不需要做
-      } else {
-        options.url = baseUrl + options.url
+        options.url = import.meta.env.VITE_APP_PROXY_PREFIX + options.url
       }
       // #endif
-      // 非H5正常拼接
       // #ifndef H5
       options.url = baseUrl + options.url
       // #endif
-      // TIPS: 如果需要对接多个后端服务，也可以在这里处理，拼接成所需要的地址
     }
     // 1. 请求超时
     options.timeout = 10000 // 10s
