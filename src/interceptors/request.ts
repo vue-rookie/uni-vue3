@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import qs from "qs"
 import { useUserStore } from "@/store"
 import { platform } from "@/utils/platform"
 import { setAuthHeaders } from "@/utils/auth"
@@ -13,7 +14,7 @@ const httpInterceptor = {
   invoke(options: CustomRequestOptions) {
     // 接口请求支持通过 query 参数配置 queryString
     if (options.query) {
-      const queryStr = new URLSearchParams(options.query).toString()
+      const queryStr = qs.stringify(options.query)
       if (options.url.includes("?")) {
         options.url += `&${queryStr}`
       } else {

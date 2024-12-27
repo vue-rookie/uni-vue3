@@ -86,6 +86,7 @@
     "jsencrypt": "^3.3.2",
     "pinia": "2.0.36",
     "pinia-plugin-persistedstate": "3.2.1",
+    "qs": "6.5.3",
     "uqrcodejs": "^4.0.7",
     "uview-plus": "^3.3.58",
     "vue": "3.4.21",
