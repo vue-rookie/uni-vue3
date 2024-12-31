@@ -1,0 +1,39 @@
+{
+  "code": 200,
+  "data": [
+    {
+      "url": "https://uview-plus.jiangruyi.com/album/1.jpg"
+    },
+    {
+      "url": "https://uview-plus.jiangruyi.com/album/2.jpg"
+    },
+    {
+      "url": "https://uview-plus.jiangruyi.com/album/3.jpg"
+    },
+    {
+      "url": "https://uview-plus.jiangruyi.com/album/4.jpg"
+    },
+    {
+      "url": "https://uview-plus.jiangruyi.com/album/5.jpg"
+    },
+    {
+      "url": "https://uview-plus.jiangruyi.com/album/6.jpg"
+    },
+    {
+      "url": "https://uview-plus.jiangruyi.com/album/7.jpg"
+    },
+    {
+      "url": "https://uview-plus.jiangruyi.com/album/8.jpg"
+    },
+    {
+      "url": "https://uview-plus.jiangruyi.com/album/9.jpg"
+    },
+    {
+      "url": "https://uview-plus.jiangruyi.com/album/10.jpg"
+    }
+  ],
+  "msg": "success",
+  "success": true,
+  "err": null,
+  "timestamp": 1696200000000
+}

@@ -49,7 +49,7 @@ const httpInterceptor = {
     if (token) {
       options.header = {
         ...options.header,
-        ...setAuthHeaders(),
+        // ...setAuthHeaders(),
       }
     }
   },

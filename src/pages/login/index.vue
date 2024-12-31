@@ -1,6 +1,6 @@
 <template>
   <view class="flex items-center h-full w-full flex-col h-screen">
-    <view :style="{ paddingTop: navHeight + 130 + 'rpx' }" class="w-full pb-5 font-500">
+    <view class="w-full pb-5 font-500">
       <view class="text-[44rpx] text-center px-[64rpx] text-[#060B2D]]">您好,</view>
       <view class="text-[44rpx] text-center px-[64rpx] text-[#060B2D]">欢迎使用uni-vue3</view>
     </view>
@@ -16,14 +16,14 @@
           手机号快捷登录
         </up-button>
         <view class="mt-4" :class="isErrorStatus ? 'error-status' : ''">
-          <wd-checkbox v-model="agree" @change="handleChange">
+          <up-checkbox v-model="agree" @change="handleChange">
             <text class="text-[12px]">
               我已阅读并同意
               <text class="text-[#06f]">《用户注册协议》</text>
               和
               <text class="text-[#06f]">《隐私协议》</text>
             </text>
-          </wd-checkbox>
+          </up-checkbox>
         </view>
       </view>
     </view>
@@ -31,16 +31,9 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from "@/store/user"
-import { usePageScroll } from "@/hooks/usePageScroll"
-const userStore = useUserStore()
-const { onPageScroll, navHeight, opacity } = usePageScroll()
 const agree = ref<boolean>(false)
 const isErrorStatus = ref<boolean>(false)
-
 const getPhoneNumber = async (e) => {
-  console.log(e)
-
   uni.showToast({
     icon: "success",
     title: "登录成功",

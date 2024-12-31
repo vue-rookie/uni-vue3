@@ -31,14 +31,4 @@ function click(item) {
 }
 </script>
 
-<style scoped lang="scss">
-:deep(.wd-search) {
-  width: 412rpx;
-}
-:deep(.wd-search__placeholder-txt) {
-  width: 350rpx;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-</style>
+<style scoped lang="scss"></style>

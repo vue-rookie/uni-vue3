@@ -1,0 +1,60 @@
+{
+  "projectName": "uni-app-vue3-ts",
+  "projectDesc": "基于uni-app+vue3+ts的模板项目",
+
+  "classPrefix": "uniVue-",
+  "layoutEnum": {
+    "indexPage": {
+      "header": {
+        "isCustom": true,
+        "customStyle": {
+          "type": 1,
+          "isNeedSearch": false
+        }
+      },
+      "body": {
+        "bodyList": [
+          {
+            "componentType": "UpCard",
+            "props": {
+              "border": true,
+              "padding": 30,
+              "num": 10,
+              "title": "标题",
+              "subTitle": "副标题"
+            },
+            "classNames": "",
+            "data": [],
+            "api": "/api/getCards"
+          },
+          {
+            "componentType": "UpSwiper",
+            "props": {
+              "autoplay": true,
+              "interval": 5000,
+              "duration": 1000,
+              "circular": false
+            },
+            "data": [],
+            "classNames": "",
+            "api": "/api/getSwipers"
+          },
+
+          {
+            "componentType": "UpList",
+            "props": {
+              "border": true,
+              "padding": 30,
+              "num": 10,
+              "title": "标题",
+              "subTitle": "副标题"
+            },
+            "api": "/api/getLists"
+          }
+        ],
+        "classNames": ""
+      },
+      "tabBar": {}
+    }
+  }
+}

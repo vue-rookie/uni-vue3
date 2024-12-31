@@ -56,6 +56,7 @@ module.exports = {
     "scss/load-no-partial-leading-underscore": "off",
     "no-redeclare": "off",
     "@typescript-eslint/no-redeclare": "error",
+    "@typescript-eslint/no-var-requires": "off",
   },
   settings: {
     "import/parsers": {
