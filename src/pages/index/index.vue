@@ -3,7 +3,7 @@
     <view v-for="(layout, index) in body.bodyList" :key="index" :class="body.classNames">
       <view :class="layout.classNames">
         <up-swiper
-          :list="swiperList"
+          :list="dataListMap[layout.dataField]"
           indicator
           indicatorMode="dot"
           v-if="layout.componentType === 'UpSwiper'"
@@ -42,7 +42,7 @@
       </view>
       <view v-if="layout.componentType === 'UpList'">
         <up-list>
-          <up-list-item v-for="(item, index) in scrollList" :key="index">
+          <up-list-item v-for="(item, index) in dataListMap[layout.dataField]" :key="index">
             <up-cell :title="`列表长度-${index + 1}`">
               <template #icon>
                 <up-avatar
@@ -61,36 +61,13 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue"
 import pageConfig from "@/config/style.config.json"
-import { http } from "@/utils/http"
+import { useApi } from "../hooks/useApi"
 const { body } = pageConfig.layoutEnum?.indexPage || {}
-const getApis = (): any => {
-  return body.bodyList.map((item) => {
-    return {
-      api: (data) => http.post(item.api, data),
-      componentType: item.componentType,
-    }
-  })
-}
-const swiperList = ref([])
-const scrollList = ref([])
-const cardList = ref([])
-
-const dataListMap = new Map([
-  ["UpSwiper", swiperList],
-  ["UpList", scrollList],
-  ["UpCard", cardList],
-])
-onLoad(() => {
-  getApis().forEach(async (item, index) => {
-    try {
-      const res = await item.api()
-      if (res.success || res.code === 200) {
-        dataListMap.get(item.componentType).value = res.data
-      }
-    } catch (error) {}
-  })
+const { getDataS, dataListMap } = useApi()
+onLoad(async () => {
+  await getDataS(body.bodyList)
+  console.log(dataListMap)
 })
 </script>
 

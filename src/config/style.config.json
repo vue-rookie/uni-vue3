@@ -25,7 +25,8 @@
             },
             "classNames": "",
             "data": [],
-            "api": "/api/getCards"
+            "api": "/api/getCards",
+            "dataField": "cardData"
           },
           {
             "componentType": "UpSwiper",
@@ -37,7 +38,8 @@
             },
             "data": [],
             "classNames": "",
-            "api": "/api/getSwipers"
+            "api": "/api/getSwipers",
+            "dataField": "swiperData"
           },
 
           {
@@ -49,7 +51,8 @@
               "title": "标题",
               "subTitle": "副标题"
             },
-            "api": "/api/getLists"
+            "api": "/api/getLists",
+            "dataField": "scrollData"
           }
         ],
         "classNames": ""
