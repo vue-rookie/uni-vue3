@@ -1,4 +1,4 @@
-import { http } from "@/utils/http"
+import { request } from "@/utils/request"
 interface IUploadParam {
   businessCode: string
   file: File
@@ -6,5 +6,5 @@ interface IUploadParam {
   objectType: string
 }
 export const uploadApi = (data?: IUploadParam) => {
-  return http.post<any>("/api/upload", data)
+  return request.post<any>("/api/upload", data)
 }

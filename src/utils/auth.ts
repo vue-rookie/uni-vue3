@@ -10,9 +10,9 @@ export const setAuthHeaders = () => {
   if (!token) {
     return {}
   }
-  // 如有需要，我们可以设置一些自定义请求头
+  // 如有需要，我们可以设置一些自定义请求头,比如设备名、token 等,跟自己的后端同学协商好的。
   const configHeaders = [
-    { key: "userDeviceIdentify", value: userDeviceIdentify },
+    { key: "deviceIdentify", value: userDeviceIdentify },
     { key: "token", value: token },
     { key: "otherKey", value: "xxx" },
   ]

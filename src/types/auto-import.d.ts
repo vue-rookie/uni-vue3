@@ -178,9 +178,7 @@ declare module 'vue' {
     readonly useInputDataLimit: UnwrapRef<typeof import('../hooks/useInputLimit')['useInputDataLimit']>
     readonly useLocation: UnwrapRef<typeof import('../hooks/useLocation')['useLocation']>
     readonly usePageScroll: UnwrapRef<typeof import('../hooks/usePageScroll')['usePageScroll']>
-    readonly useRequest: UnwrapRef<typeof import('../hooks/useRequest')['default']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
-    readonly useUpload: UnwrapRef<typeof import('../hooks/useUpload')['default']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>
@@ -265,9 +263,7 @@ declare module '@vue/runtime-core' {
     readonly useInputDataLimit: UnwrapRef<typeof import('../hooks/useInputLimit')['useInputDataLimit']>
     readonly useLocation: UnwrapRef<typeof import('../hooks/useLocation')['useLocation']>
     readonly usePageScroll: UnwrapRef<typeof import('../hooks/usePageScroll')['usePageScroll']>
-    readonly useRequest: UnwrapRef<typeof import('../hooks/useRequest')['default']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
-    readonly useUpload: UnwrapRef<typeof import('../hooks/useUpload')['default']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>

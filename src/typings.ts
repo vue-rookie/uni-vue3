@@ -1,6 +1,6 @@
 // 全局要用的类型放到这里
 
-type ZJResult<T> = {
+type ApiResult<T> = {
   success: boolean
   traceid: string
   code: string
@@ -10,7 +10,7 @@ type ZJResult<T> = {
   timestamp: number
 }
 
-type ZJPageResult<T> = {
+type ApiPageResult<T> = {
   list: T[]
   pageNo: number
   pageSize: number
@@ -20,7 +20,6 @@ type ZJPageResult<T> = {
   totalOrderCount?: number
 }
 
-// uni.uploadFile文件上传参数
 type IUniUploadFileOptions = {
   file?: File
   files?: UniApp.UploadFileOptionFiles[]
@@ -36,13 +35,10 @@ type IUserInfo = {
   openid?: string
   token?: string
   userDeviceIdentify?: string
-  driverId?: number
   secretKey?: string
   systemCode?: string
   username?: string
-  driverName?: string
   tenantId?: number
-  firstLogin?: boolean
   telephone?: number
   accountId?: number
   systemId?: number
