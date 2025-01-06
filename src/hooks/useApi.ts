@@ -27,7 +27,7 @@ export const useApi = () => {
   /**
    * 请求接口数据
    */
-  const getDataS = async (
+  const sendBatchRequest = async (
     list: Array<{ api: string; componentType: string; dataField: string; paramsField: string }>,
     apiParamsOption?: any,
   ) => {
@@ -36,7 +36,7 @@ export const useApi = () => {
       if (!item.api) continue
       try {
         const data = item?.paramsField ? apiParamsOption[item.paramsField] : item.paramsField
-        const res: ApiResult<any> = await item.api(data)
+        const res = await item.api(data)
         // 接口需要遵守返回规范,成功标志必须含有success:true或者code:200
         if (res.success || res.code === 200) {
           dataListMap[item.dataField] = res.data
@@ -47,5 +47,18 @@ export const useApi = () => {
     }
   }
 
-  return { getApis, getDataS, dataListMap }
+  const sendSpecifyRequest = async (url: string, data: any) => {
+    const res = await http.post(url, data)
+    try {
+      if (res.code === 200 || res.success) {
+        return res.data
+      } else {
+        return Promise.reject(res.msg)
+      }
+    } catch (error) {
+      return Promise.reject(res.msg)
+    }
+  }
+
+  return { getApis, sendBatchRequest, dataListMap, sendSpecifyRequest }
 }

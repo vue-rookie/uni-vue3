@@ -7,7 +7,25 @@
       "content": "描述内容1",
       "subContent": "描述子内容1",
       "url": "https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg",
-      "subUrl": "https://img12.360buyimg.com/n7/jfs/t1/102191/19/9072/330688/5e0af7cfE17698872/c91c00d713bf729a.jpg"
+      "subUrl": "https://img12.360buyimg.com/n7/jfs/t1/102191/19/9072/330688/5e0af7cfE17698872/c91c00d713bf729a.jpg",
+      "btns": [
+        {
+          "id": 1,
+          "title": "提交",
+          "key": "submit"
+        },
+        {
+          "id": 2,
+          "title": "查看",
+          "key": "view"
+        },
+        {
+          "id": 2,
+          "title": "删除",
+          "key": "delete"
+        }
+      ],
+      "status": 1
     },
     {
       "id": 2,
@@ -15,13 +33,34 @@
       "content": "描述内容2",
       "subContent": "描述子内容2",
       "url": "https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg",
-      "subUrl": "https://img12.360buyimg.com/n7/jfs/t1/102191/19/9072/330688/5e0af7cfE17698872/c91c00d713bf729a.jpg"
+      "subUrl": "https://img12.360buyimg.com/n7/jfs/t1/102191/19/9072/330688/5e0af7cfE17698872/c91c00d713bf729a.jpg",
+      "btns": [
+        {
+          "id": 1,
+          "title": "提交",
+          "key": "submit"
+        },
+        {
+          "id": 2,
+          "title": "查看",
+          "key": "view"
+        }
+      ],
+      "status": 2
     },
     {
       "id": 3,
       "title": "测试标题3",
       "content": "描述内容3",
-      "subContent": ""
+      "subContent": "",
+      "btns": [
+        {
+          "id": 2,
+          "title": "查看",
+          "key": "view"
+        }
+      ],
+      "status": 3
     }
   ],
   "msg": "success",

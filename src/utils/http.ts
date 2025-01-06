@@ -2,7 +2,7 @@ import { CustomRequestOptions } from "@/interceptors/request"
 import { useUserStore } from "@/store"
 export const http = <T>(options: CustomRequestOptions) => {
   // 1. 返回 Promise 对象
-  return new Promise<ZJResult<T>>((resolve, reject) => {
+  return new Promise<Result<T>>((resolve, reject) => {
     uni.request({
       ...options,
       dataType: "json",
@@ -14,17 +14,17 @@ export const http = <T>(options: CustomRequestOptions) => {
         const userStore = useUserStore()
         // 状态码 2xx，参考 axios 的设计
         if (res.statusCode >= 200 && res.statusCode < 300) {
-          if ((res.data as ZJResult<T>).success) {
+          if ((res.data as Result<T>).success) {
             // 2.1 提取核心数据 res.data
-            resolve(res.data as ZJResult<T>)
+            resolve(res.data as Result<T>)
           } else {
             uni.showToast({
               icon: "none",
-              title: (res.data as ZJResult<T>).msg || "请求错误",
+              title: (res.data as Result<T>).msg || "请求错误",
               duration: 5000,
             })
             const loginAuthCode = ["000100202", "000100203"]
-            if (loginAuthCode.includes((res.data as ZJResult<T>).code)) {
+            if (loginAuthCode.includes((res.data as Result<T>).code)) {
               userStore.clearUserInfo()
               uni.setStorageSync("driverInfo", {})
               setTimeout(() => {
@@ -44,7 +44,7 @@ export const http = <T>(options: CustomRequestOptions) => {
           !options.hideErrorToast &&
             uni.showToast({
               icon: "none",
-              title: (res.data as ZJResult<T>).msg || "请求错误",
+              title: (res.data as Result<T>).msg || "请求错误",
               duration: 5000,
             })
           reject(res)

@@ -5,8 +5,8 @@
       v-for="(item, index) in dataListMap.cardDetailData?.detailData"
       :key="index"
     >
-      <view class="min-w-100rpx" v-if="item.key?.show">{{ item.key?.name }}</view>
-      <view class="flex-1 ml-4" v-if="item.value?.type !== 'img'">
+      <view class="min-w-100rpx text-[#5A6B8F]" v-if="item.key?.show">{{ item.key?.name }}</view>
+      <view class="flex-1 ml-4 text-[#060B2D]" v-if="item.value?.type !== 'img'">
         {{ getValues(item.value?.value, item.value.options) }}
       </view>
       <view class="flex" v-else>
@@ -20,12 +20,11 @@
 import pageConfig from "@/config/style.config"
 import { useApi } from "@/hooks/useApi"
 const { body } = pageConfig.layoutEnum?.cardDetailPage || {}
-const { getDataS, dataListMap } = useApi()
+const { sendBatchRequest, dataListMap } = useApi()
 onLoad(async (option) => {
-  await getDataS(body.bodyList, {
+  await sendBatchRequest(body.bodyList, {
     cardParams: { id: option.id },
   })
-  console.log(dataListMap, 222)
 })
 const getValues = computed(() => {
   return (value, options) => {

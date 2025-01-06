@@ -1,16 +1,16 @@
 // 全局要用的类型放到这里
 
-type ZJResult<T> = {
+type Result<T> = {
   success: boolean
   traceid: string
-  code: string
+  code: number | string
   msg: string
   err: string
   data: T
   timestamp: number
 }
 
-type ZJPageResult<T> = {
+type PageResult<T> = {
   list: T[]
   pageNo: number
   pageSize: number

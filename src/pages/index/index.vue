@@ -16,7 +16,7 @@
           :key="cardId"
         >
           <template #body>
-            <view class="">
+            <view class="" @click.stop="handleClick(card)">
               <view class="flex justify-between items-center" v-if="card.content">
                 <view :class="layout.contentClassNames">
                   {{ card.content }}
@@ -39,9 +39,16 @@
               </view>
             </view>
           </template>
-          <template #foot>
-            <view>
-              <up-button type="primary" @click="handleClick(card)">查看详情</up-button>
+          <template #foot v-if="card.btns?.length">
+            <view class="flex justify-end">
+              <up-button
+                type="primary"
+                @click.stop="handleClick(btn, card)"
+                v-for="(btn, btnId) in card.btn"
+                :key="btnId"
+              >
+                {{ btn.name }}
+              </up-button>
             </view>
           </template>
         </up-card>
@@ -70,16 +77,36 @@
 import pageConfig from "@/config/style.config"
 import { useApi } from "@/hooks/useApi"
 const { body } = pageConfig.layoutEnum?.indexPage || {}
-const { getDataS, dataListMap } = useApi()
+const { sendBatchRequest, dataListMap, sendSpecifyRequest } = useApi()
 onLoad(async (option) => {
   const params = option
   console.log(params)
-  await getDataS(body.bodyList)
+  await sendBatchRequest(body.bodyList)
 })
-const handleClick = (card) => {
-  uni.navigateTo({
-    url: `/pages-sub/cardDetail/index?id=${card.id}`,
-  })
+const handleClick = (btn, card) => {
+  switch (btn.type) {
+    case "view":
+      uni.navigateTo({
+        url: `/pages-sub/cardDetail/index?id=${card.id}`,
+      })
+      break
+    case "submit":
+      try {
+        sendSpecifyRequest(card.id, card.body)
+        uni.showToast({
+          title: "提交成功",
+          icon: "none",
+        })
+      } catch (error) {
+        uni.showToast({
+          title: error.msg,
+          icon: "none",
+        })
+      }
+      break
+    default:
+      break
+  }
 }
 </script>
 

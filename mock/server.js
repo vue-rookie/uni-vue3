@@ -5,7 +5,6 @@ const path = require("path")
 const app = express()
 const cors = require("cors")
 const PORT = 5000
-console.log(mockList)
 // 配置 CORS 中间件
 app.use(
   cors({
