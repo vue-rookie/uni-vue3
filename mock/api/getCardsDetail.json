@@ -1,0 +1,66 @@
+{
+  "code": 200,
+  "data": {
+    "id": 1,
+    "detailData": [
+      {
+        "key": {
+          "name": "图片",
+          "filed": "shopDes",
+          "show": false
+        },
+        "value": {
+          "type": "img",
+          "value": "https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg"
+        }
+      },
+      {
+        "key": {
+          "name": "货物名称",
+          "filed": "shopName",
+          "show": true
+        },
+        "value": {
+          "type": "text",
+          "value": "货物名称嘻嘻嘻xxxxxxx货物名称"
+        }
+      },
+      {
+        "key": {
+          "name": "货物描述",
+          "filed": "shopDes",
+          "show": true
+        },
+        "value": {
+          "type": "text",
+          "value": "货物名称嘻嘻嘻xxxxxxx货物描述"
+        }
+      },
+      {
+        "key": {
+          "name": "订单状态",
+          "filed": "status",
+          "show": true
+        },
+        "value": {
+          "type": "select",
+          "options": [
+            {
+              "value": 1,
+              "label": "运输中"
+            },
+            {
+              "value": 2,
+              "label": "已签收"
+            }
+          ],
+          "value": 1
+        }
+      }
+    ]
+  },
+  "msg": "success",
+  "success": true,
+  "err": null,
+  "timestamp": 123123123123
+}

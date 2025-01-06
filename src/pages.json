@@ -127,6 +127,14 @@
             "navigationBarTitleText": "订单详情",
             "navigationStyle": "default"
           }
+        },
+        {
+          "path": "cardDetail/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "详情",
+            "navigationStyle": "default"
+          }
         }
       ]
     }

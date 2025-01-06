@@ -96,6 +96,7 @@
     "useTool": true,
     "useLocation": true,
     "useInputDataLimit": true,
-    "useInputLimit": true
+    "useInputLimit": true,
+    "useApi": true
   }
 }

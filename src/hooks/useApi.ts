@@ -12,13 +12,14 @@ export const useApi = () => {
    * @returns
    */
   const getApis = (
-    list: Array<{ api: string; componentType: string; dataField: string }>,
+    list: Array<{ api: string; componentType: string; dataField: string; paramsField: string }>,
   ): ApiItem[] => {
     return list.map((item) => {
       return {
         api: item.api ? (data) => http.post(item.api, data) : null,
         componentType: item.componentType,
         dataField: item.dataField,
+        paramsField: item.paramsField,
       }
     })
   }
@@ -27,13 +28,15 @@ export const useApi = () => {
    * 请求接口数据
    */
   const getDataS = async (
-    list: Array<{ api: string; componentType: string; dataField: string }>,
+    list: Array<{ api: string; componentType: string; dataField: string; paramsField: string }>,
+    apiParamsOption?: any,
   ) => {
     const apis = getApis(list)
     for (const item of apis) {
       if (!item.api) continue
       try {
-        const res: ApiResult<any> = await item.api()
+        const data = item?.paramsField ? apiParamsOption[item.paramsField] : item.paramsField
+        const res: ApiResult<any> = await item.api(data)
         // 接口需要遵守返回规范,成功标志必须含有success:true或者code:200
         if (res.success || res.code === 200) {
           dataListMap[item.dataField] = res.data
