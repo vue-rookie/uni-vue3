@@ -15,16 +15,6 @@
         >
           手机号快捷登录
         </up-button>
-        <view class="mt-4" :class="isErrorStatus ? 'error-status' : ''">
-          <up-checkbox v-model="agree" @change="handleChange">
-            <text class="text-[12px]">
-              我已阅读并同意
-              <text class="text-[#06f]">《用户注册协议》</text>
-              和
-              <text class="text-[#06f]">《隐私协议》</text>
-            </text>
-          </up-checkbox>
-        </view>
       </view>
     </view>
   </view>

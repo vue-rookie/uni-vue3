@@ -11,17 +11,17 @@
       "btns": [
         {
           "id": 1,
-          "title": "提交",
+          "name": "提交",
           "key": "submit"
         },
         {
           "id": 2,
-          "title": "查看",
+          "name": "查看",
           "key": "view"
         },
         {
           "id": 2,
-          "title": "删除",
+          "name": "删除",
           "key": "delete"
         }
       ],
@@ -37,12 +37,12 @@
       "btns": [
         {
           "id": 1,
-          "title": "提交",
+          "name": "提交",
           "key": "submit"
         },
         {
           "id": 2,
-          "title": "查看",
+          "name": "查看",
           "key": "view"
         }
       ],
@@ -56,7 +56,7 @@
       "btns": [
         {
           "id": 2,
-          "title": "查看",
+          "name": "查看",
           "key": "view"
         }
       ],

@@ -1,5 +1,5 @@
 /**
- * 这里防业务中的一些枚举类型
+ * 这里存放业务中的一些枚举类型
  */
 export interface ICommonConstant<T = number> {
   label: string
