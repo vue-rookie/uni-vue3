@@ -6,6 +6,7 @@ import { routeInterceptor, requestInterceptor, prototypeInterceptor } from "./in
 import "virtual:uno.css"
 import "@/style/index.scss"
 import "@/static/fonts/style.css"
+import "uview-plus/index.scss"
 export function createApp() {
   const app = createSSRApp(App)
   app.use(store)
