@@ -44,10 +44,3 @@ pnpm dev:mp-weixin
 
 - +v：qq8181227
 
-### 捐赠
-
-如果你觉得对你有帮助，可以请作者喝coffee！
-
-<p align='center'>
-<img alt="微信收款码" src="./src/static/pay.jpg" height="330" style="display:inline-block; height:330px;">
-</p>
