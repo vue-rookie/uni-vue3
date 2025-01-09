@@ -1,5 +1,5 @@
-# 2024 最新 uni-app 开发模板
-
+# 2025 最新 uni-app 开发模板
+uni-app Vue3 + Vite + TypeScript + Pinia + Unocss +  uview-plus
 使用最新 uni-app vue-cli 模板， vue3、vite 最新版本搭建，通过命令方式运行和打包构建，加入了 unocss 原子化开发方式，极大的提升您的开发效率。
 
 ## 技术架构
