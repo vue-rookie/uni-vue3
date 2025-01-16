@@ -38,7 +38,38 @@ pnpm dev:mp-weixin
 ## 未来要做什么？
 
 - 完全低代码配置模式，无需做任何开发，，包括后端接口联调也只需要配置
+- 后端接口返回格式只需按照框架约定的规则返回。秉持的原则始终是约定>配置
 - 有兴趣的小伙伴一起加入研发
+- 在config 分支开发，如果没用后端接口，需要先执行server.js模拟后端接口数据，
+```
+   node mock.server.js
+
+```
+-如果有后端接口，修改config/style.config.ts中对应的api地址为你的接口地址，同时修改环境变量中的VITE_SERVER_BASEURL
+-注意：接口返回值需要遵循返回规范
+
+```
+// 通用返回值
+type ApiResult<T> = {
+  success: boolean
+  code: number | string
+  msg: string
+  err: string
+  data: T
+  timestamp: number
+}
+// 分页返回值
+type ApiPageResult<T> = {
+  list: T[]
+  pageNo: number
+  pageSize: number
+  total: number
+  totalPages: number
+  totalAmount: number
+  totalOrderCount: number
+}
+
+```
 
 ## 联系我
 
