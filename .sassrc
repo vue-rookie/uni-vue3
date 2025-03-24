@@ -1,3 +1,4 @@
 {
-  "quiet": true
+  "quiet": true,
+  "quietDeps": true
 } 

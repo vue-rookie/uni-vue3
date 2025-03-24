@@ -9,6 +9,8 @@ import UnoCSS from "unocss/vite"
 import AutoImport from "unplugin-auto-import/vite"
 import { visualizer } from "rollup-plugin-visualizer"
 import ViteRestart from "vite-plugin-restart"
+import { resolve } from "path"
+
 export default ({ command, mode }) => {
   console.log("command, mode -> ", command, mode)
 
@@ -80,6 +82,19 @@ export default ({ command, mode }) => {
     css: {
       postcss: {
         plugins: [],
+      },
+      preprocessorOptions: {
+        scss: {
+          includePaths: [resolve(__dirname, "src")],
+          additionalData: `@use "@/style/_mixins.scss" as *; @use "@/style/uview-theme.scss" as *;`,
+          sassOptions: {
+            quiet: true,
+            quietDeps: true,
+            logger: {
+              warn: () => {},
+            },
+          },
+        },
       },
     },
 
