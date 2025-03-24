@@ -74,6 +74,8 @@ export default defineManifestConfig({
       sdkConfigs: {},
       /* 图标配置 */
       icons: {
+        // 临时注释掉图标配置，避免加载错误
+        /* 
         android: {
           hdpi: "static/app/icons/72x72.png",
           xhdpi: "static/app/icons/96x96.png",
@@ -104,6 +106,7 @@ export default defineManifestConfig({
             "spotlight@3x": "static/app/icons/120x120.png",
           },
         },
+        */
       },
     },
   },

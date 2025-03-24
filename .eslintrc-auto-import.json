@@ -96,6 +96,13 @@
     "useTool": true,
     "useLocation": true,
     "useInputDataLimit": true,
-    "useInputLimit": true
+    "useInputLimit": true,
+    "DirectiveBinding": true,
+    "MaybeRef": true,
+    "MaybeRefOrGetter": true,
+    "onWatcherCleanup": true,
+    "useId": true,
+    "useModel": true,
+    "useTemplateRef": true
   }
 }
