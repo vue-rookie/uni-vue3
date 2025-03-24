@@ -9,6 +9,7 @@ import {
 } from "unocss"
 
 import { presetApplet, presetRemRpx, transformerAttributify } from "unocss-applet"
+import transformerAttributifyJsx from "@unocss/transformer-attributify-jsx"
 const isMp = process.env?.UNI_PLATFORM?.startsWith("mp") ?? false
 
 const presets: Preset[] = []
@@ -52,13 +53,33 @@ export default defineConfig({
      * 卡片通用
      */
     ["card", "rounded-lg shadow-md bg-white p-4 m-2"],
+    // 常用样式简写
+    { "flex-between": "flex items-center justify-between" },
+    { "text-ellipsis": "whitespace-nowrap overflow-hidden text-ellipsis" },
   ],
   transformers: [
-    transformerDirectives(),
     transformerVariantGroup(),
+    transformerDirectives(),
     transformerAttributify({
-      prefixedOnly: true,
+      // 属性化转换
       prefix: "u",
     }),
+    transformerAttributifyJsx(),
+  ],
+  rules: [
+    // 自定义规则
+    [/^fs-(\d+)$/, ([, d]) => ({ "font-size": `${d}rpx` })],
+    [/^lh-(\d+)$/, ([, d]) => ({ "line-height": `${d}rpx` })],
+  ],
+  safelist: [
+    // 安全列表，确保这些类始终可用
+    "text-primary",
+    "text-success",
+    "text-warning",
+    "text-error",
+    "bg-primary",
+    "bg-success",
+    "bg-warning",
+    "bg-error",
   ],
 })

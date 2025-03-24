@@ -7,6 +7,8 @@ import "virtual:uno.css"
 import "@/style/index.scss"
 import "@/static/fonts/style.css"
 import "uview-plus/index.scss"
+import OptimizeRender from "./directives/optimizeRender"
+
 export function createApp() {
   const app = createSSRApp(App)
   app.use(store)
@@ -15,6 +17,7 @@ export function createApp() {
   app.use(prototypeInterceptor)
   // 使用uviewPlus组件库
   app.use(uviewPlus)
+  app.use(OptimizeRender)
   return {
     app,
   }

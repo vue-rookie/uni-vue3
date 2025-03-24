@@ -1,8 +1,16 @@
 <script setup lang="ts">
 import { onLaunch, onShow, onHide } from "@dcloudio/uni-app"
+// #ifdef H5
+import { reportPageLoadPerformance } from "@/utils/performance"
+// #endif
 
 onLaunch(() => {
   console.log("App Launch")
+  // #ifdef H5
+  setTimeout(() => {
+    reportPageLoadPerformance()
+  }, 2000)
+  // #endif
 })
 onShow(() => {
   console.log("App Show")

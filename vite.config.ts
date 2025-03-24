@@ -9,6 +9,7 @@ import UnoCSS from "unocss/vite"
 import AutoImport from "unplugin-auto-import/vite"
 import { visualizer } from "rollup-plugin-visualizer"
 import ViteRestart from "vite-plugin-restart"
+import viteImagemin from "vite-plugin-imagemin"
 import { resolve } from "path"
 
 export default ({ command, mode }) => {
@@ -58,6 +59,35 @@ export default ({ command, mode }) => {
         // 通过这个插件，在修改vite.config.js文件则不需要重新运行也生效配置
         restart: ["vite.config.js"],
       }),
+      // 图片压缩插件 (仅生产环境启用)
+      mode === "production" &&
+        viteImagemin({
+          gifsicle: {
+            optimizationLevel: 7,
+            interlaced: false,
+          },
+          optipng: {
+            optimizationLevel: 7,
+          },
+          mozjpeg: {
+            quality: 80,
+          },
+          pngquant: {
+            quality: [0.8, 0.9],
+            speed: 4,
+          },
+          svgo: {
+            plugins: [
+              {
+                name: "removeViewBox",
+              },
+              {
+                name: "removeEmptyAttrs",
+                active: false,
+              },
+            ],
+          },
+        }),
       // h5环境增加编译时间
       UNI_PLATFORM === "h5" && {
         name: "html-transform",
@@ -88,8 +118,10 @@ export default ({ command, mode }) => {
           includePaths: [resolve(__dirname, "src")],
           additionalData: `@use "@/style/_mixins.scss" as *; @use "@/style/uview-theme.scss" as *;`,
           sassOptions: {
+            charset: false,
             quiet: true,
             quietDeps: true,
+            outputStyle: "compressed",
             logger: {
               warn: () => {},
             },
@@ -102,7 +134,11 @@ export default ({ command, mode }) => {
       alias: {
         "@": path.join(process.cwd(), "./src"),
         "@img": path.join(process.cwd(), "./src/static/images"),
+        "@components": path.join(process.cwd(), "./src/components"),
+        "@stores": path.join(process.cwd(), "./src/stores"),
+        "@utils": path.join(process.cwd(), "./src/utils"),
       },
+      dedupe: ["vue"],
     },
     server: {
       host: "0.0.0.0",
@@ -129,6 +165,36 @@ export default ({ command, mode }) => {
         compress: {
           drop_console: VITE_DELETE_CONSOLE === "true",
           drop_debugger: true,
+          pure_funcs: VITE_DELETE_CONSOLE === "true" ? ["console.log"] : [],
+          passes: 2, // 多次优化
+          ecma: 2015, // 使用 ES6 语法
+        },
+        format: {
+          comments: false, // 移除注释
+        },
+      },
+      cssCodeSplit: true,
+      assetsInlineLimit: 4096,
+      chunkSizeWarningLimit: 2000,
+      // 优化 CSS
+      cssMinify: "lightningcss",
+      rollupOptions: {
+        output: {
+          manualChunks: (id) => {
+            if (id.includes("node_modules/vue")) {
+              return "vendor"
+            }
+            if (id.includes("node_modules/uview-plus")) {
+              return "uview"
+            }
+            // 将其他常用依赖分组
+            if (id.includes("node_modules/")) {
+              return "vendor-deps"
+            }
+          },
+          chunkFileNames: "static/js/[name]-[hash].js",
+          entryFileNames: "static/js/[name]-[hash].js",
+          assetFileNames: "static/[ext]/[name]-[hash].[ext]",
         },
       },
     },
