@@ -29,21 +29,9 @@
         "text": "首页"
       },
       {
-        "iconPath": "static/tabbar/tab1.png",
-        "selectedIconPath": "static/tabbar/tab1-select.png",
-        "pagePath": "pages/task/index",
-        "text": "tab1"
-      },
-      {
-        "iconPath": "static/tabbar/tab2.png",
-        "selectedIconPath": "static/tabbar/tab2-select.png",
-        "pagePath": "pages/waybill/index",
-        "text": "tab2"
-      },
-      {
         "iconPath": "static/tabbar/user.png",
         "selectedIconPath": "static/tabbar/user-select.png",
-        "pagePath": "pages/home/index",
+        "pagePath": "pages/user/index",
         "text": "我的"
       }
     ]
@@ -59,11 +47,11 @@
       "needLogin": false
     },
     {
-      "path": "pages/home/index",
+      "path": "pages/user/index",
       "type": "page",
       "style": {
         "navigationBarTitleText": "我的",
-        "navigationStyle": "custom"
+        "navigationStyle": "default"
       },
       "needLogin": false
     },
@@ -72,43 +60,7 @@
       "type": "page",
       "style": {
         "navigationBarTitleText": "登录",
-        "navigationStyle": "default"
-      },
-      "needLogin": false
-    },
-    {
-      "path": "pages/search/index",
-      "type": "page",
-      "style": {
-        "navigationBarTitleText": "搜索",
         "navigationStyle": "custom"
-      },
-      "needLogin": true
-    },
-    {
-      "path": "pages/search/searchAppoint",
-      "type": "page",
-      "style": {
-        "navigationBarTitleText": "搜索",
-        "navigationStyle": "custom"
-      },
-      "needLogin": true
-    },
-    {
-      "path": "pages/task/index",
-      "type": "page",
-      "style": {
-        "navigationBarTitleText": "tab1",
-        "navigationStyle": "default"
-      },
-      "needLogin": false
-    },
-    {
-      "path": "pages/waybill/index",
-      "type": "page",
-      "style": {
-        "navigationBarTitleText": "tab2",
-        "navigationStyle": "default"
       },
       "needLogin": false
     }

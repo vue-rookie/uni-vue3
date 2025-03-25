@@ -10,16 +10,14 @@ import AutoImport from "unplugin-auto-import/vite"
 import { visualizer } from "rollup-plugin-visualizer"
 import ViteRestart from "vite-plugin-restart"
 import viteImagemin from "vite-plugin-imagemin"
-import { resolve } from "path"
+import { printBuildInfo } from "./src/utils/logger"
 
 export default ({ command, mode }) => {
-  console.log("command, mode -> ", command, mode)
-
-  const { UNI_PLATFORM } = process.env
-  console.log("UNI_PLATFORM -> ", UNI_PLATFORM) // 得到 mp-weixin, h5, app 等
+  const UNI_PLATFORM = process.env.UNI_PLATFORM || "h5"
 
   const env = loadEnv(mode, path.resolve(process.cwd(), "env"))
   const {
+    VITE_APP_TITLE,
     VITE_APP_PORT,
     VITE_SERVER_BASEURL,
     VITE_DELETE_CONSOLE,
@@ -27,7 +25,9 @@ export default ({ command, mode }) => {
     VITE_APP_PROXY,
     VITE_APP_PROXY_PREFIX,
   } = env
-  console.log("环境变量 env -> ", env)
+
+  // 打印构建环境信息
+  printBuildInfo(command, mode, UNI_PLATFORM, env)
 
   return defineConfig({
     envDir: "./env", // 自定义env目录

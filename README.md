@@ -23,6 +23,8 @@ pnpm>7.0.0
 
 pnpm dev:mp-weixin
 
+![构建成功](./src/static/log.jpg)
+
 3. 调试
 
 - 微信平台：然后打开微信开发者工具，导入上面`pnpm dev:mp-weixin` 生成的本地 dist 文件夹，选择本项目的`dist/dev/mp-weixin` 文件。
@@ -35,17 +37,6 @@ pnpm dev:mp-weixin
 
 - 如果不想在pages页面中单独引入组件，全局组件可以放到uni-module模块下，这也是符合uni-app easycom的规范
 - 业务ts类型放到对应的pages对应文件type.ts中
-
-## 未来要做什么？
-
-- 完全低代码配置模式，无需做任何开发，，包括后端接口联调也只需要配置
-- 后端接口返回格式只需按照框架约定的规则返回。秉持的原则始终是约定>配置
-- 有兴趣的小伙伴一起加入研发
-- 在config 分支开发，如果没用后端接口，需要先执行server.js模拟后端接口数据，
-
-````
-   node mock.server.js
-
 
 ## 联系我
 
@@ -112,8 +103,4 @@ perf.markTime("开始初始化")
 // ... 执行代码 ...
 perf.markTime("初始化完成")
 perf.measureTime("开始初始化", "初始化完成")
-````
-
-## 其他文档
-
-[此处包含其他原有项目文档]
+```
