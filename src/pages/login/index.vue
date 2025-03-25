@@ -1,6 +1,6 @@
 <template>
   <view class="flex items-center h-full w-full flex-col h-screen">
-    <view :style="{ paddingTop: navHeight + 130 + 'rpx' }" class="w-full pb-5 font-500">
+    <view class="w-full pb-5 font-500">
       <view class="text-[44rpx] text-center px-[64rpx] text-[#060B2D]]">您好,</view>
       <view class="text-[44rpx] text-center px-[64rpx] text-[#060B2D]">欢迎使用uni-vue3</view>
     </view>
@@ -24,7 +24,6 @@
 import { useUserStore } from "@/store/user"
 import { usePageScroll } from "@/hooks/usePageScroll"
 const userStore = useUserStore()
-const { onPageScroll, navHeight, opacity } = usePageScroll()
 const agree = ref<boolean>(false)
 const isErrorStatus = ref<boolean>(false)
 
@@ -69,13 +68,15 @@ const handleChange = (e) => {
 <style lang="scss">
 .circle {
   border: 2rpx solid #ccd4dd;
-  box-shadow: 0px 2px 4px rgba(6, 11, 45, 0.06);
+  box-shadow: 0 2px 4px rgb(6 11 45 / 6%);
 }
+
 .login-wrap {
   height: 100%;
   border-radius: 32rpx 32rpx 0;
-  box-shadow: 0 4rpx 64rpx 0 rgba(6, 11, 45, 0.08);
+  box-shadow: 0 4rpx 64rpx 0 rgb(6 11 45 / 8%);
 }
+
 .error-status {
   animation: shake 0.5s !important;
 }
@@ -84,21 +85,27 @@ const handleChange = (e) => {
   0% {
     transform: translateX(0);
   }
+
   15% {
     transform: translateX(-10rpx);
   }
+
   30% {
     transform: translateX(10rpx);
   }
+
   45% {
     transform: translateX(-10rpx);
   }
+
   60% {
     transform: translateX(10rpx);
   }
+
   75% {
     transform: translateX(-10rpx);
   }
+
   100% {
     transform: translateX(0);
   }

@@ -1,5 +1,5 @@
-// 使用 @use 替代 @import
-@use "./iconfont.css" as *;
+@import "./iconfont.css";
+// 其他样式
 
 .test {
   // 可以通过 @apply 多个样式封装整体样式

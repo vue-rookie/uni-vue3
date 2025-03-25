@@ -16,15 +16,7 @@ export default ({ command, mode }) => {
   const UNI_PLATFORM = process.env.UNI_PLATFORM || "h5"
 
   const env = loadEnv(mode, path.resolve(process.cwd(), "env"))
-  const {
-    VITE_APP_TITLE,
-    VITE_APP_PORT,
-    VITE_SERVER_BASEURL,
-    VITE_DELETE_CONSOLE,
-    VITE_SHOW_SOURCEMAP,
-    VITE_APP_PROXY,
-    VITE_APP_PROXY_PREFIX,
-  } = env
+  const { VITE_APP_PROXY } = env
 
   // 打印构建环境信息
   printBuildInfo(command, mode, UNI_PLATFORM, env)
@@ -116,7 +108,7 @@ export default ({ command, mode }) => {
       preprocessorOptions: {
         scss: {
           // https://github.com/vitejs/vite/issues/15474
-          additionalData: `@use "@/style/_mixins.scss" as *;`,
+          additionalData: `@import "@/style/theme.scss";`,
           sassOptions: {
             quiet: true,
             quietDeps: true,
@@ -128,72 +120,6 @@ export default ({ command, mode }) => {
               debug: function () {},
             },
           },
-        },
-      },
-    },
-
-    resolve: {
-      alias: {
-        "@": path.join(process.cwd(), "./src"),
-        "@img": path.join(process.cwd(), "./src/static/images"),
-        "@components": path.join(process.cwd(), "./src/components"),
-        "@stores": path.join(process.cwd(), "./src/stores"),
-        "@utils": path.join(process.cwd(), "./src/utils"),
-      },
-      dedupe: ["vue"],
-    },
-    server: {
-      host: "0.0.0.0",
-      hmr: true,
-      port: Number.parseInt(VITE_APP_PORT, 10),
-      // 仅 H5 端生效，其他端不生效（其他端走build，不走devServer)
-      proxy: JSON.parse(VITE_APP_PROXY)
-        ? {
-            [VITE_APP_PROXY_PREFIX]: {
-              target: VITE_SERVER_BASEURL,
-              changeOrigin: true,
-              rewrite: (path) => path.replace(new RegExp(`^${VITE_APP_PROXY_PREFIX}`), ""),
-            },
-          }
-        : undefined,
-    },
-    build: {
-      // 方便非h5端调试
-      sourcemap: VITE_SHOW_SOURCEMAP === "true", // 默认是false
-      target: "es6",
-      // 开发环境不用压缩
-      minify: mode === "development" ? false : "terser",
-      terserOptions: {
-        compress: {
-          drop_console: VITE_DELETE_CONSOLE === "true",
-          drop_debugger: true,
-          pure_funcs: VITE_DELETE_CONSOLE === "true" ? ["console.log"] : [],
-          passes: 2, // 多次优化
-          ecma: 2015, // 使用 ES6 语法
-        },
-        format: {
-          comments: false, // 移除注释
-        },
-      },
-      cssCodeSplit: true,
-      assetsInlineLimit: 4096,
-      chunkSizeWarningLimit: 2000,
-      // 优化 CSS
-      cssMinify: "lightningcss",
-      rollupOptions: {
-        output: {
-          manualChunks: (id) => {
-            if (id.includes("node_modules/vue")) {
-              return "vendor"
-            }
-            // 将其他常用依赖分组
-            if (id.includes("node_modules/")) {
-              return "vendor-deps"
-            }
-          },
-          chunkFileNames: "static/js/[name]-[hash].js",
-          entryFileNames: "static/js/[name]-[hash].js",
-          assetFileNames: "static/[ext]/[name]-[hash].[ext]",
         },
       },
     },

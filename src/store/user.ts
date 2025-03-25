@@ -6,7 +6,7 @@ export const useUserStore = defineStore(
   "user",
   () => {
     const userInfo = ref<IUserInfo>({ ...initState })
-    const appid = "wx75c65ec54d3f83ed" // 你的appid
+    const appid = "" // 你的appid
     const setUserInfo = (val: IUserInfo) => {
       userInfo.value = val
     }

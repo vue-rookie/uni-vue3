@@ -185,7 +185,7 @@ devDependencies:
     specifier: ^8.4.32
     version: 8.5.3
   postcss-html:
-    specifier: ^1.5.0
+    specifier: ^1.8.0
     version: 1.8.0
   postcss-scss:
     specifier: ^4.0.9
@@ -214,6 +214,9 @@ devDependencies:
   stylelint-config-recommended-vue:
     specifier: ^1.5.0
     version: 1.6.0(postcss-html@1.8.0)(stylelint@16.16.0)
+  stylelint-config-standard-vue:
+    specifier: ^1.0.0
+    version: 1.0.0(postcss-html@1.8.0)(stylelint@16.16.0)
   stylelint-prettier:
     specifier: ^5.0.0
     version: 5.0.3(prettier@3.5.3)(stylelint@16.16.0)
@@ -11862,6 +11865,39 @@ packages:
       stylelint: ^16.1.0
     dependencies:
       stylelint: 16.16.0(typescript@4.9.5)
+    dev: true
+
+  /stylelint-config-recommended@15.0.0(stylelint@16.16.0):
+    resolution: {integrity: sha512-9LejMFsat7L+NXttdHdTq94byn25TD+82bzGRiV1Pgasl99pWnwipXS5DguTpp3nP1XjvLXVnEJIuYBfsRjRkA==}
+    engines: {node: '>=18.12.0'}
+    peerDependencies:
+      stylelint: ^16.13.0
+    dependencies:
+      stylelint: 16.16.0(typescript@4.9.5)
+    dev: true
+
+  /stylelint-config-standard-vue@1.0.0(postcss-html@1.8.0)(stylelint@16.16.0):
+    resolution: {integrity: sha512-wAzU7p6DSlo04pWfCbOcaMq09Nojt0FEsbdxhCBTdC7IguD9ZVl7FP/bvyA0HAHjZGC4JkW7m6WiQaoVMDSuFw==}
+    engines: {node: ^12 || >=14}
+    peerDependencies:
+      postcss-html: ^1.0.0
+      stylelint: '>=14.0.0'
+    dependencies:
+      postcss-html: 1.8.0
+      stylelint: 16.16.0(typescript@4.9.5)
+      stylelint-config-html: 1.1.0(postcss-html@1.8.0)(stylelint@16.16.0)
+      stylelint-config-recommended-vue: 1.6.0(postcss-html@1.8.0)(stylelint@16.16.0)
+      stylelint-config-standard: 37.0.0(stylelint@16.16.0)
+    dev: true
+
+  /stylelint-config-standard@37.0.0(stylelint@16.16.0):
+    resolution: {integrity: sha512-+6eBlbSTrOn/il2RlV0zYGQwRTkr+WtzuVSs1reaWGObxnxLpbcspCUYajVQHonVfxVw2U+h42azGhrBvcg8OA==}
+    engines: {node: '>=18.12.0'}
+    peerDependencies:
+      stylelint: ^16.13.0
+    dependencies:
+      stylelint: 16.16.0(typescript@4.9.5)
+      stylelint-config-recommended: 15.0.0(stylelint@16.16.0)
     dev: true
 
   /stylelint-order@6.0.4(stylelint@16.16.0):
