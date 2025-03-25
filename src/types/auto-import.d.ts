@@ -75,22 +75,30 @@ declare global {
   const triggerRef: typeof import('vue')['triggerRef']
   const unref: typeof import('vue')['unref']
   const useAttrs: typeof import('vue')['useAttrs']
+  const useCamera: typeof import('../hooks/useCamera')['useCamera']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useDate: typeof import('../hooks/useDate')['useDate']
   const useDisplay: typeof import('../hooks/useDisplay')['useDisplay']
+  const useEvent: typeof import('../hooks/useEvent')['useEvent']
   const useId: typeof import('vue')['useId']
   const useInputDataLimit: typeof import('../hooks/useInputLimit')['useInputDataLimit']
   const useInputLimit: typeof import('../hooks/useInputLimit')['useInputLimit']
   const useLocation: typeof import('../hooks/useLocation')['useLocation']
+  const useModal: typeof import('../hooks/useModal')['useModal']
   const useModel: typeof import('vue')['useModel']
   const usePageScroll: typeof import('../hooks/usePageScroll')['usePageScroll']
   const useQrcode: typeof import('../hooks/useQrcode')['useQrcode']
-  const useRequest: typeof import('../hooks/useRequest')['default']
+  const useRequest: typeof import('../hooks/useRequest')['useRequest']
+  const useShare: typeof import('../hooks/useShare')['useShare']
   const useSlots: typeof import('vue')['useSlots']
+  const useStorage: typeof import('../hooks/useStorage')['useStorage']
+  const useSystem: typeof import('../hooks/useSystem')['useSystem']
   const useTemplateRef: typeof import('vue')['useTemplateRef']
+  const useTheme: typeof import('../hooks/useTheme')['useTheme']
   const useTool: typeof import('../hooks/useTool')['useTool']
   const useUpload: typeof import('../hooks/useUpload')['default']
+  const useValidation: typeof import('../hooks/useValidation')['useValidation']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
   const watchPostEffect: typeof import('vue')['watchPostEffect']
@@ -177,16 +185,25 @@ declare module 'vue' {
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
+    readonly useCamera: UnwrapRef<typeof import('../hooks/useCamera')['useCamera']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useDisplay: UnwrapRef<typeof import('../hooks/useDisplay')['useDisplay']>
+    readonly useEvent: UnwrapRef<typeof import('../hooks/useEvent')['useEvent']>
     readonly useId: UnwrapRef<typeof import('vue')['useId']>
     readonly useInputDataLimit: UnwrapRef<typeof import('../hooks/useInputLimit')['useInputDataLimit']>
     readonly useLocation: UnwrapRef<typeof import('../hooks/useLocation')['useLocation']>
+    readonly useModal: UnwrapRef<typeof import('../hooks/useModal')['useModal']>
     readonly useModel: UnwrapRef<typeof import('vue')['useModel']>
     readonly usePageScroll: UnwrapRef<typeof import('../hooks/usePageScroll')['usePageScroll']>
+    readonly useRequest: UnwrapRef<typeof import('../hooks/useRequest')['useRequest']>
+    readonly useShare: UnwrapRef<typeof import('../hooks/useShare')['useShare']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
+    readonly useStorage: UnwrapRef<typeof import('../hooks/useStorage')['useStorage']>
+    readonly useSystem: UnwrapRef<typeof import('../hooks/useSystem')['useSystem']>
     readonly useTemplateRef: UnwrapRef<typeof import('vue')['useTemplateRef']>
+    readonly useTheme: UnwrapRef<typeof import('../hooks/useTheme')['useTheme']>
+    readonly useValidation: UnwrapRef<typeof import('../hooks/useValidation')['useValidation']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>

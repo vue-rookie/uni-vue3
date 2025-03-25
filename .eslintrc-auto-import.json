@@ -103,6 +103,14 @@
     "onWatcherCleanup": true,
     "useId": true,
     "useModel": true,
-    "useTemplateRef": true
+    "useTemplateRef": true,
+    "useCamera": true,
+    "useEvent": true,
+    "useModal": true,
+    "useShare": true,
+    "useStorage": true,
+    "useSystem": true,
+    "useTheme": true,
+    "useValidation": true
   }
 }

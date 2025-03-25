@@ -5,20 +5,13 @@
 
 interface NavigateToOptions {
   url: "/pages/index/index" |
-       "/pages/home/index" |
-       "/pages/login/index" |
-       "/pages/search/index" |
-       "/pages/search/searchAppoint" |
-       "/pages/task/index" |
-       "/pages/waybill/index" |
-       "/pages-sub/login/forgetpass" |
-       "/pages-sub/login/loginForm" |
-       "/pages-sub/login/verifyLogin";
+       "/pages/user/index" |
+       "/pages/login/index" 
 }
 interface RedirectToOptions extends NavigateToOptions {}
 
 interface SwitchTabOptions {
-  url: "/pages/index/index" | "/pages/task/index" | "/pages/waybill/index" | "/pages/home/index"
+  url: "/pages/index/index" | "/pages/user/index"
 }
 
 type ReLaunchOptions = NavigateToOptions | SwitchTabOptions;
