@@ -115,15 +115,17 @@ export default ({ command, mode }) => {
       },
       preprocessorOptions: {
         scss: {
-          includePaths: [resolve(__dirname, "src")],
-          additionalData: `@use "@/style/_mixins.scss" as *; @use "@/style/uview-theme.scss" as *;`,
+          // https://github.com/vitejs/vite/issues/15474
+          additionalData: `@use "@/style/_mixins.scss" as *;`,
           sassOptions: {
-            charset: false,
             quiet: true,
             quietDeps: true,
+            charset: false,
+            sourceMap: false,
             outputStyle: "compressed",
             logger: {
-              warn: () => {},
+              warn: function () {},
+              debug: function () {},
             },
           },
         },
@@ -183,9 +185,6 @@ export default ({ command, mode }) => {
           manualChunks: (id) => {
             if (id.includes("node_modules/vue")) {
               return "vendor"
-            }
-            if (id.includes("node_modules/uview-plus")) {
-              return "uview"
             }
             // 将其他常用依赖分组
             if (id.includes("node_modules/")) {

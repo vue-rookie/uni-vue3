@@ -87,10 +87,7 @@
     "pinia": "2.0.36",
     "pinia-plugin-persistedstate": "3.2.1",
     "qs": "6.5.3",
-    "uqrcodejs": "^4.0.7",
-    "uview-plus": "^3.3.58",
-    "vue": "3.4.21",
-    "z-paging": "^2.8.4"
+    "vue": "3.4.21"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
@@ -106,8 +103,8 @@
     "@rollup/rollup-darwin-x64": "^4.17.2",
     "@types/node": "^20.11.5",
     "@types/wechat-miniprogram": "^3.4.7",
-    "@typescript-eslint/eslint-plugin": "^6.15.0",
-    "@typescript-eslint/parser": "^6.15.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
     "@uni-helper/vite-plugin-uni-layouts": "^0.1.7",
     "@uni-helper/vite-plugin-uni-manifest": "^0.2.3",
     "@uni-helper/vite-plugin-uni-platform": "^0.0.4",
@@ -131,7 +128,7 @@
     "postcss-html": "^1.5.0",
     "postcss-scss": "^4.0.9",
     "rollup-plugin-visualizer": "^5.11.0",
-    "sass": "^1.69.5",
+    "sass": "^1.69.0",
     "stylelint": "^16.0.2",
     "stylelint-config-html": "^1.1.0",
     "stylelint-config-recess-order": "^4.4.0",

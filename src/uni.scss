@@ -78,9 +78,3 @@ $uni-font-size-paragraph: 15px !default;
 
 $uni-button-color-primary: #0066ff !default;
 $uni-button-bg-primary: #0066ff !default;
-
-// 先导入自定义主题变量
-@use "style/uview-theme" as *;
-
-// 使用 @use 导入 uview-plus 主题
-@use "uview-plus/theme" as uview;

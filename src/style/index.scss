@@ -1,6 +1,5 @@
 // 使用 @use 替代 @import
 @use "./iconfont.css" as *;
-@use "style/uview-theme" as *;
 
 .test {
   // 可以通过 @apply 多个样式封装整体样式
