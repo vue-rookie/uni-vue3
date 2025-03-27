@@ -4,10 +4,31 @@
  */
 
 // 定义简单的 App 接口代替 Vue 的导入
-import { lazyLoadImage } from "../style/mixins"
+// 移除import { lazyLoadImage } from "../style/mixins"
 
 interface App {
   directive: (name: string, options: any) => void
+}
+
+// 内联lazyLoadImage函数
+function lazyLoadImage(el: any, src: string) {
+  if (typeof window !== "undefined" && "IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            el.src = src
+            observer.unobserve(el)
+          }
+        })
+      },
+      { threshold: 0.1 },
+    )
+    observer.observe(el)
+  } else {
+    // 降级处理
+    el.src = src
+  }
 }
 
 export default {

@@ -6,7 +6,7 @@
     </view>
     <view class="bg-white w-full login-wrap">
       <view class="mt-[180rpx] text-center px-[64rpx]">
-        <up-button
+        <button
           type="primary"
           :open-type="agree ? 'getPhoneNumber' : ''"
           @getphonenumber="getPhoneNumber"
@@ -14,7 +14,7 @@
           class="login-btn"
         >
           手机号快捷登录
-        </up-button>
+        </button>
       </view>
     </view>
   </view>

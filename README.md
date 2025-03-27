@@ -12,6 +12,10 @@ uni-app Vue3 + Vite5 + TypeScript + Pinia + Unocss
 node>18.0.0
 pnpm>7.0.0
 
+2. 不建议集成第三方组件库
+
+- 由于第三方组件库大部分组件未使用微信原生组件开发，相对原生组件性能较差。对于小程序来说，建议使用原生的组件去开发。当然如果您对性能没有较高的要求，您可以自行选择集成第三方组件库。
+
 2. 快速开始
 
 ```
@@ -62,7 +66,6 @@ pnpm dev:mp-weixin
 3. **Sass 优化**：
    - 配置 CSS 输出压缩
    - 使用 `@use` 替代 `@import` 解决警告
-   - 添加自定义 mixin 增强功能
 
 ### 运行时优化
 
@@ -72,14 +75,7 @@ pnpm dev:mp-weixin
    - `v-if-visible`：条件渲染优化
    - `v-virtual-scroll`：虚拟滚动
 
-2. **性能工具函数**：
-
-   - `throttle`：高性能节流函数
-   - `debounce`：防抖函数
-   - `memoize`：内存缓存
-   - `lazyLoadImage`：懒加载
-
-3. **性能监控**：
+2. **性能监控**：
    - `monitorRenderPerformance`：渲染性能跟踪
    - `monitorMemoryUsage`：内存使用监控
    - `detectRerender`：组件重渲染检测
@@ -88,14 +84,8 @@ pnpm dev:mp-weixin
 ### 使用方法
 
 ```js
-// 导入优化工具
-import { throttle, debounce } from "@/style/mixins"
+// 导入性能监控工具
 import { monitorRenderPerformance } from "@/utils/performance"
-
-// 使用节流函数
-const handleScroll = throttle(() => {
-  // 处理滚动事件
-}, 200)
 
 // 监控性能
 const perf = monitorRenderPerformance()
