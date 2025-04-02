@@ -36,7 +36,7 @@ export default defineConfig({
     colors: {
       // 主题色
       primary: {
-        DEFAULT: "#3c9cff",
+        DEFAULT: "#06f",
         50: "#f0f7ff",
         100: "#e0f0ff",
         200: "#bae0ff",
@@ -120,11 +120,11 @@ export default defineConfig({
     },
     // 字体大小
     fontSize: {
-      xs: ["10px", { lineHeight: "1.5" }],
-      sm: ["12px", { lineHeight: "1.5" }],
-      base: ["14px", { lineHeight: "1.5" }],
-      lg: ["16px", { lineHeight: "1.5" }],
-      xl: ["18px", { lineHeight: "1.5" }],
+      xs: ["10px", { "line-height": "1.5" }],
+      sm: ["12px", { "line-height": "1.5" }],
+      base: ["14px", { "line-height": "1.5" }],
+      lg: ["16px", { "line-height": "1.5" }],
+      xl: ["18px", { "line-height": "1.5" }],
     },
     // 圆角
     borderRadius: {

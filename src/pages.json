@@ -67,8 +67,8 @@
       "path": "pages/login/index",
       "type": "page",
       "style": {
-        "navigationBarTitleText": "登录",
-        "navigationStyle": "custom"
+        "navigationBarTitleText": "登录注册",
+        "navigationStyle": "default"
       },
       "needLogin": false
     }
@@ -89,7 +89,7 @@
           "path": "news/index",
           "type": "page",
           "style": {
-            "navigationBarTitleText": "新闻",
+            "navigationBarTitleText": "新闻列表",
             "navigationStyle": "default"
           }
         }

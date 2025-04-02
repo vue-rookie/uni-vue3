@@ -1,173 +1,246 @@
 <template>
-  <view class="page-container bg-gray-100 min-h-screen">
-    <!-- 顶部导航 -->
-    <view class="bg-white px-4 py-3 text-center text-lg font-medium border-b border-gray-100">
-      登录注册
+  <view class="page-container bg-white min-h-screen flex flex-col">
+    <!-- Logo区域 -->
+    <view class="mt-12 mb-6 flex justify-center">
+      <image
+        src="https://picsum.photos/400/200?random=1"
+        mode="aspectFit"
+        class="w-48 h-24 rounded-lg"
+      />
     </view>
 
-    <!-- 登录表单 -->
-    <view class="mt-6 px-4">
-      <view class="bg-white rounded-lg shadow-sm p-4">
-        <!-- 登录方式切换 -->
-        <view class="flex items-center justify-center mb-4">
-          <view
-            @click="loginType = 'quick'"
-            class="flex-1 text-center py-2"
-            :class="
-              loginType === 'quick' ? 'text-blue-500 border-b-2 border-blue-500' : 'text-gray-500'
-            "
-          >
-            <text class="text-sm">快捷授权登录</text>
-          </view>
-          <view
-            @click="loginType = 'password'"
-            class="flex-1 text-center py-2"
-            :class="
-              loginType === 'password'
-                ? 'text-blue-500 border-b-2 border-blue-500'
-                : 'text-gray-500'
-            "
-          >
-            <text class="text-sm">密码登录</text>
-          </view>
-          <view
-            @click="loginType = 'code'"
-            class="flex-1 text-center py-2"
-            :class="
-              loginType === 'code' ? 'text-blue-500 border-b-2 border-blue-500' : 'text-gray-500'
-            "
-          >
-            <text class="text-sm">验证码登录</text>
-          </view>
+    <!-- 登录表单容器 -->
+    <view class="px-10 w-full flex-1">
+      <!-- 标签页切换部分 - 作为切换登录方式的入口 -->
+      <view v-if="!showOtherLoginMethods" class="flex justify-between items-center mb-10">
+        <text class="text-xl font-bold text-[#060b2d]">
+          {{ loginTypeLabels[loginType] }}
+        </text>
+        <text class="text-sm text-[#06f]" @click="showOtherLoginMethods = true">其他登录方式</text>
+      </view>
+
+      <!-- 其他登录方式选择 -->
+      <view v-if="showOtherLoginMethods" class="mb-10">
+        <view class="flex items-center mb-5">
+          <text
+            class="i-ri-arrow-left-line mr-3 text-[#060b2d]"
+            @click="showOtherLoginMethods = false"
+          ></text>
+          <text class="text-xl font-bold text-[#060b2d]">选择登录方式</text>
         </view>
 
-        <!-- 快捷授权登录 -->
-        <view v-if="loginType === 'quick'" class="text-center">
+        <view class="grid grid-cols-2 gap-5">
+          <view
+            v-for="(name, type) in loginTypeLabels"
+            :key="type"
+            class="flex flex-col items-center justify-center p-5 rounded-lg border border-gray-100 active:bg-gray-50"
+            @click="switchLoginType(type)"
+          >
+            <view class="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center mb-2">
+              <text class="text-xl text-[#06f]" :class="loginTypeIcons[type]"></text>
+            </view>
+            <text class="text-[#060b2d]">{{ name }}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 快捷授权登录 -->
+      <view v-if="loginType === 'quick' && !showOtherLoginMethods" class="animate-fade-in">
+        <view class="space-y-5">
           <button
-            type="primary"
             :open-type="agree ? 'getPhoneNumber' : ''"
             @getphonenumber="getPhoneNumber"
             @click.stop="checkedAgree"
-            class="w-full py-1.5 bg-blue-500 text-white rounded-md active:bg-blue-600 text-sm"
+            class="w-full py-3 rounded-xl active:opacity-90 text-white text-base font-medium bg-[#06f]"
           >
-            手机号快捷登录
+            快捷登录
           </button>
+
           <view class="flex items-center justify-center mt-3">
-            <checkbox
-              :checked="agree"
+            <view
+              class="w-5 h-5 rounded-full flex items-center justify-center mr-2 border-[1px]"
+              :class="agree ? 'bg-[#06f] border-[#06f]' : 'border-gray-400 border-solid'"
               @click="agree = !agree"
-              color="#3b82f6"
-              style="transform: scale(0.8)"
-            />
-            <text class="text-xs text-gray-500 ml-1">
+            >
+              <text v-if="agree" class="i-ri-check-line text-white text-xs"></text>
+            </view>
+            <text class="text-sm text-[#060b2d]">
               我已阅读并同意
-              <text class="text-blue-500">《用户协议》</text>
+              <text class="text-[#06f]">《用户注册协议》</text>
               和
-              <text class="text-blue-500">《隐私政策》</text>
+              <text class="text-[#06f]">《隐私协议》</text>
             </text>
           </view>
         </view>
+      </view>
 
-        <!-- 密码登录 -->
-        <view v-if="loginType === 'password'" class="space-y-3">
-          <view>
-            <view class="flex items-center px-3 py-2 bg-gray-50 rounded-md border border-gray-200">
-              <view class="w-4 h-4 mr-2 flex items-center justify-center">
-                <text class="i-ri-phone-line text-gray-400"></text>
-              </view>
-              <input
-                v-model="phone"
-                type="number"
-                placeholder="请输入手机号"
-                class="flex-1 bg-transparent text-sm focus:outline-none"
-              />
+      <!-- 密码登录 -->
+      <view v-if="loginType === 'password' && !showOtherLoginMethods" class="animate-fade-in">
+        <view class="space-y-5">
+          <view class="flex items-center px-5 py-4 bg-gray-50 rounded-xl">
+            <view class="w-5 h-5 mr-3 flex items-center justify-center">
+              <text class="i-ri-phone-line text-[#060b2d]"></text>
+            </view>
+            <input
+              v-model="phone"
+              type="number"
+              placeholder="请输入手机号码"
+              class="flex-1 bg-transparent text-base focus:outline-none text-[#060b2d]"
+            />
+          </view>
+
+          <view class="flex items-center px-5 py-4 bg-gray-50 rounded-xl">
+            <view class="w-5 h-5 mr-3 flex items-center justify-center">
+              <text class="i-ri-lock-line text-[#060b2d]"></text>
+            </view>
+            <input
+              v-model="password"
+              :type="showPassword ? 'text' : 'password'"
+              placeholder="请输入密码"
+              class="flex-1 bg-transparent text-base focus:outline-none text-[#060b2d]"
+            />
+            <view
+              class="w-6 h-6 flex items-center justify-center"
+              @click="showPassword = !showPassword"
+            >
+              <text v-if="showPassword" class="i-ri-eye-line text-[#060b2d]"></text>
+              <text v-else class="i-ri-eye-off-line text-[#060b2d]"></text>
             </view>
           </view>
-          <view>
-            <view class="flex items-center px-3 py-2 bg-gray-50 rounded-md border border-gray-200">
-              <view class="w-4 h-4 mr-2 flex items-center justify-center">
-                <text class="i-ri-lock-line text-gray-400"></text>
-              </view>
-              <input
-                v-model="password"
-                type="password"
-                placeholder="请输入密码"
-                class="flex-1 bg-transparent text-sm focus:outline-none"
-              />
-            </view>
+
+          <view class="flex justify-end">
+            <text class="text-sm text-[#06f]" @click="navigateTo('/pages/forgot/index')">
+              忘记密码?
+            </text>
           </view>
+
           <button
             @click="handleLogin"
-            class="w-full py-1.5 bg-blue-500 text-white rounded-md active:bg-blue-600 text-sm"
+            class="w-full py-3 mt-3 rounded-xl active:opacity-90 text-white text-base font-medium bg-[#06f]"
           >
             登录
           </button>
-        </view>
 
-        <!-- 验证码登录 -->
-        <view v-if="loginType === 'code'" class="space-y-3">
-          <view>
-            <view class="flex items-center px-3 py-2 bg-gray-50 rounded-md border border-gray-200">
-              <view class="w-4 h-4 mr-2 flex items-center justify-center">
-                <text class="i-ri-phone-line text-gray-400"></text>
-              </view>
-              <input
-                v-model="phone"
-                type="number"
-                placeholder="请输入手机号"
-                class="flex-1 bg-transparent text-sm focus:outline-none"
-              />
+          <view class="flex items-center justify-center mt-3">
+            <view
+              class="w-5 h-5 rounded-full flex items-center justify-center mr-2 border-[1px]"
+              :class="agree ? 'bg-[#06f] border-[#06f]' : 'border-gray-400 border-solid'"
+              @click="agree = !agree"
+            >
+              <text v-if="agree" class="i-ri-check-line text-white text-xs"></text>
             </view>
+            <text class="text-sm text-[#060b2d]">
+              我已阅读并同意
+              <text class="text-[#06f]">《用户注册协议》</text>
+              和
+              <text class="text-[#06f]">《隐私协议》</text>
+            </text>
           </view>
-          <view>
-            <view class="flex items-center px-3 py-2 bg-gray-50 rounded-md border border-gray-200">
-              <view class="w-4 h-4 mr-2 flex items-center justify-center">
-                <text class="i-ri-mail-send-line text-gray-400"></text>
-              </view>
-              <input
-                v-model="code"
-                type="number"
-                placeholder="请输入验证码"
-                class="flex-1 bg-transparent text-sm focus:outline-none"
-              />
-              <button
-                @click="getCode"
-                class="ml-2 px-3 py-1.5 bg-blue-500 text-white rounded-md text-sm"
-                :disabled="countdown > 0"
-              >
-                {{ countdown > 0 ? `${countdown}s` : "获取验证码" }}
-              </button>
+        </view>
+      </view>
+
+      <!-- 验证码登录 -->
+      <view v-if="loginType === 'code' && !showOtherLoginMethods" class="animate-fade-in">
+        <view class="space-y-5">
+          <view class="flex items-center px-5 py-4 bg-gray-50 rounded-xl">
+            <view class="w-5 h-5 mr-3 flex items-center justify-center">
+              <text class="i-ri-phone-line text-[#060b2d]"></text>
             </view>
+            <input
+              v-model="phone"
+              type="number"
+              placeholder="请输入手机号码"
+              class="flex-1 bg-transparent text-base focus:outline-none text-[#060b2d]"
+            />
           </view>
+
+          <view class="flex items-center px-5 py-2 bg-gray-50 rounded-xl">
+            <view class="w-5 h-5 mr-3 flex items-center justify-center">
+              <text class="i-ri-shield-keyhole-line text-[#060b2d]"></text>
+            </view>
+            <input
+              v-model="code"
+              type="number"
+              placeholder="请输入验证码"
+              class="flex-1 bg-transparent text-base focus:outline-none text-[#060b2d]"
+            />
+            <button
+              @click="getCode"
+              class="px-3 py-2 rounded-lg text-sm"
+              :class="countdown > 0 ? 'text-gray-400 bg-gray-200' : 'text-white bg-[#06f]'"
+              :disabled="countdown > 0"
+            >
+              {{ countdown > 0 ? `${countdown}s` : "获取验证码" }}
+            </button>
+          </view>
+
           <button
             @click="handleLogin"
-            class="w-full py-1.5 bg-blue-500 text-white rounded-md active:bg-blue-600 text-sm"
+            class="w-full py-3 mt-3 rounded-xl active:opacity-90 text-white text-base font-medium bg-[#06f]"
           >
             登录
           </button>
+
+          <view class="flex items-center justify-center mt-3">
+            <view
+              class="w-5 h-5 rounded-full flex items-center justify-center mr-2 border-[1px]"
+              :class="agree ? 'bg-[#06f] border-[#06f]' : 'border-gray-400 border-solid'"
+              @click="agree = !agree"
+            >
+              <text v-if="agree" class="i-ri-check-line text-white text-xs"></text>
+            </view>
+            <text class="text-sm text-[#060b2d]">
+              我已阅读并同意
+              <text class="text-[#06f]">《用户注册协议》</text>
+              和
+              <text class="text-[#06f]">《隐私协议》</text>
+            </text>
+          </view>
         </view>
       </view>
+    </view>
 
-      <!-- 注册入口 -->
-      <view class="mt-4 text-center">
-        <text class="text-sm text-gray-500">还没有账号？</text>
-        <text @click="navigateTo('/pages/register/index')" class="text-sm text-blue-500 ml-1">
-          立即注册
-        </text>
-      </view>
+    <!-- 注册入口 -->
+    <view class="mt-auto mb-10 text-center">
+      <text class="text-sm text-[#060b2d]">还没有账号？</text>
+      <text @click="navigateTo('/pages/register/index')" class="text-sm ml-1 text-[#06f]">
+        立即注册
+      </text>
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
+import { ref, computed } from "vue"
 
-const loginType = ref("quick") // quick, password, code
 const phone = ref("")
 const password = ref("")
 const code = ref("")
 const countdown = ref(0)
 const agree = ref(false)
+const showPassword = ref(false)
+const showOtherLoginMethods = ref(false)
+const loginType = ref("quick") // quick, password, code
+
+// 登录类型标签
+const loginTypeLabels = {
+  quick: "快捷登录",
+  password: "密码登录",
+  code: "验证码登录",
+}
+
+// 登录类型图标
+const loginTypeIcons = {
+  quick: "i-ri-phone-line",
+  password: "i-ri-lock-line",
+  code: "i-ri-shield-keyhole-line",
+}
+
+// 切换登录类型
+const switchLoginType = (type) => {
+  loginType.value = type
+  showOtherLoginMethods.value = false
+}
 
 const getCode = () => {
   if (countdown.value > 0) return
@@ -226,3 +299,21 @@ const navigateTo = (url: string) => {
   })
 }
 </script>
+
+<style>
+.animate-fade-in {
+  animation: fade-in 0.3s ease-in-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
