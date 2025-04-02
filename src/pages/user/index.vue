@@ -1,153 +1,148 @@
 <template>
-  <view class="min-h-screen bg-gray-50">
-    <!-- 用户信息卡片 -->
-    <view class="bg-primary p-6 text-white">
-      <view class="flex items-center space-x-4">
-        <image
-          class="w-16 h-16 rounded-full border-2 border-white/20"
-          src="https://placekitten.com/100/100"
-          mode="aspectFill"
-        />
-        <view>
-          <text class="text-lg font-medium">用户名</text>
-          <text class="text-sm opacity-80">ID: 888888</text>
+  <view class="page-container bg-gray-100 min-h-screen">
+    <!-- 顶部导航 -->
+    <view class="bg-white px-4 py-3 text-center text-lg font-medium border-b border-gray-100">
+      个人中心
+    </view>
+
+    <!-- 用户信息 -->
+    <view class="mt-3 bg-white">
+      <view class="flex items-center px-4 py-4">
+        <view class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center">
+          <text class="i-ri-user-line text-3xl"></text>
+        </view>
+        <view class="ml-4 flex-1">
+          <view class="text-lg font-medium">用户名</view>
+          <view class="text-sm text-gray-500 mt-1">ID: 123456789</view>
+        </view>
+        <view class="text-gray-400">
+          <text class="i-ri-arrow-right-s-line inline-block"></text>
         </view>
       </view>
     </view>
 
-    <!-- 用户数据统计 -->
-    <view class="bg-white -mt-4 mx-4 rounded-lg shadow-sm p-4">
-      <view class="grid grid-cols-3 gap-4">
-        <view class="text-center">
-          <text class="text-lg font-medium text-gray-900">128</text>
-          <text class="text-sm text-gray-500">收藏</text>
+    <!-- 主要功能 -->
+    <view class="mt-3 bg-white">
+      <view class="text-sm text-gray-500 px-4 py-2">主要功能</view>
+      <view class="divide-y divide-gray-100">
+        <view
+          @click="navigateTo('/pages-sub/order/index')"
+          class="flex items-center justify-between px-4 py-3 active:bg-gray-50"
+        >
+          <view class="flex items-center flex-1">
+            <view class="w-5 h-5 mr-3 flex items-center justify-center">
+              <text class="i-ri-bill-line"></text>
+            </view>
+            <text>我的订单</text>
+          </view>
+          <view class="text-gray-400">
+            <text class="i-ri-arrow-right-s-line inline-block"></text>
+          </view>
         </view>
-        <view class="text-center">
-          <text class="text-lg font-medium text-gray-900">32</text>
-          <text class="text-sm text-gray-500">关注</text>
+        <view
+          @click="navigateTo('/pages-sub/address/index')"
+          class="flex items-center justify-between px-4 py-3 active:bg-gray-50"
+        >
+          <view class="flex items-center flex-1">
+            <view class="w-5 h-5 mr-3 flex items-center justify-center">
+              <text class="i-ri-map-pin-line"></text>
+            </view>
+            <text>收货地址</text>
+          </view>
+          <view class="text-gray-400">
+            <text class="i-ri-arrow-right-s-line inline-block"></text>
+          </view>
         </view>
-        <view class="text-center">
-          <text class="text-lg font-medium text-gray-900">256</text>
-          <text class="text-sm text-gray-500">足迹</text>
+        <view
+          @click="navigateTo('/pages-sub/coupon/index')"
+          class="flex items-center justify-between px-4 py-3 active:bg-gray-50"
+        >
+          <view class="flex items-center flex-1">
+            <view class="w-5 h-5 mr-3 flex items-center justify-center">
+              <text class="i-ri-coupon-line"></text>
+            </view>
+            <text>优惠券</text>
+          </view>
+          <view class="text-gray-400">
+            <text class="i-ri-arrow-right-s-line inline-block"></text>
+          </view>
         </view>
       </view>
     </view>
 
-    <!-- 功能菜单 -->
-    <view class="mt-4 mx-4 space-y-4">
-      <!-- 订单相关 -->
-      <view class="bg-white rounded-lg shadow-sm overflow-hidden">
-        <view class="p-4 border-b border-gray-100">
-          <text class="text-base font-medium text-gray-900">我的订单</text>
+    <!-- 其他功能 -->
+    <view class="mt-3 bg-white">
+      <view class="text-sm text-gray-500 px-4 py-2">其他功能</view>
+      <view class="divide-y divide-gray-100">
+        <view
+          @click="navigateTo('/pages-sub/feedback/index')"
+          class="flex items-center justify-between px-4 py-3 active:bg-gray-50"
+        >
+          <view class="flex items-center flex-1">
+            <view class="w-5 h-5 mr-3 flex items-center justify-center">
+              <text class="i-ri-feedback-line"></text>
+            </view>
+            <text>意见反馈</text>
+          </view>
+          <view class="text-gray-400">
+            <text class="i-ri-arrow-right-s-line inline-block"></text>
+          </view>
         </view>
-        <view class="grid grid-cols-4 p-4">
-          <view class="flex flex-col items-center space-y-2">
-            <view class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-              <text class="text-primary text-lg">📦</text>
+        <view
+          @click="navigateTo('/pages-sub/about/index')"
+          class="flex items-center justify-between px-4 py-3 active:bg-gray-50"
+        >
+          <view class="flex items-center flex-1">
+            <view class="w-5 h-5 mr-3 flex items-center justify-center">
+              <text class="i-ri-information-line"></text>
             </view>
-            <text class="text-sm text-gray-600">待付款</text>
+            <text>关于我们</text>
           </view>
-          <view class="flex flex-col items-center space-y-2">
-            <view class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-              <text class="text-primary text-lg">🚚</text>
-            </view>
-            <text class="text-sm text-gray-600">待发货</text>
-          </view>
-          <view class="flex flex-col items-center space-y-2">
-            <view class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-              <text class="text-primary text-lg">📝</text>
-            </view>
-            <text class="text-sm text-gray-600">待评价</text>
-          </view>
-          <view class="flex flex-col items-center space-y-2">
-            <view class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-              <text class="text-primary text-lg">📋</text>
-            </view>
-            <text class="text-sm text-gray-600">全部订单</text>
+          <view class="text-gray-400">
+            <text class="i-ri-arrow-right-s-line inline-block"></text>
           </view>
         </view>
       </view>
+    </view>
 
-      <!-- 其他功能 -->
-      <view class="bg-white rounded-lg shadow-sm overflow-hidden">
-        <view class="p-4 border-b border-gray-100">
-          <text class="text-base font-medium text-gray-900">常用功能</text>
-        </view>
-        <view class="grid grid-cols-4 p-4">
-          <view class="flex flex-col items-center space-y-2">
-            <view class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-              <text class="text-primary text-lg">❤️</text>
-            </view>
-            <text class="text-sm text-gray-600">我的收藏</text>
-          </view>
-          <view class="flex flex-col items-center space-y-2">
-            <view class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-              <text class="text-primary text-lg">👥</text>
-            </view>
-            <text class="text-sm text-gray-600">我的关注</text>
-          </view>
-          <view class="flex flex-col items-center space-y-2">
-            <view class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-              <text class="text-primary text-lg">🎁</text>
-            </view>
-            <text class="text-sm text-gray-600">优惠券</text>
-          </view>
-          <view class="flex flex-col items-center space-y-2">
-            <view class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-              <text class="text-primary text-lg">💳</text>
-            </view>
-            <text class="text-sm text-gray-600">我的钱包</text>
-          </view>
-        </view>
-      </view>
-
-      <!-- 设置列表 -->
-      <view class="bg-white rounded-lg shadow-sm overflow-hidden">
-        <view class="p-4 border-b border-gray-100">
-          <text class="text-base font-medium text-gray-900">设置</text>
-        </view>
-        <view class="divide-y divide-gray-100">
-          <view class="flex items-center justify-between p-4">
-            <view class="flex items-center space-x-3">
-              <text class="text-lg">⚙️</text>
-              <text class="text-gray-600">账号设置</text>
-            </view>
-            <text class="text-gray-400">></text>
-          </view>
-          <view class="flex items-center justify-between p-4">
-            <view class="flex items-center space-x-3">
-              <text class="text-lg">🔔</text>
-              <text class="text-gray-600">消息通知</text>
-            </view>
-            <text class="text-gray-400">></text>
-          </view>
-          <view class="flex items-center justify-between p-4">
-            <view class="flex items-center space-x-3">
-              <text class="text-lg">🔒</text>
-              <text class="text-gray-600">隐私设置</text>
-            </view>
-            <text class="text-gray-400">></text>
-          </view>
-          <view class="flex items-center justify-between p-4">
-            <view class="flex items-center space-x-3">
-              <text class="text-lg">❓</text>
-              <text class="text-gray-600">帮助与反馈</text>
-            </view>
-            <text class="text-gray-400">></text>
-          </view>
-          <view class="flex items-center justify-between p-4">
-            <view class="flex items-center space-x-3">
-              <text class="text-lg">ℹ️</text>
-              <text class="text-gray-600">关于我们</text>
-            </view>
-            <text class="text-gray-400">></text>
-          </view>
-        </view>
-      </view>
+    <!-- 退出登录 -->
+    <view class="mt-3 mb-3 px-4">
+      <button
+        @click="handleLogout"
+        class="w-full py-2 bg-white text-red-500 rounded-md active:bg-gray-50"
+      >
+        退出登录
+      </button>
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
-// 这里可以添加页面逻辑
+const navigateTo = (url: string) => {
+  uni.navigateTo({
+    url,
+    fail: (err) => {
+      console.error("页面跳转失败:", err)
+    },
+  })
+}
+
+const handleLogout = () => {
+  uni.showModal({
+    title: "提示",
+    content: "确定要退出登录吗？",
+    success: (res) => {
+      if (res.confirm) {
+        // 这里添加退出登录的逻辑
+        uni.showToast({
+          title: "退出成功",
+          icon: "success",
+        })
+        setTimeout(() => {
+          uni.navigateBack()
+        }, 1500)
+      }
+    },
+  })
+}
 </script>

@@ -55,6 +55,15 @@
       "needLogin": false
     },
     {
+      "path": "pages/settings/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "设置",
+        "navigationStyle": "default"
+      },
+      "needLogin": false
+    },
+    {
       "path": "pages/login/index",
       "type": "page",
       "style": {
@@ -73,6 +82,14 @@
           "type": "page",
           "style": {
             "navigationBarTitleText": "订单详情",
+            "navigationStyle": "default"
+          }
+        },
+        {
+          "path": "news/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "新闻",
             "navigationStyle": "default"
           }
         }

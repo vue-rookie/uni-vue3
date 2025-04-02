@@ -1,96 +1,117 @@
-# 2025 最新 uni-app 开发模板
+# UniApp Vue3 企业级开发模板
 
-uni-app Vue3 + Vite5 + TypeScript + Pinia + Unocss
-使用最新 uni-app vue-cli 模板， vue3、vite 最新版本搭建，通过命令方式运行和打包构建，加入了 unocss 原子化开发方式，极大的提升您的开发效率。
+> 基于 Vue3 + Vite5 + TypeScript + Pinia + UnoCSS 的现代化跨端开发解决方案
 
-## 技术架构
+## 🚀 技术栈
 
-基于 vue3+vite+uniapp+typescript+unocss
+- **核心框架**：Vue 3.4
+- **构建工具**：Vite 5.0
+- **开发语言**：TypeScript 5.0
+- **状态管理**：Pinia 2.0
+- **样式方案**：UnoCSS
+- **跨端框架**：UniApp 3.0
 
-1. 环境要求
+## 📋 环境要求
 
-node>18.0.0
-pnpm>7.0.0
+- Node.js >= 18.0.0
+- pnpm >= 7.0.0
+- 微信开发者工具（开发小程序时使用）
 
-2. 不建议集成第三方组件库
+## 🛠️ 快速开始
 
-- 由于第三方组件库大部分组件未使用微信原生组件开发，相对原生组件性能较差。对于小程序来说，建议使用原生的组件去开发。当然如果您对性能没有较高的要求，您可以自行选择集成第三方组件库。
+```bash
+# 安装依赖
+pnpm install
 
-2. 快速开始
-
-```
-   pnpm install
-   pnpm i
-   pnpm dev:mp
-
-```
-
+# 开发环境运行
 pnpm dev:mp-weixin
 
-![构建成功](./src/static/log.jpg)
+# 生产环境构建
+pnpm build:mp-weixin
+```
 
-3. 调试
+## 📱 开发指南
 
-- 微信平台：然后打开微信开发者工具，导入上面`pnpm dev:mp-weixin` 生成的本地 dist 文件夹，选择本项目的`dist/dev/mp-weixin` 文件。
+### 微信小程序开发
 
-4. 发布
+1. **开发环境配置**
 
-- 微信平台：`pnpm build:mp-weixin`, 打包后的文件在 `dist/build/mp-weixin`，然后通过微信开发者工具导入，并点击右上角的"上传"按钮进行上传。
+   - 运行 `pnpm dev:mp-weixin` 生成开发环境代码
+   - 使用微信开发者工具导入 `dist/dev/mp-weixin` 目录
+   - 开启"不校验合法域名"选项（开发环境）
 
-## 注意
+2. **生产环境发布**
+   - 执行 `pnpm build:mp-weixin` 生成生产环境代码
+   - 使用微信开发者工具导入 `dist/build/mp-weixin` 目录
+   - 点击"上传"按钮发布小程序
 
-- 如果不想在pages页面中单独引入组件，全局组件可以放到uni-module模块下，这也是符合uni-app easycom的规范
-- 业务ts类型放到对应的pages对应文件type.ts中
+### 项目规范
 
-## 联系我
+1. **组件开发规范**
 
-- +v：qq8181227（疑难解答，也接前端项目开发）
+   - 全局组件统一放置在 `uni-module` 目录下
+   - 遵循 UniApp 的 easycom 组件规范
+   - 组件命名采用 PascalCase 命名法
 
-## 性能优化说明
+2. **类型定义规范**
+   - 业务类型定义统一放在对应页面的 `type.ts` 文件中
+   - 公共类型定义放在 `types` 目录下
+   - 类型命名采用 PascalCase 命名法
 
-本项目已经实施了多种性能优化策略，提升应用的加载速度和运行效率：
+## 🚀 性能优化
 
 ### 构建优化
 
-1. **代码分割**：
+1. **代码分割**
 
-   - 使用 `manualChunks` 将代码分割成更小的块
-   - 第三方依赖单独分组，提高缓存效率
+   - 使用 `manualChunks` 实现代码分割
+   - 第三方依赖独立打包，提高缓存效率
+   - 路由组件按需加载
 
-2. **资源优化**：
+2. **资源优化**
 
-   - 使用 `vite-plugin-imagemin` 压缩图片资源
-   - 设置合理的 `assetsInlineLimit` 控制小文件内联
-   - 采用 `lightningcss` 进行更高效的 CSS 压缩
+   - 图片资源自动压缩
+   - CSS 代码压缩和优化
+   - 静态资源 CDN 加速
 
-3. **Sass 优化**：
-   - 配置 CSS 输出压缩
-   - 使用 `@use` 替代 `@import` 解决警告
+3. **编译优化**
+   - 使用 `lightningcss` 进行 CSS 处理
+   - 配置合理的 `assetsInlineLimit`
+   - 优化 Sass 编译配置
 
 ### 运行时优化
 
-1. **渲染优化指令**：
+1. **渲染优化**
 
-   - `v-lazy`：图片懒加载指令
-   - `v-if-visible`：条件渲染优化
-   - `v-virtual-scroll`：虚拟滚动
+   - 图片懒加载
+   - 虚拟列表
+   - 条件渲染优化
 
-2. **性能监控**：
-   - `monitorRenderPerformance`：渲染性能跟踪
-   - `monitorMemoryUsage`：内存使用监控
-   - `detectRerender`：组件重渲染检测
-   - `reportPageLoadPerformance`：页面加载性能报告
+2. **性能监控**
+   - 页面加载性能监控
+   - 组件渲染性能分析
+   - 内存使用监控
 
-### 使用方法
+## 📦 项目结构
 
-```js
-// 导入性能监控工具
-import { monitorRenderPerformance } from "@/utils/performance"
-
-// 监控性能
-const perf = monitorRenderPerformance()
-perf.markTime("开始初始化")
-// ... 执行代码 ...
-perf.markTime("初始化完成")
-perf.measureTime("开始初始化", "初始化完成")
 ```
+├── src
+│   ├── pages              # 页面文件
+│   ├── pages-sub          # 子页面
+│   ├── static             # 静态资源
+│   ├── types              # 类型定义
+│   ├── utils              # 工具函数
+│   └── uni-module         # 全局组件
+├── vite.config.ts         # Vite 配置
+└── package.json           # 项目配置
+```
+
+## 🤝 技术支持
+
+- 技术咨询：+v qq8181227
+- 项目定制：承接各类前端项目开发
+- 问题反馈：欢迎提交 Issue
+
+## 📄 开源协议
+
+本项目采用 MIT 协议开源，详情请查看 [LICENSE](LICENSE) 文件。
