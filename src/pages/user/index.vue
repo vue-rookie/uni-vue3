@@ -1,10 +1,5 @@
 <template>
   <view class="page-container bg-gray-100 min-h-screen">
-    <!-- 顶部导航 -->
-    <view class="bg-white px-4 py-3 text-center text-lg font-medium border-b border-gray-100">
-      个人中心
-    </view>
-
     <!-- 用户信息 -->
     <view class="mt-3 bg-white">
       <view class="flex items-center px-4 py-4">

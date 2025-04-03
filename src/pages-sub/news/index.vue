@@ -99,42 +99,42 @@
 
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from "vue"
-
-const categories = ["全部", "热点", "科技", "财经", "体育", "娱乐"]
+import Tabs from "@/components/Tabs.vue"
+const categories = ["全部", "类型1", "类型2", "类型3", "类型4", "类型5"]
 const currentCategory = ref(0)
 
 const newsList = ref([
   {
-    title: "2024年全球科技创新大会在京召开，聚焦人工智能与可持续发展",
-    author: "科技日报",
+    title: "标题标题标题标题",
+    author: "作者作者作者作者",
     time: "10分钟前",
     views: "1.2万",
     image: "https://picsum.photos/200/200?random=1",
   },
   {
-    title: "央行发布最新货币政策报告，强调稳健货币政策取向不变",
-    author: "财经网",
+    title: "标题标题标题标题",
+    author: "作者作者作者作者",
     time: "30分钟前",
     views: "2.5万",
     image: "https://picsum.photos/200/200?random=2",
   },
   {
-    title: "中国女足晋级世界杯八强，创造历史最佳战绩",
-    author: "体育周刊",
+    title: "标题标题标题标题",
+    author: "作者作者作者作者",
     time: "1小时前",
     views: "5.8万",
     image: "https://picsum.photos/200/200?random=3",
   },
   {
-    title: "新一代国产操作系统发布，性能提升显著",
-    author: "IT之家",
+    title: "标题标题标题标题",
+    author: "作者作者作者作者",
     time: "2小时前",
     views: "3.4万",
     image: "https://picsum.photos/200/200?random=4",
   },
   {
-    title: "全国多地迎来强降雨，气象部门发布预警",
-    author: "中国天气",
+    title: "标题标题标题标题",
+    author: "作者作者作者作者",
     time: "3小时前",
     views: "1.9万",
     image: "https://picsum.photos/200/200?random=5",
@@ -174,7 +174,7 @@ const generateNewsItems = (count: number, categoryIndex: number) => {
 
   for (let i = 0; i < count; i++) {
     items.push({
-      title: `${category !== "全部" ? `[${category}] ` : ""}标题 ${i + 1}: ${getRandomTitle()}`,
+      title: `${category !== "全部" ? `[${category}] ` : ""} ${getRandomTitle()}`,
       author: getRandomAuthor(),
       time: getRandomTime(),
       views: `${Math.floor(Math.random() * 10) + 1}.${Math.floor(Math.random() * 9)}万`,
@@ -188,16 +188,17 @@ const generateNewsItems = (count: number, categoryIndex: number) => {
 // 随机标题
 const getRandomTitle = () => {
   const titles = [
-    "人工智能技术进步迅速，专家呼吁加强伦理规范",
-    "全球芯片供应链重组，各国竞相加码半导体产业",
-    "新能源汽车销量持续增长，市场竞争日趋激烈",
-    "互联网金融监管政策完善，促进行业健康发展",
-    "电子商务平台积极拓展农村市场，带动乡村振兴",
-    "云计算技术加速企业数字化转型，提升运营效率",
-    "数字人民币试点范围扩大，支付方式多元化",
-    "绿色发展理念深入人心，低碳经济成为新趋势",
-    "元宇宙概念持续升温，相关技术研发提速",
-    "健康科技创新不断，智能医疗设备普及率提高",
+    "标题标题标题标题1",
+    "标题标题标题标题2",
+    "标题标题标题标题3",
+    "标题标题标题标题4",
+    "标题标题标题标题5",
+    "标题标题标题标题6",
+    "标题标题标题标题7",
+    "标题标题标题标题8",
+    "标题标题标题标题9",
+    "标题标题标题标题10",
+    "标题标题标题标题11",
   ]
   return titles[Math.floor(Math.random() * titles.length)]
 }
@@ -205,16 +206,16 @@ const getRandomTitle = () => {
 // 随机作者
 const getRandomAuthor = () => {
   const authors = [
-    "科技日报",
-    "财经网",
-    "体育周刊",
-    "IT之家",
-    "中国天气",
-    "商业观察",
-    "教育时报",
-    "健康报道",
-    "娱乐周刊",
-    "科学探索",
+    "作者1",
+    "作者2",
+    "作者3",
+    "作者4",
+    "作者5",
+    "作者6",
+    "作者7",
+    "作者8",
+    "作者9",
+    "作者10",
   ]
   return authors[Math.floor(Math.random() * authors.length)]
 }

@@ -1,12 +1,8 @@
 <template>
   <view class="page-container bg-white min-h-screen flex flex-col">
     <!-- Logo区域 -->
-    <view class="mt-12 mb-6 flex justify-center">
-      <image
-        src="https://picsum.photos/400/200?random=1"
-        mode="aspectFit"
-        class="w-48 h-24 rounded-lg"
-      />
+    <view class="mt-12 mb-6 flex justify-center text-2xl font-bold text-[#060b2d]">
+      你好，uni-vue3
     </view>
 
     <!-- 登录表单容器 -->
