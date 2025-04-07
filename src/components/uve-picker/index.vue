@@ -10,7 +10,9 @@
         {{ selectedLabels.join(" / ") }}
       </text>
       <text v-else class="text-gray-400">{{ placeholder }}</text>
-      <text class="text-gray-400 ml-2" :class="{ 'transform rotate-180': isOpen }">▼</text>
+      <text class="text-gray-400 ml-2" :class="{ 'transform rotate-180': isOpen }">
+        <text class="i-ri-arrow-down-s-line"></text>
+      </text>
     </view>
 
     <!-- 选择器弹出层 -->
@@ -22,9 +24,13 @@
       <view class="bg-white w-full relative z-10">
         <!-- 顶部操作栏 -->
         <view class="flex justify-between items-center border-b border-gray-200 p-3">
-          <text @tap="closePicker" class="text-gray-500">取消</text>
+          <text @tap="closePicker" class="text-gray-500">
+            <text class="i-ri-close-line text-lg"></text>
+          </text>
           <text class="text-base font-medium">{{ title || placeholder }}</text>
-          <text @tap="confirmSelection" class="text-primary">确定</text>
+          <text @tap="confirmSelection" class="text-primary">
+            <text class="i-ri-check-line text-lg"></text>
+          </text>
         </view>
 
         <!-- 选择器主体 - 使用immediate-change属性提高响应速度 -->

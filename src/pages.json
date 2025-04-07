@@ -9,6 +9,7 @@
   "easycom": {
     "autoscan": true,
     "custom": {
+      "^uve-(.*)": "@/components/uve-$1/index.vue"
     }
   },
   "tabBar": {
@@ -87,18 +88,42 @@
       "root": "pages-sub",
       "pages": [
         {
-          "path": "orderDetail/index",
+          "path": "button-demo/index",
           "type": "page",
           "style": {
-            "navigationBarTitleText": "订单详情",
+            "navigationBarTitleText": "uve-button按钮",
             "navigationStyle": "default"
           }
         },
         {
-          "path": "news/index",
+          "path": "border-demo/index",
           "type": "page",
           "style": {
-            "navigationBarTitleText": "新闻列表",
+            "navigationBarTitleText": "uve-border边框",
+            "navigationStyle": "default"
+          }
+        },
+        {
+          "path": "picker-demo/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "uve-picker选择器",
+            "navigationStyle": "default"
+          }
+        },
+        {
+          "path": "message-demo/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "uve-message消息",
+            "navigationStyle": "default"
+          }
+        },
+        {
+          "path": "tabs-demo/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "uve-tabs标签",
             "navigationStyle": "default"
           }
         }
