@@ -2,6 +2,8 @@
 
 > 基于 Vue3 + Vite5 + TypeScript + Pinia + UnoCSS 的现代化跨端开发解决方案
 
+![框架预览](https://qinqiang.oss-cn-beijing.aliyuncs.com/gh_0fb82a6dc9c4_344.jpg)
+
 ## 🚀 技术栈
 
 - **核心框架**：Vue 3.4
