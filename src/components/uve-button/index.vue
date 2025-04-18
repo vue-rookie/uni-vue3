@@ -4,12 +4,12 @@
       'inline-flex items-center justify-center px-4 text-sm text-center whitespace-nowrap cursor-pointer border border-transparent rounded outline-none transition-all duration-200',
       // 按钮类型
       {
-        'text-gray-700 bg-white border-gray-300': type === 'default' && !plain,
-        'text-white bg-primary border-primary': type === 'primary' && !plain,
-        'text-white bg-success border-success': type === 'success' && !plain,
-        'text-white bg-warning border-warning': type === 'warning' && !plain,
-        'text-white bg-danger border-danger': type === 'danger' && !plain,
-        'text-white bg-info border-info': type === 'info' && !plain,
+        'text-gray-700 !bg-white border-gray-300': type === 'default' && !plain,
+        'text-white !bg-primary border-primary': type === 'primary' && !plain,
+        'text-white !bg-success border-success': type === 'success' && !plain,
+        'text-white !bg-warning border-warning': type === 'warning' && !plain,
+        'text-white !bg-danger border-danger': type === 'danger' && !plain,
+        'text-white !bg-info border-info': type === 'info' && !plain,
       },
       // 朴素按钮
       {

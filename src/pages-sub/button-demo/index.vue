@@ -147,8 +147,6 @@
 
 <script setup>
 import { ref } from "vue"
-import uveButton from "@/components/uve-button/index.vue"
-
 const clickCount = ref(0)
 
 const handleClick = () => {

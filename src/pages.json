@@ -112,18 +112,66 @@
           }
         },
         {
-          "path": "message-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-message消息",
-            "navigationStyle": "default"
-          }
-        },
-        {
           "path": "tabs-demo/index",
           "type": "page",
           "style": {
             "navigationBarTitleText": "uve-tabs标签",
+            "navigationStyle": "default"
+          }
+        },
+        {
+          "path": "swiper-demo/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "uve-swiper轮播图",
+            "navigationStyle": "default"
+          }
+        },
+        {
+          "path": "navbar-demo/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "uve-navbar导航栏",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "form-demo/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "uve-form表单",
+            "navigationStyle": "default"
+          }
+        },
+        {
+          "path": "input-demo/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "uve-input输入框",
+            "navigationStyle": "default"
+          }
+        },
+        {
+          "path": "checkbox-demo/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "uve-checkbox复选框",
+            "navigationStyle": "default"
+          }
+        },
+        {
+          "path": "radio-demo/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "uve-radio单选框",
+            "navigationStyle": "default"
+          }
+        },
+        {
+          "path": "popup-demo/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "uve-popup弹窗",
             "navigationStyle": "default"
           }
         }
