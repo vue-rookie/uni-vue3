@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, provide, onMounted, watch } from "vue"
+import { reactive, provide, onMounted, watch } from "vue"
 import { useValidation } from "@/hooks"
 
 // 表单数据和验证状态
@@ -161,33 +161,66 @@ const validate = async (callback?: (error: any, valid: boolean) => void) => {
 }
 
 // 表单提交处理
-const onSubmit = async () => {
-  console.log("表单提交")
-  let isValid = true
+const onSubmit = async (e) => {
+  console.log("表单提交，事件对象:", e)
+  let isValid = false // 默认为false，必须验证通过才能设为true
 
   if (props.validateOnSubmit) {
-    isValid = await validate((err, valid) => {
-      if (err) {
-        console.error("验证过程中发生错误:", err)
-        isValid = false
-        return
-      }
-      isValid = valid
-    })
+    try {
+      const result = await validation.validateForm(true)
+      console.log("表单验证结果:", result)
+
+      formState.valid = result.valid
+      formState.errorFields = Object.keys(result.invalidFields).reduce(
+        (errors, field) => {
+          errors[field] = result.invalidFields[field].message
+          return errors
+        },
+        {} as Record<string, string>,
+      )
+
+      emits("validate", {
+        valid: result.valid,
+        errorFields: formState.errorFields,
+      })
+
+      isValid = result.valid
+    } catch (err) {
+      console.error("表单验证异常:", err)
+      isValid = false
+      // 设置formState
+      formState.valid = false
+    }
+  } else {
+    isValid = true // 不需要验证时，直接设为有效
   }
 
   if (isValid) {
     console.log("表单验证通过，触发submit事件")
     emits("submit", props.model)
+
+    // 显示成功提示
+    if (uni && typeof uni.showToast === "function") {
+      uni.showToast({
+        title: "提交成功",
+        icon: "success",
+      })
+    }
+
+    return true
   } else {
-    console.log("表单验证失败")
+    console.log("表单验证失败，阻止提交")
+    // 阻止默认提交行为
+    e?.preventDefault?.()
+    e?.stopPropagation?.()
+    return false
   }
 }
 
 // 表单提交方法 (供外部调用)
 const submit = async () => {
   console.log("调用submit方法")
-  return onSubmit()
+  return onSubmit(null)
 }
 
 // 表单重置处理
@@ -232,5 +265,6 @@ defineExpose({
   clearValidate,
   resetFields: reset, // 兼容性别名
   submitForm: submit, // 兼容性别名
+  validateField: (field, trigger) => validation.validateField(field, trigger), // 添加单字段验证方法
 })
 </script>

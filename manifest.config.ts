@@ -119,13 +119,15 @@ export default defineManifestConfig({
       urlCheck: false,
       minified: true,
     },
+    libVersion: "latest",
     usingComponents: true,
     lazyCodeLoading: "requiredComponents",
+    // 小程序权限配置
     requiredPrivateInfos: ["chooseLocation", "getLocation"],
 
     permission: {
       "scope.userLocation": {
-        desc: "您的位置将用于小程序校验签到位置",
+        desc: "您的位置将用于签到",
       },
     },
     // __usePrivacyCheck__: true,

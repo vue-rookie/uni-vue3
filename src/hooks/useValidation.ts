@@ -183,13 +183,24 @@ export const useValidation = () => {
     // 字段有规则，准备验证
     const rulesArray = Array.isArray(fieldRules) ? fieldRules : [fieldRules]
 
-    // 筛选当前触发方式下需要验证的规则
+    // 强制检查必填规则（如果触发类型是submit）
     const triggerRules = rulesArray.filter((rule) => {
       if (!rule.trigger) return trigger === "submit" // 没有设置触发方式，则只在提交时验证
-
       const triggers = Array.isArray(rule.trigger) ? rule.trigger : [rule.trigger]
       return triggers.includes(trigger as any)
     })
+
+    // 如果是提交验证，确保必填规则始终被验证
+    if (trigger === "submit") {
+      // 找出所有必填规则
+      const requiredRules = rulesArray.filter((rule) => rule.required)
+      // 将必填规则添加到triggerRules中（如果不存在）
+      requiredRules.forEach((requiredRule) => {
+        if (!triggerRules.includes(requiredRule)) {
+          triggerRules.push(requiredRule)
+        }
+      })
+    }
 
     // 如果没有需要验证的规则，则返回当前状态
     if (triggerRules.length === 0) {
@@ -329,23 +340,40 @@ export const useValidation = () => {
    * @param validateAll 是否验证所有字段，默认为 true
    */
   const validateForm = async (validateAll: boolean = true): Promise<ValidationResult> => {
+    console.log("开始验证表单，validateAll:", validateAll)
+
     const invalidFields: Record<string, ValidationState> = {}
     const fieldNames = validateAll
       ? Object.keys(rules)
       : Object.keys(fieldsState).filter((field) => fieldsState[field].dirty)
 
+    console.log("要验证的字段:", fieldNames)
+
+    if (fieldNames.length === 0) {
+      console.log("没有需要验证的字段")
+      return {
+        valid: true,
+        invalidFields: {},
+      }
+    }
+
     // 验证所有字段
     await Promise.all(
       fieldNames.map(async (field) => {
+        console.log("验证字段:", field)
         const state = await validateField(field, "submit")
+        console.log("字段验证结果:", field, state.valid, state.message)
         if (!state.valid) {
           invalidFields[field] = state
         }
       }),
     )
 
+    const valid = Object.keys(invalidFields).length === 0
+    console.log("表单验证结果:", valid, "无效字段:", Object.keys(invalidFields))
+
     return {
-      valid: Object.keys(invalidFields).length === 0,
+      valid,
       invalidFields,
     }
   }

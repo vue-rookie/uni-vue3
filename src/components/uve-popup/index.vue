@@ -262,31 +262,6 @@ onUnmounted(() => {
 </script>
 
 <style>
-/* 动画效果 */
-.animate-fade-in {
-  animation: fadeIn 0.3s ease-out;
-}
-
-.animate-slide-up {
-  animation: slideUp 0.3s ease-out;
-}
-
-.animate-slide-down {
-  animation: slideDown 0.3s ease-out;
-}
-
-.animate-slide-left {
-  animation: slideLeft 0.3s ease-out;
-}
-
-.animate-slide-right {
-  animation: slideRight 0.3s ease-out;
-}
-
-.animate-zoom-in {
-  animation: zoomIn 0.3s ease-out;
-}
-
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -347,6 +322,31 @@ onUnmounted(() => {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
   }
+}
+
+/* 动画效果 */
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+.animate-slide-down {
+  animation: slide-down 0.3s ease-out;
+}
+
+.animate-slide-left {
+  animation: slide-left 0.3s ease-out;
+}
+
+.animate-slide-right {
+  animation: slide-right 0.3s ease-out;
+}
+
+.animate-zoom-in {
+  animation: zoom-in 0.3s ease-out;
 }
 
 .popup-content {

@@ -189,6 +189,11 @@
       </view>
     </view>
   </view>
+
+  <!-- 底部提示 -->
+  <view class="mt-6 mb-10 px-4 text-center pb-4">
+    <view class="text-sm text-gray-500">更多组件实现中......，欢迎您提建议和issues</view>
+  </view>
 </template>
 
 <script setup lang="ts">
@@ -207,5 +212,28 @@ const navigateTo = (url: string) => {
       console.error("页面跳转失败:", err)
     },
   })
+}
+
+const openURL = (url: string) => {
+  // 在条件编译中打开URL
+  // #ifdef H5
+  window.open(url)
+  // #endif
+
+  // #ifdef APP-PLUS
+  plus.runtime.openURL(url)
+  // #endif
+
+  // #ifdef MP
+  uni.setClipboardData({
+    data: url,
+    success: () => {
+      uni.showToast({
+        title: "链接已复制",
+        icon: "none",
+      })
+    },
+  })
+  // #endif
 }
 </script>

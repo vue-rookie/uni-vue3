@@ -10,10 +10,19 @@
       <view class="font-medium mb-3">基础表单</view>
       <uve-form :model="basicForm" :rules="basicRules" label-width="80px" ref="basicFormRef">
         <uve-form-item label="用户名" prop="username">
-          <uve-input v-model="basicForm.username" placeholder="请输入用户名" />
+          <uve-input
+            v-model="basicForm.username"
+            placeholder="请输入用户名"
+            @blur="handleFieldBlur(basicFormRef, 'username')"
+          />
         </uve-form-item>
         <uve-form-item label="密码" prop="password">
-          <uve-input v-model="basicForm.password" type="password" placeholder="请输入密码" />
+          <uve-input
+            v-model="basicForm.password"
+            type="password"
+            placeholder="请输入密码"
+            @blur="handleFieldBlur(basicFormRef, 'password')"
+          />
         </uve-form-item>
         <uve-form-item>
           <view class="flex space-x-3">
@@ -34,13 +43,25 @@
         ref="validateFormRef"
       >
         <uve-form-item label="姓名" prop="name">
-          <uve-input v-model="validateForm.name" placeholder="请输入姓名" />
+          <uve-input
+            v-model="validateForm.name"
+            placeholder="请输入姓名"
+            @blur="handleFieldBlur(validateFormRef, 'name')"
+          />
         </uve-form-item>
         <uve-form-item label="邮箱" prop="email">
-          <uve-input v-model="validateForm.email" placeholder="请输入邮箱" />
+          <uve-input
+            v-model="validateForm.email"
+            placeholder="请输入邮箱"
+            @blur="handleFieldBlur(validateFormRef, 'email')"
+          />
         </uve-form-item>
         <uve-form-item label="手机号" prop="mobile">
-          <uve-input v-model="validateForm.mobile" placeholder="请输入手机号" />
+          <uve-input
+            v-model="validateForm.mobile"
+            placeholder="请输入手机号"
+            @blur="handleFieldBlur(validateFormRef, 'mobile')"
+          />
         </uve-form-item>
         <uve-form-item>
           <view class="flex space-x-3">
@@ -170,16 +191,33 @@
         label-width="80px"
       >
         <uve-form-item label="用户名" prop="username">
-          <uve-input v-model="validationForm.username" placeholder="请输入用户名" />
+          <uve-input
+            v-model="validationForm.username"
+            placeholder="请输入用户名"
+            @blur="handleBlur('username')"
+          />
         </uve-form-item>
         <uve-form-item label="密码" prop="password">
-          <uve-input v-model="validationForm.password" type="password" placeholder="请输入密码" />
+          <uve-input
+            v-model="validationForm.password"
+            type="password"
+            placeholder="请输入密码"
+            @blur="handleBlur('password')"
+          />
         </uve-form-item>
         <uve-form-item label="邮箱" prop="email">
-          <uve-input v-model="validationForm.email" placeholder="请输入邮箱" />
+          <uve-input
+            v-model="validationForm.email"
+            placeholder="请输入邮箱"
+            @blur="handleBlur('email')"
+          />
         </uve-form-item>
         <uve-form-item label="手机号" prop="mobile">
-          <uve-input v-model="validationForm.mobile" placeholder="请输入手机号" />
+          <uve-input
+            v-model="validationForm.mobile"
+            placeholder="请输入手机号"
+            @blur="handleBlur('mobile')"
+          />
         </uve-form-item>
         <uve-form-item>
           <uve-button type="primary" @tap="submitValidationForm">提交</uve-button>
@@ -199,8 +237,8 @@ const basicForm = reactive({
   password: "",
 })
 const basicRules = {
-  username: [{ required: true, message: "请输入用户名", trigger: "change" }],
-  password: [{ required: true, message: "请输入密码", trigger: "change" }],
+  username: [{ required: true, message: "请输入用户名", trigger: ["blur", "submit"] }],
+  password: [{ required: true, message: "请输入密码", trigger: ["blur", "submit"] }],
 }
 
 // 表单校验
@@ -212,20 +250,20 @@ const validateForm = reactive({
 })
 const validateRules = {
   name: [
-    { required: true, message: "请输入姓名", trigger: "change" },
-    { min: 2, max: 5, message: "长度在 2 到 5 个字符", trigger: "change" },
+    { required: true, message: "请输入姓名", trigger: ["blur", "submit"] },
+    { min: 2, max: 5, message: "长度在 2 到 5 个字符", trigger: ["blur", "submit"] },
   ],
   email: [
-    { required: true, message: "请输入邮箱", trigger: "change" },
+    { required: true, message: "请输入邮箱", trigger: ["blur", "submit"] },
     {
       pattern: /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/,
       message: "请输入正确的邮箱地址",
-      trigger: "change",
+      trigger: ["blur", "submit"],
     },
   ],
   mobile: [
-    { required: true, message: "请输入手机号", trigger: "change" },
-    { pattern: /^1[3-9]\d{9}$/, message: "请输入正确的手机号码", trigger: "change" },
+    { required: true, message: "请输入手机号", trigger: ["blur", "submit"] },
+    { pattern: /^1[3-9]\d{9}$/, message: "请输入正确的手机号码", trigger: ["blur", "submit"] },
   ],
 }
 
@@ -254,20 +292,32 @@ const validationForm = reactive({
 })
 
 const validationRules = {
-  username: [{ required: true, message: "请输入用户名", trigger: "change" }],
-  password: [{ required: true, message: "请输入密码", trigger: "change" }],
+  username: [{ required: true, message: "请输入用户名", trigger: ["blur", "submit"] }],
+  password: [{ required: true, message: "请输入密码", trigger: ["blur", "submit"] }],
   email: [
-    { required: true, message: "请输入邮箱", trigger: "change" },
+    { required: true, message: "请输入邮箱", trigger: ["blur", "submit"] },
     {
       pattern: /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/,
       message: "请输入正确的邮箱地址",
-      trigger: "change",
+      trigger: ["blur", "submit"],
     },
   ],
   mobile: [
-    { required: true, message: "请输入手机号", trigger: "change" },
-    { pattern: /^1[3-9]\d{9}$/, message: "请输入正确的手机号码", trigger: "change" },
+    { required: true, message: "请输入手机号", trigger: ["blur", "submit"] },
+    { pattern: /^1[3-9]\d{9}$/, message: "请输入正确的手机号码", trigger: ["blur", "submit"] },
   ],
+}
+
+// 通用字段验证辅助方法
+const handleFieldBlur = (formRef, field) => {
+  if (formRef?.value?.validateField) {
+    formRef.value.validateField(field, "blur")
+  }
+}
+
+// 处理输入框失焦事件，触发单字段验证
+const handleBlur = (field) => {
+  handleFieldBlur(validationFormRef, field)
 }
 
 // 基础表单方法
@@ -278,21 +328,9 @@ const submitBasicForm = () => {
     return
   }
 
-  basicFormRef.value.validate((valid: boolean) => {
-    console.log("表单验证结果:", valid)
-    if (valid) {
-      uni.showToast({
-        title: "提交成功",
-        icon: "success",
-      })
-    } else {
-      console.log("表单验证失败")
-      uni.showToast({
-        title: "表单验证失败",
-        icon: "error",
-      })
-    }
-  })
+  // 直接使用submit方法
+  const res = basicFormRef.value.submit()
+  console.log("表单提交结果:", res)
 }
 
 const resetBasicForm = () => {
@@ -309,21 +347,9 @@ const submitValidateForm = () => {
     return
   }
 
-  validateFormRef.value.validate((valid: boolean) => {
-    console.log("表单验证结果:", valid)
-    if (valid) {
-      uni.showToast({
-        title: "提交成功",
-        icon: "success",
-      })
-    } else {
-      console.log("表单验证失败")
-      uni.showToast({
-        title: "表单验证失败",
-        icon: "error",
-      })
-    }
-  })
+  // 直接使用submit方法
+  const res = validateFormRef.value.submit()
+  console.log("表单提交结果:", res)
 }
 
 const resetValidateForm = () => {
@@ -351,20 +377,9 @@ const submitValidationForm = async () => {
       return
     }
 
-    validationFormRef.value.validate((valid) => {
-      if (valid) {
-        uni.showToast({
-          title: "提交成功",
-          icon: "success",
-        })
-        console.log("表单验证通过，提交数据：", validationForm)
-      } else {
-        uni.showToast({
-          title: "表单验证失败",
-          icon: "error",
-        })
-      }
-    })
+    // 直接使用submit方法
+    const res = validationFormRef.value.submit()
+    console.log("表单提交结果:", res)
   } catch (error) {
     console.log("表单验证失败：", error)
   }

@@ -58,6 +58,7 @@
       "minified": true
     },
     "usingComponents": true,
+    "libVersion": "latest",
     "lazyCodeLoading": "requiredComponents",
     "requiredPrivateInfos": [
       "chooseLocation",
@@ -65,7 +66,7 @@
     ],
     "permission": {
       "scope.userLocation": {
-        "desc": "您的位置将用于小程序校验签到位置"
+        "desc": "您的位置将用于签到"
       }
     }
   },
