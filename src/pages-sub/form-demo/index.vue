@@ -9,25 +9,29 @@
     <view class="bg-white rounded p-4 mb-4 box-border">
       <view class="font-medium mb-3">基础表单</view>
       <uve-form :model="basicForm" :rules="basicRules" label-width="80px" ref="basicFormRef">
-        <uve-form-item label="用户名" prop="username">
+        <uve-form-item label="字段1" prop="username">
           <uve-input
             v-model="basicForm.username"
-            placeholder="请输入用户名"
+            placeholder="请输入字段1"
             @blur="handleFieldBlur(basicFormRef, 'username')"
           />
         </uve-form-item>
-        <uve-form-item label="密码" prop="password">
+        <uve-form-item label="字段2" prop="password">
           <uve-input
             v-model="basicForm.password"
-            type="password"
-            placeholder="请输入密码"
+            type="text"
+            placeholder="请输入字段2"
             @blur="handleFieldBlur(basicFormRef, 'password')"
           />
         </uve-form-item>
         <uve-form-item>
           <view class="flex space-x-3">
-            <uve-button type="primary" @click="submitBasicForm">提交</uve-button>
-            <uve-button type="default" @click="resetBasicForm" plain>重置</uve-button>
+            <view>
+              <uve-button type="primary" @click="submitBasicForm">提交</uve-button>
+            </view>
+            <view>
+              <uve-button type="default" @click="resetBasicForm">重置</uve-button>
+            </view>
           </view>
         </uve-form-item>
       </uve-form>
@@ -42,31 +46,35 @@
         label-width="80px"
         ref="validateFormRef"
       >
-        <uve-form-item label="姓名" prop="name">
+        <uve-form-item label="字段1" prop="name">
           <uve-input
             v-model="validateForm.name"
-            placeholder="请输入姓名"
+            placeholder="请输入字段1"
             @blur="handleFieldBlur(validateFormRef, 'name')"
           />
         </uve-form-item>
-        <uve-form-item label="邮箱" prop="email">
+        <uve-form-item label="字段2" prop="email">
           <uve-input
             v-model="validateForm.email"
-            placeholder="请输入邮箱"
+            placeholder="请输入字段2"
             @blur="handleFieldBlur(validateFormRef, 'email')"
           />
         </uve-form-item>
-        <uve-form-item label="手机号" prop="mobile">
+        <uve-form-item label="字段3" prop="mobile">
           <uve-input
             v-model="validateForm.mobile"
-            placeholder="请输入手机号"
+            placeholder="请输入字段3"
             @blur="handleFieldBlur(validateFormRef, 'mobile')"
           />
         </uve-form-item>
         <uve-form-item>
           <view class="flex space-x-3">
-            <uve-button type="primary" @click="submitValidateForm">提交</uve-button>
-            <uve-button type="default" @click="resetValidateForm">重置</uve-button>
+            <view>
+              <uve-button type="primary" @click="submitValidateForm">提交</uve-button>
+            </view>
+            <view>
+              <uve-button type="default" @click="resetValidateForm">重置</uve-button>
+            </view>
           </view>
         </uve-form-item>
       </uve-form>
@@ -76,44 +84,48 @@
     <view class="bg-white rounded p-4 mb-4 box-border">
       <view class="font-medium mb-3">多类型表单</view>
       <uve-form :model="complexForm" label-width="80px" ref="complexFormRef">
-        <uve-form-item label="姓名">
-          <uve-input v-model="complexForm.name" placeholder="请输入姓名" class="w-full" />
+        <uve-form-item label="字段1">
+          <uve-input v-model="complexForm.name" placeholder="请输入内容" class="w-full" />
         </uve-form-item>
-        <uve-form-item label="性别">
+        <uve-form-item label="字段2">
           <view class="flex space-x-4">
-            <uve-radio label="男" value="male" v-model:modelValue="complexForm.gender"></uve-radio>
             <uve-radio
-              label="女"
+              label="选项1"
+              value="male"
+              v-model:modelValue="complexForm.gender"
+            ></uve-radio>
+            <uve-radio
+              label="选项2"
               value="female"
               v-model:modelValue="complexForm.gender"
             ></uve-radio>
           </view>
         </uve-form-item>
-        <uve-form-item label="爱好">
+        <uve-form-item label="字段3">
           <view class="flex flex-wrap gap-4">
             <uve-checkbox
-              label="阅读"
+              label="选项1"
               value="reading"
               v-model:modelValue="complexForm.hobbies"
             ></uve-checkbox>
             <uve-checkbox
-              label="游戏"
+              label="选项2"
               value="gaming"
               v-model:modelValue="complexForm.hobbies"
             ></uve-checkbox>
             <uve-checkbox
-              label="旅行"
+              label="选项3"
               value="travel"
               v-model:modelValue="complexForm.hobbies"
             ></uve-checkbox>
           </view>
         </uve-form-item>
-        <uve-form-item label="备注" class="w-full">
+        <uve-form-item label="字段4" class="w-full">
           <view class="w-full">
             <uve-input
               v-model="complexForm.remark"
               type="textarea"
-              placeholder="请输入备注"
+              placeholder="请输入内容"
               auto-height
               height="120px"
               class="w-full"
@@ -122,8 +134,12 @@
         </uve-form-item>
         <uve-form-item>
           <view class="flex space-x-3">
-            <uve-button type="primary" @click="submitComplexForm">提交</uve-button>
-            <uve-button type="default" @click="resetComplexForm">重置</uve-button>
+            <view>
+              <uve-button type="primary" @click="submitComplexForm">提交</uve-button>
+            </view>
+            <view>
+              <uve-button type="default" @click="resetComplexForm">重置</uve-button>
+            </view>
           </view>
         </uve-form-item>
       </uve-form>
@@ -138,11 +154,11 @@
         label-width="60px"
         class="flex flex-wrap items-center"
       >
-        <uve-form-item label="姓名" class="mb-2 mr-3">
-          <uve-input v-model="inlineForm.name" placeholder="请输入姓名" class="w-[180px]" />
+        <uve-form-item label="字段1" class="mb-2 mr-3">
+          <uve-input v-model="inlineForm.name" placeholder="请输入内容" class="w-[180px]" />
         </uve-form-item>
-        <uve-form-item label="部门" class="mb-2 mr-3">
-          <uve-input v-model="inlineForm.department" placeholder="请输入部门" class="w-[180px]" />
+        <uve-form-item label="字段2" class="mb-2 mr-3">
+          <uve-input v-model="inlineForm.department" placeholder="请输入内容" class="w-[180px]" />
         </uve-form-item>
         <uve-form-item class="mb-2">
           <uve-button type="primary">查询</uve-button>
@@ -158,7 +174,7 @@
           <view class="text-sm text-gray-500 mb-2">左对齐（默认）</view>
           <uve-form :model="{}" label-width="80px" label-position="left">
             <uve-form-item label="标签">
-              <uve-input placeholder="左对齐标签" />
+              <uve-input placeholder="左对齐内容" />
             </uve-form-item>
           </uve-form>
         </view>
@@ -166,7 +182,7 @@
           <view class="text-sm text-gray-500 mb-2">右对齐</view>
           <uve-form :model="{}" label-width="80px" label-position="right">
             <uve-form-item label="标签">
-              <uve-input placeholder="右对齐标签" />
+              <uve-input placeholder="右对齐内容" />
             </uve-form-item>
           </uve-form>
         </view>
@@ -174,7 +190,7 @@
           <view class="text-sm text-gray-500 mb-2">顶部对齐</view>
           <uve-form :model="{}" label-width="80px" label-position="top">
             <uve-form-item label="标签">
-              <uve-input placeholder="顶部对齐标签" />
+              <uve-input placeholder="顶部对齐内容" />
             </uve-form-item>
           </uve-form>
         </view>
@@ -190,38 +206,29 @@
         :rules="validationRules"
         label-width="80px"
       >
-        <uve-form-item label="用户名" prop="username">
+        <uve-form-item label="字段1" prop="username">
           <uve-input
             v-model="validationForm.username"
-            placeholder="请输入用户名"
+            placeholder="请输入字段1"
             @blur="handleBlur('username')"
           />
         </uve-form-item>
-        <uve-form-item label="密码" prop="password">
+        <uve-form-item label="字段2" prop="password">
           <uve-input
             v-model="validationForm.password"
-            type="password"
-            placeholder="请输入密码"
+            placeholder="请输入字段2"
             @blur="handleBlur('password')"
           />
         </uve-form-item>
-        <uve-form-item label="邮箱" prop="email">
-          <uve-input
-            v-model="validationForm.email"
-            placeholder="请输入邮箱"
-            @blur="handleBlur('email')"
-          />
-        </uve-form-item>
-        <uve-form-item label="手机号" prop="mobile">
-          <uve-input
-            v-model="validationForm.mobile"
-            placeholder="请输入手机号"
-            @blur="handleBlur('mobile')"
-          />
-        </uve-form-item>
         <uve-form-item>
-          <uve-button type="primary" @tap="submitValidationForm">提交</uve-button>
-          <uve-button class="ml-2" @tap="resetValidationForm">重置</uve-button>
+          <view class="flex space-x-3">
+            <view>
+              <uve-button type="primary" @tap="submitValidationForm">提交</uve-button>
+            </view>
+            <view>
+              <uve-button class="ml-2" @tap="resetValidationForm">重置</uve-button>
+            </view>
+          </view>
         </uve-form-item>
       </uve-form>
     </view>
@@ -237,8 +244,8 @@ const basicForm = reactive({
   password: "",
 })
 const basicRules = {
-  username: [{ required: true, message: "请输入用户名", trigger: ["blur", "submit"] }],
-  password: [{ required: true, message: "请输入密码", trigger: ["blur", "submit"] }],
+  username: [{ required: true, message: "请输入字段", trigger: ["blur", "submit"] }],
+  password: [{ required: true, message: "请输入字段", trigger: ["blur", "submit"] }],
 }
 
 // 表单校验
@@ -250,20 +257,20 @@ const validateForm = reactive({
 })
 const validateRules = {
   name: [
-    { required: true, message: "请输入姓名", trigger: ["blur", "submit"] },
+    { required: true, message: "请输入字段", trigger: ["blur", "submit"] },
     { min: 2, max: 5, message: "长度在 2 到 5 个字符", trigger: ["blur", "submit"] },
   ],
   email: [
-    { required: true, message: "请输入邮箱", trigger: ["blur", "submit"] },
+    { required: true, message: "请输入字段", trigger: ["blur", "submit"] },
     {
       pattern: /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/,
-      message: "请输入正确的邮箱地址",
+      message: "请输入正确格式的字段",
       trigger: ["blur", "submit"],
     },
   ],
   mobile: [
-    { required: true, message: "请输入手机号", trigger: ["blur", "submit"] },
-    { pattern: /^1[3-9]\d{9}$/, message: "请输入正确的手机号码", trigger: ["blur", "submit"] },
+    { required: true, message: "请输入字段1", trigger: ["blur", "submit"] },
+    { pattern: /^1[3-9]\d{9}$/, message: "请输入正确的字段1", trigger: ["blur", "submit"] },
   ],
 }
 
@@ -292,19 +299,19 @@ const validationForm = reactive({
 })
 
 const validationRules = {
-  username: [{ required: true, message: "请输入用户名", trigger: ["blur", "submit"] }],
-  password: [{ required: true, message: "请输入密码", trigger: ["blur", "submit"] }],
+  username: [{ required: true, message: "请输入字段1", trigger: ["blur", "submit"] }],
+  password: [{ required: true, message: "请输入字段2", trigger: ["blur", "submit"] }],
   email: [
-    { required: true, message: "请输入邮箱", trigger: ["blur", "submit"] },
+    { required: true, message: "请输入字段3", trigger: ["blur", "submit"] },
     {
       pattern: /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/,
-      message: "请输入正确的邮箱地址",
+      message: "请输入正确格式的字段3",
       trigger: ["blur", "submit"],
     },
   ],
   mobile: [
-    { required: true, message: "请输入手机号", trigger: ["blur", "submit"] },
-    { pattern: /^1[3-9]\d{9}$/, message: "请输入正确的手机号码", trigger: ["blur", "submit"] },
+    { required: true, message: "请输入字段4", trigger: ["blur", "submit"] },
+    { pattern: /^1[3-9]\d{9}$/, message: "请输入正确格式的字段4", trigger: ["blur", "submit"] },
   ],
 }
 

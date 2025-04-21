@@ -1,10 +1,13 @@
 <template>
   <button
     :class="[
-      'inline-flex items-center justify-center px-4 text-sm text-center whitespace-nowrap cursor-pointer border border-transparent rounded outline-none transition-all duration-200',
-      // 按钮类型
+      'inline-flex items-center justify-center px-4 text-sm text-center whitespace-nowrap cursor-pointer rounded  transition-all duration-200',
+      // 默认按钮样式
+      type === 'default'
+        ? 'border border-gray-300 text-gray-700 bg-white border-defualt'
+        : 'border border-transparent',
+      // 其他按钮类型
       {
-        'text-gray-700 !bg-white border-gray-300': type === 'default' && !plain,
         'text-white !bg-primary border-primary': type === 'primary' && !plain,
         'text-white !bg-success border-success': type === 'success' && !plain,
         'text-white !bg-warning border-warning': type === 'warning' && !plain,
@@ -13,7 +16,7 @@
       },
       // 朴素按钮
       {
-        'bg-white': plain,
+        'bg-white border-defualt': plain,
         'text-primary  hover:bg-primary bg-primary/50 hover:text-white':
           plain && type === 'primary',
         'text-success hover:bg-success bg-success/50 hover:text-white': plain && type === 'success',
@@ -94,3 +97,8 @@ const handleClick = (event: MouseEvent) => {
   emit("click", event)
 }
 </script>
+<style lang="scss">
+.border-defualt {
+  border: 1px solid #dcdfe6;
+}
+</style>
