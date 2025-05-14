@@ -6,6 +6,7 @@ import { reportPageLoadPerformance } from "@/utils/performance"
 
 onLaunch(() => {
   console.log("App Launch")
+  console.log("test_husky")
   // #ifdef H5
   setTimeout(() => {
     reportPageLoadPerformance()
