@@ -1,166 +1,452 @@
-# 小红书风格移动应用
+# UniApp Vue3 企业级开发模板
 
-基于 **uni-app + Vue3 + TypeScript** 开发的类小红书社交分享应用，支持多端发布（H5、小程序、App）。
+> 基于 Vue3 + Vite5 + TypeScript + Pinia + UnoCSS 的现代化跨端开发解决方案
 
-## ✨ 特性
+![框架预览](https://qinqiang.oss-cn-beijing.aliyuncs.com/gh_0fb82a6dc9c4_344.jpg)
 
-- 🎨 **精美UI设计** - 完全仿照小红书的视觉设计和交互体验
-- 📱 **多端兼容** - 一套代码，支持H5、微信小程序、App等多个平台
-- 🚀 **现代技术栈** - Vue3 + TypeScript + Vite + UnoCSS
-- 🎯 **完整功能** - 瀑布流首页、发现页、发布、消息、个人中心
-- 💫 **流畅交互** - 点赞、收藏、评论、关注等社交功能
-- 🎪 **响应式设计** - 适配不同屏幕尺寸和设备类型
+## 🚀 技术栈
 
-## 🏗️ 项目结构
+- **核心框架**：Vue 3.4
+- **构建工具**：Vite 5.0
+- **开发语言**：TypeScript 5.0
+- **状态管理**：Pinia 2.0
+- **样式方案**：UnoCSS
+- **跨端框架**：UniApp 3.0
 
+## 🪝 自定义 Hooks
+
+项目中精心封装了丰富的自定义 Hooks，大幅提升开发效率和代码质量，所有 Hooks 支持 TypeScript 类型推导。
+
+### UI 交互类
+
+#### useModal - 对话框管理
+
+提供统一的弹窗交互解决方案，包括确认框、消息提示、加载状态等。
+
+```typescript
+import { useModal } from "@/hooks"
+
+// 在组件中使用
+const {
+  showToast,
+  showSuccess,
+  showError,
+  showConfirm,
+  showLoading,
+  hideLoading,
+  showActionSheet,
+} = useModal()
+
+// 显示确认对话框
+await showConfirm({
+  title: "操作确认",
+  content: "确定要执行此操作吗？",
+})
+
+// 显示成功提示
+showSuccess("操作成功")
+
+// 显示加载状态
+const loading = showLoading()
+try {
+  // 执行异步操作
+} finally {
+  loading.hide() // 隐藏加载
+}
+
+// 显示底部操作菜单
+const selectedIndex = await showActionSheet({
+  itemList: ["选项一", "选项二", "选项三"],
+})
 ```
-src/
-├── components/          # 自定义组件
-│   ├── xhs-navbar/     # 导航栏组件
-│   ├── xhs-note-card/  # 笔记卡片组件
-│   └── xhs-waterfall/  # 瀑布流组件
-├── pages/              # 页面文件
-│   ├── home/          # 首页
-│   ├── discovery/     # 发现页
-│   ├── publish/       # 发布页
-│   ├── message/       # 消息页
-│   ├── profile/       # 个人中心
-│   └── detail/        # 笔记详情
-├── static/            # 静态资源
-├── style/             # 全局样式
-└── utils/             # 工具函数
+
+#### useTheme - 主题管理
+
+支持动态切换明暗主题，可扩展自定义主题，支持系统主题自动跟随。
+
+```typescript
+import { useTheme } from "@/hooks"
+
+const { currentTheme, setTheme, toggleTheme, isDarkTheme, addTheme } = useTheme()
+
+// 切换主题
+toggleTheme() // 在明暗主题间切换
+
+// 设置指定主题
+setTheme("dark")
+
+// 添加自定义主题
+addTheme("custom", {
+  "--background-color": "#f0f0f0",
+  "--text-color": "#333333",
+  "--primary-color": "#4080ff",
+})
 ```
 
-## 📱 功能模块
+### 数据处理类
 
-### 🏠 首页
-- 瀑布流布局展示笔记
-- 分类标签切换（推荐、关注、时尚、美妆等）
-- 下拉刷新、上拉加载更多
-- 搜索功能
+#### useStorage - 本地存储
 
-### 🔍 发现页
-- 热门话题推荐
-- 品牌合作展示
-- 热门商品推荐
-- 推荐达人列表
+增强版本地存储，支持过期时间、类型安全、自动序列化/反序列化、响应式存储。
 
-### ✍️ 发布页
-- 多图片选择和预览
-- 图片编辑和排序
-- 文字内容编辑
-- 话题标签添加
-- 位置信息定位
-- 发布设置选项
+```typescript
+import { useStorage } from "@/hooks"
 
-### 💬 消息页
-- 聊天列表管理
-- 系统通知展示
-- 点赞、评论、关注通知
-- 未读消息提醒
+const { setStorage, getStorage, removeStorage, clearStorage, createReactiveStorage } = useStorage()
 
-### 👤 个人中心
-- 用户信息展示
-- 笔记、收藏、赞过分类
-- 关注和粉丝统计
-- 个人资料编辑
+// 存储数据，30天过期
+await setStorage("user-info", { id: 1, name: "Admin" }, 30 * 24 * 60 * 60 * 1000)
 
-### 📖 笔记详情
-- 图片轮播展示
-- 点赞、收藏、分享
-- 评论互动系统
-- 作者信息和关注
+// 读取数据
+const userInfo = await getStorage("user-info")
 
-## 🚀 快速开始
+// 创建响应式存储
+const count = createReactiveStorage("visit-count", 0)
+count.value++ // 自动同步到存储
+```
 
-### 环境要求
+#### useRequest - 网络请求
 
-- Node.js >= 18
-- pnpm >= 7.30
+强大的请求管理 Hook，自动处理加载状态、错误处理、请求缓存等。
 
-### 安装依赖
+```typescript
+import { useRequest } from "@/hooks"
+
+const request = useRequest({
+  baseURL: "https://api.example.com",
+  autoHandleError: true, // 自动处理错误
+  autoLoading: true, // 自动显示加载状态
+})
+
+// GET 请求
+const { data } = await request.get("/users", { page: 1 })
+
+// POST 请求
+await request.post("/articles", { title, content })
+
+// 文件上传
+await request.upload("/upload", {
+  filePath: tempFilePath,
+  name: "file",
+  formData: { type: "avatar" },
+})
+```
+
+#### useInputLimit - 输入限制
+
+提供各类输入限制函数，轻松实现各种格式检查和输入控制。
+
+```typescript
+import { useInputDataLimit } from "@/hooks/useInputLimit"
+
+const {
+  limitNumber, // 仅限数字
+  limitLetter, // 仅限字母
+  limitNumberAndLetter, // 仅限数字和字母
+  limitToPositiveTwoDecimals, // 仅限两位小数的正数
+  limitNoChinese, // 不允许中文
+} = useInputDataLimit()
+
+// 在输入事件中使用
+const handleInput = (e) => {
+  const rawValue = e.detail.value
+  const formattedValue = limitToPositiveTwoDecimals(rawValue)
+  // 更新表单值
+}
+```
+
+### 设备能力类
+
+#### useLocation - 位置服务
+
+封装位置获取、地址解析、坐标转换等功能，支持高精度定位和后台定位。
+
+```typescript
+import { useLocation } from "@/hooks"
+
+const { getLocation, startLocationUpdate, stopLocationUpdate, chooseLocation, openLocation } =
+  useLocation()
+
+// 获取当前位置
+const position = await getLocation({
+  type: "gcj02", // 坐标系类型
+  isHighAccuracy: true, // 高精度定位
+})
+
+// 打开地图选择位置
+const location = await chooseLocation()
+
+// 在地图上查看位置
+await openLocation({
+  latitude: 39.9087,
+  longitude: 116.3975,
+  name: "目的地",
+  address: "详细地址信息",
+  scale: 18,
+})
+```
+
+#### useCamera - 相机功能
+
+相机相关功能封装，包括拍照、录像、选择相册等功能。
+
+```typescript
+import { useCamera } from "@/hooks"
+
+const { takePhoto, chooseImage, chooseVideo, previewImage, compressImage } = useCamera()
+
+// 拍照或从相册选择
+const filePath = await takePhoto({
+  sourceType: ["camera", "album"],
+})
+
+// 选择多张图片
+const images = await chooseImage({
+  count: 9,
+  sizeType: ["original", "compressed"],
+})
+
+// 压缩图片
+const compressedPath = await compressImage(filePath, {
+  quality: 80, // 压缩质量
+})
+```
+
+#### useSystem - 系统信息
+
+获取系统信息、设备信息、网络状态等功能。
+
+```typescript
+import { useSystem } from "@/hooks"
+
+const { getSystemInfo, getNetworkType, onNetworkStatusChange, getDeviceInfo, vibrateShort } =
+  useSystem()
+
+// 获取系统信息
+const systemInfo = getSystemInfo()
+console.log(`运行平台: ${systemInfo.platform}, 系统: ${systemInfo.system}`)
+
+// 获取网络状态
+const networkType = await getNetworkType()
+
+// 监听网络变化
+onNetworkStatusChange((res) => {
+  console.log(`网络变更: ${res.networkType}, 是否连接: ${res.isConnected}`)
+})
+```
+
+### 其他实用 Hooks
+
+#### useShare - 分享功能
+
+统一的分享接口，支持小程序分享、系统分享、自定义分享等。
+
+```typescript
+import { useShare } from "@/hooks"
+
+const { share, shareWithSystem, configMiniProgramShare } = useShare()
+
+// 配置页面分享参数
+configMiniProgramShare({
+  title: "分享标题",
+  path: "/pages/index/index",
+  imageUrl: "/static/share.png",
+  onShareSuccess: () => {
+    console.log("分享成功")
+  },
+})
+
+// 系统分享
+shareWithSystem({
+  title: "分享内容",
+  summary: "内容摘要",
+  href: "https://example.com",
+  imageUrl: "/static/share.png",
+})
+```
+
+#### useValidation - 表单验证
+
+强大的表单验证系统，内置多种常用验证规则，支持自定义验证。
+
+```typescript
+import { useValidation } from "@/hooks"
+
+const validation = useValidation()
+
+// 创建表单数据和规则
+const { formData, rules, validate, errors, resetValidation } = validation.createForm(
+  {
+    username: "",
+    password: "",
+    email: "",
+    phone: "",
+  },
+  {
+    username: [
+      { required: true, message: "用户名不能为空" },
+      { min: 3, max: 20, message: "长度在3到20个字符" },
+    ],
+    password: [
+      { required: true, message: "密码不能为空" },
+      { min: 6, message: "密码长度不能小于6位" },
+      { pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/, message: "密码必须包含大小写字母和数字" },
+    ],
+    email: [{ type: "email", message: "请输入正确的邮箱格式" }],
+    phone: [{ pattern: /^1[3-9]\d{9}$/, message: "请输入正确的手机号" }],
+  },
+)
+
+// 提交表单
+const handleSubmit = async () => {
+  const valid = await validate()
+  if (valid) {
+    // 表单验证通过，提交数据
+    console.log("表单数据:", formData)
+  } else {
+    // 表单验证失败
+    console.log("验证错误:", errors.value)
+  }
+}
+```
+
+#### usePageScroll - 页面滚动
+
+页面滚动相关功能，包括滚动到指定位置、监听滚动事件等。
+
+```typescript
+import { usePageScroll } from "@/hooks"
+
+const { scrollTo, scrollToTop, scrollToSelector, onPageScroll, getScrollPosition } = usePageScroll()
+
+// 滚动到顶部
+scrollToTop()
+
+// 滚动到指定位置
+scrollTo(0, 200, true) // 带动画效果滚动到 200px 位置
+
+// 滚动到指定元素
+scrollToSelector(".news-item-5", {
+  offset: -20, // 偏移量
+  duration: 300, // 动画时长
+})
+
+// 监听页面滚动
+onPageScroll((scrollTop) => {
+  if (scrollTop > 100) {
+    // 显示返回顶部按钮
+  }
+})
+```
+
+## 📋 环境要求
+
+- Node.js >= 18.0.0
+- pnpm >= 7.0.0
+- 微信开发者工具（开发小程序时使用）
+
+## 🛠️ 快速开始
 
 ```bash
+# 安装依赖
 pnpm install
-```
 
-### 开发运行
-
-```bash
-# H5端开发
-pnpm dev
-
-# 微信小程序
+# 开发环境运行
 pnpm dev:mp-weixin
 
-# App端
-pnpm dev:app
-```
-
-### 构建发布
-
-```bash
-# H5端构建
-pnpm build
-
-# 微信小程序构建
+# 生产环境构建
 pnpm build:mp-weixin
-
-# App端构建
-pnpm build:app
 ```
 
-## 🎨 设计系统
+## 📱 开发指南
 
-### 主题色彩
-- 主色：`#ff2442` (小红书红)
-- 辅助色：`#ff6b85` (浅红)
-- 背景色：`#f8f8f8` (浅灰)
-- 文本色：`#333333` / `#666666` / `#999999`
+### 微信小程序开发
 
-### 组件规范
-- 圆角：`16rpx` (卡片) / `40rpx` (按钮)
-- 阴影：`0 2rpx 8rpx rgba(0, 0, 0, 0.05)`
-- 间距：`24rpx` (标准间距)
+1. **开发环境配置**
 
-## 📦 核心组件
+   - 运行 `pnpm dev:mp-weixin` 生成开发环境代码
+   - 使用微信开发者工具导入 `dist/dev/mp-weixin` 目录
+   - 开启"不校验合法域名"选项（开发环境）
 
-### xhs-navbar
-自定义导航栏组件，支持透明背景、搜索框、自定义内容等
+2. **生产环境发布**
+   - 执行 `pnpm build:mp-weixin` 生成生产环境代码
+   - 使用微信开发者工具导入 `dist/build/mp-weixin` 目录
+   - 点击"上传"按钮发布小程序
 
-### xhs-note-card  
-笔记卡片组件，展示封面图片、标题、作者信息、互动数据
+### 项目规范
 
-### xhs-waterfall
-瀑布流布局组件，自动分配笔记到不同列，实现瀑布流效果
+1. **组件开发规范**
 
-## 🔧 技术栈
+   - 全局组件统一放置在 `uni-module` 目录下
+   - 遵循 UniApp 的 easycom 组件规范
+   - 组件命名采用 PascalCase 命名法
 
-- **前端框架**：Vue 3.4.21
-- **开发工具**：Vite 5.2.8
-- **类型检查**：TypeScript 4.9.5
-- **CSS 预处理**：Sass 1.69.0
-- **原子化CSS**：UnoCSS 0.58.0
-- **跨端框架**：uni-app 3.0.0
-- **状态管理**：Pinia 2.0.36
-- **代码规范**：ESLint + Prettier + Stylelint
+2. **类型定义规范**
 
-## 📄 许可证
+   - 业务类型定义统一放在对应页面的 `type.ts` 文件中
+   - 公共类型定义放在 `types` 目录下
+   - 类型命名采用 PascalCase 命名法
 
-MIT License
+3. **Hooks 使用规范**
+   - 公共 hooks 统一放在 `hooks` 目录下
+   - 业务相关 hooks 放在对应页面目录
+   - hooks 命名采用 camelCase 命名法，以 `use` 开头
 
-## 🤝 贡献
+## 🚀 性能优化
 
-欢迎提交 Issue 和 Pull Request 来完善这个项目！
+### 构建优化
 
-## 📞 联系方式
+1. **代码分割**
 
-如有问题或建议，请通过以下方式联系：
+   - 使用 `manualChunks` 实现代码分割
+   - 第三方依赖独立打包，提高缓存效率
+   - 路由组件按需加载
 
-- 提交 Issue
-- 发送邮件
-- 微信群讨论
+2. **资源优化**
 
----
+   - 图片资源自动压缩
+   - CSS 代码压缩和优化
+   - 静态资源 CDN 加速
 
-⭐ 如果这个项目对你有帮助，请给个 Star 支持一下！
+3. **编译优化**
+   - 使用 `lightningcss` 进行 CSS 处理
+   - 配置合理的 `assetsInlineLimit`
+   - 优化 Sass 编译配置
+
+### 运行时优化
+
+1. **渲染优化**
+
+   - 图片懒加载
+   - 虚拟列表
+   - 条件渲染优化
+
+2. **性能监控**
+   - 页面加载性能监控
+   - 组件渲染性能分析
+   - 内存使用监控
+
+## 📦 项目结构
+
+```
+├── src
+│   ├── pages              # 页面文件
+│   ├── pages-sub          # 子页面
+│   ├── hooks              # 自定义hooks
+│   ├── static             # 静态资源
+│   ├── types              # 类型定义
+│   ├── utils              # 工具函数
+│   └── uni-module         # 全局组件
+├── vite.config.ts         # Vite 配置
+└── package.json           # 项目配置
+```
+
+## 🤝 技术支持
+
+- 技术咨询：+v qq8181227
+- 项目定制：承接各类前端项目开发
+- 问题反馈：欢迎提交 Issue
+
+## 📄 开源协议
+
+本项目采用 MIT 协议开源，详情请查看 [LICENSE](LICENSE) 文件。
