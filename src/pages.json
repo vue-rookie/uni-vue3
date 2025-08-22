@@ -1,74 +1,111 @@
 {
   "globalStyle": {
     "navigationStyle": "default",
-    "navigationBarTitleText": "uni-vue3",
-    "navigationBarBackgroundColor": "#f8f8f8",
+    "navigationBarTitleText": "小红书",
+    "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTextStyle": "black",
-    "backgroundColor": "#FFFFFF"
+    "backgroundColor": "#f8f8f8"
   },
   "easycom": {
     "autoscan": true,
     "custom": {
-      "^uve-(.*)": "@/components/uve-$1/index.vue"
+      "^uve-(.*)": "@/components/uve-$1/index.vue",
+      "^xhs-(.*)": "@/components/xhs-$1/index.vue"
     }
   },
   "tabBar": {
-    "color": "#8f9ca2",
-    "selectedColor": "#000",
+    "color": "#999999",
+    "selectedColor": "#ff2442",
     "backgroundColor": "#ffffff",
-    "borderStyle": "black",
-    "height": "64px",
-    "fontSize": "14px",
-    "iconWidth": "32px",
-    "spacing": "0px",
+    "borderStyle": "white",
+    "height": "50px",
+    "fontSize": "10px",
+    "iconWidth": "24px",
+    "spacing": "3px",
     "list": [
       {
         "iconPath": "static/tabbar/home.png",
-        "selectedIconPath": "static/tabbar/home-select.png",
-        "pagePath": "pages/index/index",
-        "text": "页面"
+        "selectedIconPath": "static/tabbar/home-active.png",
+        "pagePath": "pages/home/index",
+        "text": "首页"
       },
       {
-        "iconPath": "static/tabbar/tab1.png",
-        "selectedIconPath": "static/tabbar/tab1-select.png",
-        "pagePath": "pages/use/index",
-        "text": "方法"
+        "iconPath": "static/tabbar/discovery.png",
+        "selectedIconPath": "static/tabbar/discovery-active.png",
+        "pagePath": "pages/discovery/index",
+        "text": "发现"
+      },
+      {
+        "iconPath": "static/tabbar/publish.png",
+        "selectedIconPath": "static/tabbar/publish-active.png",
+        "pagePath": "pages/publish/index",
+        "text": "发布"
+      },
+      {
+        "iconPath": "static/tabbar/message.png",
+        "selectedIconPath": "static/tabbar/message-active.png",
+        "pagePath": "pages/message/index",
+        "text": "消息"
+      },
+      {
+        "iconPath": "static/tabbar/profile.png",
+        "selectedIconPath": "static/tabbar/profile-active.png",
+        "pagePath": "pages/profile/index",
+        "text": "我"
       }
     ]
   },
   "pages": [
     {
-      "path": "pages/index/index",
+      "path": "pages/home/index",
       "type": "home",
       "style": {
-        "navigationBarTitleText": "首页",
+        "navigationBarTitleText": "小红书",
+        "navigationStyle": "custom"
+      },
+      "needLogin": false
+    },
+    {
+      "path": "pages/discovery/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "发现",
+        "navigationStyle": "custom"
+      },
+      "needLogin": false
+    },
+    {
+      "path": "pages/publish/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "发布",
+        "navigationStyle": "custom"
+      },
+      "needLogin": false
+    },
+    {
+      "path": "pages/message/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "消息",
         "navigationStyle": "default"
       },
       "needLogin": false
     },
     {
-      "path": "pages/user/index",
+      "path": "pages/profile/index",
       "type": "page",
       "style": {
-        "navigationBarTitleText": "用户中心",
-        "navigationStyle": "default"
+        "navigationBarTitleText": "我的",
+        "navigationStyle": "custom"
       },
       "needLogin": false
     },
     {
-      "path": "pages/use/index",
+      "path": "pages/detail/index",
       "type": "page",
       "style": {
-        "navigationBarTitleText": "方法示例",
-        "navigationStyle": "default"
-      },
-      "needLogin": false
-    },
-    {
-      "path": "pages/settings/index",
-      "type": "page",
-      "style": {
-        "navigationBarTitleText": "设置",
+        "navigationBarTitleText": "详情",
         "navigationStyle": "default"
       },
       "needLogin": false
@@ -77,105 +114,11 @@
       "path": "pages/login/index",
       "type": "page",
       "style": {
-        "navigationBarTitleText": "登录注册",
+        "navigationBarTitleText": "登录",
         "navigationStyle": "default"
       },
       "needLogin": false
     }
   ],
-  "subPackages": [
-    {
-      "root": "pages-sub",
-      "pages": [
-        {
-          "path": "button-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-button按钮",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "border-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-border边框",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "picker-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-picker选择器",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "tabs-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-tabs标签",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "swiper-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-swiper轮播图",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "navbar-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-navbar导航栏",
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "form-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-form表单",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "input-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-input输入框",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "checkbox-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-checkbox复选框",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "radio-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-radio单选框",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "popup-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-popup弹窗",
-            "navigationStyle": "default"
-          }
-        }
-      ]
-    }
-  ]
+  "subPackages": []
 }
