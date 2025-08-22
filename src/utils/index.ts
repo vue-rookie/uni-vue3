@@ -1,5 +1,5 @@
-// @ts-expect-error import json file
-import { pages, subPackages, tabBar } from "@/pages.json"
+import pagesJson from "@/pages.json"
+const { pages, subPackages, tabBar } = pagesJson as any
 
 /** 判断当前页面是否是tabbar页  */
 export const getIsTabbar = () => {
@@ -46,20 +46,20 @@ export const getAllPages = (key = "needLogin") => {
   // 这里处理主包
   const mainPages = [
     ...pages
-      .filter((page) => !key || page[key])
-      .map((page) => ({
+      .filter((page: any) => !key || page[key])
+      .map((page: any) => ({
         ...page,
         path: `/${page.path}`,
       })),
   ]
   // 这里处理分包
   const subPages: any[] = []
-  subPackages.forEach((subPageObj) => {
+  subPackages.forEach((subPageObj: any) => {
     // console.log(subPageObj)
     const { root } = subPageObj
 
     subPageObj.pages
-      .filter((page) => !key || page[key])
+      .filter((page: any) => !key || page[key])
       .forEach((page: { path: string } & Record<string, any>) => {
         subPages.push({
           ...page,
@@ -113,3 +113,8 @@ export function debounce(fn: Func, wait: number): Func {
     }, wait)
   }
 }
+
+/**
+ * rpx2px
+ */
+export const rpx2px = (rpx: number) => (rpx / 750) * uni.getWindowInfo().screenWidth

@@ -21,6 +21,6 @@
     "target": 3,
     "nativeTags": ["block", "template", "component", "slot"]
   },
-  "exclude": ["node_modules"],
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+  "exclude": ["node_modules", "src/hooks/useShare.ts", "src/pages/use/**"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/pages.json"]
 }

@@ -25,6 +25,12 @@
       {
         "iconPath": "static/tabbar/home.png",
         "selectedIconPath": "static/tabbar/home-select.png",
+        "pagePath": "pages/feed/index",
+        "text": "发现"
+      },
+      {
+        "iconPath": "static/tabbar/home.png",
+        "selectedIconPath": "static/tabbar/home-select.png",
         "pagePath": "pages/index/index",
         "text": "页面"
       },
@@ -38,8 +44,17 @@
   },
   "pages": [
     {
-      "path": "pages/index/index",
+      "path": "pages/feed/index",
       "type": "home",
+      "style": {
+        "navigationBarTitleText": "发现",
+        "navigationStyle": "default"
+      },
+      "needLogin": false
+    },
+    {
+      "path": "pages/index/index",
+      "type": "page",
       "style": {
         "navigationBarTitleText": "首页",
         "navigationStyle": "default"
@@ -78,6 +93,15 @@
       "type": "page",
       "style": {
         "navigationBarTitleText": "登录注册",
+        "navigationStyle": "default"
+      },
+      "needLogin": false
+    },
+    {
+      "path": "pages/post-detail/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "笔记详情",
         "navigationStyle": "default"
       },
       "needLogin": false

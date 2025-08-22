@@ -198,10 +198,11 @@ import {
   useTheme,
   useLocation,
   useCamera,
-  useShare,
   useSystem,
   useValidation,
+  usePageScroll,
 } from "@/hooks"
+import { useShare } from "@/hooks/useShare"
 import { useInputDataLimit } from "@/hooks/useInputLimit"
 
 onMounted(() => {
@@ -381,37 +382,41 @@ const demoShare = () => {
 }
 
 // Demo: useValidation
-const demoValidation = () => {
+const demoValidation = async () => {
   const validation = useValidation()
   const modal = useModal()
 
   // 手机号验证
   const phone = "13800138000"
-  const isValidPhone = validation.validatePhone(phone)
+  const phoneRules = [{ pattern: /^1[3-9]\d{9}$/, message: "手机号格式不正确", trigger: "submit" }]
+  validation.setFormData({ phone })
+  validation.setRules({ phone: phoneRules })
+  const phoneState = await validation.validateField("phone", "submit")
 
   // 密码验证
   const password = "Password123"
-  const isValidPassword = validation.validatePassword(password)
+  const passwordRules = [
+    { minLength: 6, message: "密码至少6位", trigger: "submit" },
+    { pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/, message: "需包含大小写字母和数字", trigger: "submit" },
+  ]
+  validation.setFormData({ password })
+  validation.setRules({ password: passwordRules })
+  const passwordState = await validation.validateField("password", "submit")
 
   modal.showToast(`
     验证结果:
-    手机号: ${isValidPhone ? "有效" : "无效"}
-    密码: ${isValidPassword ? "有效" : "无效"}
+    手机号: ${phoneState.valid ? "有效" : "无效"}
+    密码: ${passwordState.valid ? "有效" : "无效"}
   `)
 }
 
 // Demo: usePageScroll
 const demoPageScroll = () => {
-  const pageScroll = usePageScroll()
+  const { scrollToTop } = usePageScroll()
   const modal = useModal()
 
-  pageScroll.scrollToTop()
+  scrollToTop()
 
   modal.showToast("已滚动到页面顶部")
-
-  // 监听滚动位置
-  pageScroll.onPageScroll((scrollTop) => {
-    console.log("滚动位置:", scrollTop)
-  })
 }
 </script>

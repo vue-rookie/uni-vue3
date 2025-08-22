@@ -1,21 +1,6 @@
 import { ref, reactive } from "vue"
 
-// 分享配置接口
-interface ShareOptions {
-  title?: string
-  path?: string
-  imageUrl?: string
-  desc?: string
-  summary?: string
-  href?: string
-  content?: string
-  success?: (res: any) => void
-  fail?: (err: any) => void
-  complete?: () => void
-}
-
-// 默认分享配置
-const defaultShareOptions: ShareOptions = {
+const defaultShareOptions = {
   title: "",
   path: "",
   imageUrl: "",
@@ -25,62 +10,27 @@ const defaultShareOptions: ShareOptions = {
   content: "",
 }
 
-/**
- * 分享hooks，提供统一的分享功能
- * - 设置全局分享
- * - 分享到微信好友
- * - 分享到朋友圈
- * - 分享到微博
- * - 系统分享
- * - 复制链接
- */
-export const useShare = (globalOptions: ShareOptions = {}) => {
-  // 全局分享配置
-  const shareOptions = reactive<ShareOptions>({ ...defaultShareOptions, ...globalOptions })
-
-  // 分享状态
+export const useShare = (globalOptions = {}) => {
+  const shareOptions = reactive({ ...defaultShareOptions, ...globalOptions })
   const isSharing = ref(false)
 
-  /**
-   * 更新全局分享配置
-   * @param options 分享配置
-   */
-  const updateShareOptions = (options: ShareOptions) => {
-    Object.assign(shareOptions, options)
-  }
+  const updateShareOptions = (options) => Object.assign(shareOptions, options)
+  const resetShareOptions = () => Object.assign(shareOptions, defaultShareOptions)
 
-  /**
-   * 重置全局分享配置
-   */
-  const resetShareOptions = () => {
-    Object.assign(shareOptions, defaultShareOptions)
-  }
-
-  /**
-   * 分享到微信好友
-   * @param options 分享配置，会覆盖全局配置
-   */
-  const shareToWechat = (options: ShareOptions = {}) => {
+  const shareToWechat = (options = {}) => {
     const finalOptions = { ...shareOptions, ...options }
     isSharing.value = true
-
-    return new Promise<void>((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       // #ifdef APP-PLUS
       try {
-        if (!plus || !plus.share) {
-          throw new Error("plus.share不存在")
-        }
-
+        if (!plus || !plus.share) throw new Error("plus.share不存在")
         const shareService = plus.share.getServices((services) => {
-          const wechatService = services.find((s) => s.id === "weixin")
-
+          const wechatService = (services || []).find((s) => String(s?.id).includes("weixin"))
           if (!wechatService) {
             const error = new Error("未找到微信分享服务")
             finalOptions.fail && finalOptions.fail(error)
-            reject(error)
-            return
+            return reject(error)
           }
-
           wechatService.send(
             {
               title: finalOptions.title,
@@ -88,7 +38,7 @@ export const useShare = (globalOptions: ShareOptions = {}) => {
               href: finalOptions.href,
               pictures: [finalOptions.imageUrl],
               thumbs: [finalOptions.imageUrl],
-              extra: { scene: "WXSceneSession" }, // 微信好友
+              extra: { scene: "WXSceneSession" },
             },
             () => {
               finalOptions.success && finalOptions.success({ errMsg: "shareToWechat:ok" })
@@ -100,9 +50,7 @@ export const useShare = (globalOptions: ShareOptions = {}) => {
             },
           )
         })
-
         if (typeof shareService === "object") {
-          // getServices 同步返回
           const error = new Error("获取分享服务失败")
           finalOptions.fail && finalOptions.fail(error)
           reject(error)
@@ -117,7 +65,6 @@ export const useShare = (globalOptions: ShareOptions = {}) => {
       // #endif
 
       // #ifdef MP-WEIXIN
-      // 小程序不需要主动调用分享，在页面的onShareAppMessage中处理
       finalOptions.success && finalOptions.success({ errMsg: "shareToWechat:ok" })
       resolve()
       // #endif
@@ -138,31 +85,20 @@ export const useShare = (globalOptions: ShareOptions = {}) => {
     })
   }
 
-  /**
-   * 分享到朋友圈
-   * @param options 分享配置，会覆盖全局配置
-   */
-  const shareToTimeline = (options: ShareOptions = {}) => {
+  const shareToTimeline = (options = {}) => {
     const finalOptions = { ...shareOptions, ...options }
     isSharing.value = true
-
-    return new Promise<void>((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       // #ifdef APP-PLUS
       try {
-        if (!plus || !plus.share) {
-          throw new Error("plus.share不存在")
-        }
-
+        if (!plus || !plus.share) throw new Error("plus.share不存在")
         const shareService = plus.share.getServices((services) => {
-          const wechatService = services.find((s) => s.id === "weixin")
-
+          const wechatService = (services || []).find((s) => String(s?.id).includes("weixin"))
           if (!wechatService) {
             const error = new Error("未找到微信分享服务")
             finalOptions.fail && finalOptions.fail(error)
-            reject(error)
-            return
+            return reject(error)
           }
-
           wechatService.send(
             {
               title: finalOptions.title,
@@ -170,7 +106,7 @@ export const useShare = (globalOptions: ShareOptions = {}) => {
               href: finalOptions.href,
               pictures: [finalOptions.imageUrl],
               thumbs: [finalOptions.imageUrl],
-              extra: { scene: "WXSceneTimeline" }, // 朋友圈
+              extra: { scene: "WXSceneTimeline" },
             },
             () => {
               finalOptions.success && finalOptions.success({ errMsg: "shareToTimeline:ok" })
@@ -182,9 +118,7 @@ export const useShare = (globalOptions: ShareOptions = {}) => {
             },
           )
         })
-
         if (typeof shareService === "object") {
-          // getServices 同步返回
           const error = new Error("获取分享服务失败")
           finalOptions.fail && finalOptions.fail(error)
           reject(error)
@@ -199,7 +133,6 @@ export const useShare = (globalOptions: ShareOptions = {}) => {
       // #endif
 
       // #ifdef MP-WEIXIN
-      // 小程序不支持直接分享到朋友圈
       const error = new Error("小程序环境不支持直接分享到朋友圈")
       finalOptions.fail && finalOptions.fail(error)
       reject(error)
@@ -221,20 +154,15 @@ export const useShare = (globalOptions: ShareOptions = {}) => {
     })
   }
 
-  /**
-   * 系统分享
-   * @param options 分享配置，会覆盖全局配置
-   */
-  const shareWithSystem = (options: ShareOptions = {}) => {
+  const shareWithSystem = (options = {}) => {
     const finalOptions = { ...shareOptions, ...options }
     isSharing.value = true
-
-    return new Promise<void>((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       // #ifdef APP-PLUS
       try {
-        uni.share({
+        ;(uni).share({
           provider: "system",
-          type: 0, // 图文
+          type: 0,
           title: finalOptions.title,
           scene: "WXSceneSession",
           summary: finalOptions.desc || finalOptions.summary,
@@ -276,52 +204,30 @@ export const useShare = (globalOptions: ShareOptions = {}) => {
     })
   }
 
-  /**
-   * 复制链接
-   * @param content 要复制的内容，默认使用全局配置的href
-   */
-  const copyLink = (content?: string) => {
+  const copyLink = (content) => {
     const textToCopy = content || shareOptions.href
-
-    if (!textToCopy) {
-      return Promise.reject(new Error("没有可复制的链接"))
-    }
-
-    return new Promise<void>((resolve, reject) => {
+    if (!textToCopy) return Promise.reject(new Error("没有可复制的链接"))
+    return new Promise((resolve, reject) => {
       uni.setClipboardData({
         data: textToCopy,
         success: () => {
-          uni.showToast({
-            title: "链接已复制",
-            icon: "success",
-          })
+          uni.showToast({ title: "链接已复制", icon: "success" })
           resolve()
         },
-        fail: (err) => {
-          reject(err)
-        },
+        fail: (err) => reject(err),
       })
     })
   }
 
-  /**
-   * 设置全局分享参数（用于小程序全局分享）
-   * @returns 返回全局分享配置对象，可在页面的onShareAppMessage中使用
-   */
-  const getShareInfo = () => {
-    return {
-      title: shareOptions.title,
-      path: shareOptions.path,
-      imageUrl: shareOptions.imageUrl,
-    }
-  }
+  const getShareInfo = () => ({
+    title: shareOptions.title,
+    path: shareOptions.path,
+    imageUrl: shareOptions.imageUrl,
+  })
 
   return {
-    // 状态
     shareOptions,
     isSharing,
-
-    // 方法
     updateShareOptions,
     resetShareOptions,
     shareToWechat,
