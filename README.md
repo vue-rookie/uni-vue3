@@ -2,7 +2,7 @@
 
 > 基于 Vue3 + Vite5 + TypeScript + Pinia + UnoCSS 的现代化跨端开发解决方案
 
-![框架预览](https://qinqiang.oss-cn-beijing.aliyuncs.com/gh_0fb82a6dc9c4_344.jpg)
+![预览](https://qinqiang.oss-cn-beijing.aliyuncs.com/gh_0fb82a6dc9c4_344.jpg)
 
 ## 🚀 技术栈
 
@@ -363,7 +363,6 @@ pnpm build:mp-weixin
 ### 微信小程序开发
 
 1. **开发环境配置**
-
    - 运行 `pnpm dev:mp-weixin` 生成开发环境代码
    - 使用微信开发者工具导入 `dist/dev/mp-weixin` 目录
    - 开启"不校验合法域名"选项（开发环境）
@@ -376,13 +375,11 @@ pnpm build:mp-weixin
 ### 项目规范
 
 1. **组件开发规范**
-
    - 全局组件统一放置在 `uni-module` 目录下
    - 遵循 UniApp 的 easycom 组件规范
    - 组件命名采用 PascalCase 命名法
 
 2. **类型定义规范**
-
    - 业务类型定义统一放在对应页面的 `type.ts` 文件中
    - 公共类型定义放在 `types` 目录下
    - 类型命名采用 PascalCase 命名法
@@ -397,13 +394,11 @@ pnpm build:mp-weixin
 ### 构建优化
 
 1. **代码分割**
-
    - 使用 `manualChunks` 实现代码分割
    - 第三方依赖独立打包，提高缓存效率
    - 路由组件按需加载
 
 2. **资源优化**
-
    - 图片资源自动压缩
    - CSS 代码压缩和优化
    - 静态资源 CDN 加速
@@ -416,7 +411,6 @@ pnpm build:mp-weixin
 ### 运行时优化
 
 1. **渲染优化**
-
    - 图片懒加载
    - 虚拟列表
    - 条件渲染优化
@@ -441,12 +435,17 @@ pnpm build:mp-weixin
 └── package.json           # 项目配置
 ```
 
-## 🤝 技术支持
+## 源码
 
-- 技术咨询：+v qq8181227
-- 项目定制：承接各类前端项目开发
-- 问题反馈：欢迎提交 Issue
+[![stars](https://img.shields.io/github/stars/vue-rookie/uni-vue3?style=social)](https://github.com/vue-rookie/uni-vue3)
+[![forks](https://img.shields.io/github/forks/vue-rookie/uni-vue3?style=social)](https://github.com/vue-rookie/uni-vue3)
+[![watchers](https://img.shields.io/github/watchers/vue-rookie/uni-vue3?style=social)](https://github.com/vue-rookie/uni-vue3)
+[![license](https://img.shields.io/github/license/vue-rookie/uni-vue3?style=social)](https://github.com/vue-rookie/uni-vue3)
 
 ## 📄 开源协议
 
 本项目采用 MIT 协议开源，详情请查看 [LICENSE](LICENSE) 文件。
+
+## 致谢
+
+感谢 [DCloud](https://www.dcloud.io/) 官方，旗下出品的 [uni-app](https://uniapp.dcloud.net.cn/) 、[uni-app-x](https://uniapp.dcloud.net.cn/uni-app-x/) 、[uniCloud](https://uniapp.dcloud.net.cn/uniCloud/)、[uni-app 小程序](https://nativesupport.dcloud.net.cn/README) 等多平台、多元化的技术体系。

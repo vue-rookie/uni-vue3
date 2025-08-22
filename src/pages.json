@@ -26,13 +26,13 @@
         "iconPath": "static/tabbar/home.png",
         "selectedIconPath": "static/tabbar/home-select.png",
         "pagePath": "pages/index/index",
-        "text": "页面"
+        "text": "components"
       },
       {
         "iconPath": "static/tabbar/tab1.png",
         "selectedIconPath": "static/tabbar/tab1-select.png",
         "pagePath": "pages/use/index",
-        "text": "方法"
+        "text": "hooks"
       }
     ]
   },
@@ -59,7 +59,7 @@
       "path": "pages/use/index",
       "type": "page",
       "style": {
-        "navigationBarTitleText": "方法示例",
+        "navigationBarTitleText": "hooks示例",
         "navigationStyle": "default"
       },
       "needLogin": false

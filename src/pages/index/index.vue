@@ -201,7 +201,7 @@ import { onMounted } from "vue"
 
 onMounted(() => {
   uni.setNavigationBarTitle({
-    title: "页面示例",
+    title: "组件示例",
   })
 })
 
