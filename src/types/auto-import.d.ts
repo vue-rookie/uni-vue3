@@ -74,6 +74,7 @@ declare global {
   const toValue: typeof import('vue')['toValue']
   const triggerRef: typeof import('vue')['triggerRef']
   const unref: typeof import('vue')['unref']
+  const useApi: typeof import('../hooks/useApi')['useApi']
   const useAttrs: typeof import('vue')['useAttrs']
   const useCamera: typeof import('../hooks/useCamera')['useCamera']
   const useCssModule: typeof import('vue')['useCssModule']

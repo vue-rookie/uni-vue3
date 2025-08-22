@@ -1,5 +1,6 @@
 import { CustomRequestOptions } from "@/interceptors/request"
 import { useUserStore } from "@/store"
+import { mockRequest } from "@/utils/mock"
 
 export const request = async <T>(options: CustomRequestOptions): Promise<ApiResult<T>> => {
   const userStore = useUserStore()
@@ -11,13 +12,17 @@ export const request = async <T>(options: CustomRequestOptions): Promise<ApiResu
   }
 
   try {
-    const res = await uni.request({
-      ...options,
-      dataType: "json",
-      // #ifndef MP-WEIXIN
-      responseType: "json",
-      // #endif
-    })
+    // 开发环境 mock（命中则直接返回，否则走真实请求）
+    const mock = await mockRequest<T>(options)
+    const res = mock
+      ? ({ statusCode: 200, data: mock } as any)
+      : await uni.request({
+          ...options,
+          dataType: "json",
+          // #ifndef MP-WEIXIN
+          responseType: "json",
+          // #endif
+        })
 
     const { statusCode, data } = res
     const result = data as ApiResult<T>

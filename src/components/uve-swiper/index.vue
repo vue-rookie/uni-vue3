@@ -15,15 +15,19 @@
       class="w-full h-full"
       @change="handleChange"
     >
-      <swiper-item v-for="(item, index) in items" :key="index" class="w-full h-full">
+      <swiper-item v-for="(item, index) in normalizedItems" :key="index" class="w-full h-full">
         <view
           class="swiper-item w-full h-full flex items-center justify-center"
           :class="[mode === 'card' ? 'card-mode' : '', mode === 'stack' ? 'stack-mode' : '']"
           :style="itemStyle(index)"
         >
-          <view v-if="item.image" class="w-full h-full" @click="handleItemClick(item, index)">
+          <view
+            v-if="getImageSrc(index, item)"
+            class="w-full h-full"
+            @click="handleItemClick(item, index)"
+          >
             <image
-              :src="item.image"
+              :src="getImageSrc(index, item)"
               :mode="imageMode"
               class="swiper-image w-full h-full"
               :class="[
@@ -31,6 +35,7 @@
                 mode === 'stack' ? 'rounded-lg shadow-md' : '',
               ]"
               :style="imageStyle"
+              @error="markBroken(index)"
             />
 
             <!-- 轮播图标题 -->
@@ -54,7 +59,7 @@
       class="custom-indicator absolute bottom-3 left-0 right-0 flex justify-center"
     >
       <view
-        v-for="(_, index) in items"
+        v-for="(_, index) in normalizedItems"
         :key="index"
         class="indicator-dot mx-1"
         :class="{ active: index === currentIndex }"
@@ -81,10 +86,20 @@ interface SwiperItem {
 }
 
 const props = defineProps({
-  // 轮播图数据
+  // 轮播图数据（对象数组）
   items: {
     type: Array as () => SwiperItem[],
     default: () => [],
+  },
+  // 兼容：直接传字符串数组或对象数组
+  list: {
+    type: Array as () => (string | SwiperItem)[],
+    default: () => [],
+  },
+  // 回退占位图
+  fallback: {
+    type: String,
+    default: "/static/log.jpg",
   },
   // 轮播图高度
   height: {
@@ -187,6 +202,27 @@ watch(
   },
 )
 
+// 图片失败标记
+const brokenSet = ref<Set<number>>(new Set())
+
+// 归一化数据：优先使用 list，其次 items；字符串转为 { image }
+const normalizedItems = computed<SwiperItem[]>(() => {
+  const source = (props.list && props.list.length ? props.list : props.items) as (
+    | string
+    | SwiperItem
+  )[]
+  return source.map((it: any) => (typeof it === "string" ? { image: it } : it))
+})
+
+const getImageSrc = (index: number, item: SwiperItem) => {
+  if (brokenSet.value.has(index)) return props.fallback
+  return item.image || props.fallback
+}
+
+const markBroken = (index: number) => {
+  brokenSet.value.add(index)
+}
+
 // 图片样式
 const imageStyle = computed(() => {
   const style: Record<string, string> = {}
@@ -224,7 +260,7 @@ const itemStyle = (index: number) => {
     }
 
     style.transition = "all 0.3s"
-    style.zIndex = `${props.items.length - diff}`
+    style.zIndex = `${(normalizedItems.value?.length || 0) - diff}`
   }
 
   return style
@@ -234,7 +270,7 @@ const itemStyle = (index: number) => {
 const handleChange = (e: any) => {
   const { current } = e.detail
   currentIndex.value = current
-  emits("change", { current, item: props.items[current] })
+  emits("change", { current, item: normalizedItems.value[current] })
 }
 
 // 处理轮播图点击事件

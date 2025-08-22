@@ -26,13 +26,19 @@
         "iconPath": "static/tabbar/home.png",
         "selectedIconPath": "static/tabbar/home-select.png",
         "pagePath": "pages/index/index",
-        "text": "页面"
+        "text": "首页"
       },
       {
         "iconPath": "static/tabbar/tab1.png",
         "selectedIconPath": "static/tabbar/tab1-select.png",
-        "pagePath": "pages/use/index",
-        "text": "方法"
+        "pagePath": "pages-sub/cart/index",
+        "text": "购物车"
+      },
+      {
+        "iconPath": "static/tabbar/user.png",
+        "selectedIconPath": "static/tabbar/user-select.png",
+        "pagePath": "pages/user/index",
+        "text": "我的"
       }
     ]
   },
@@ -87,94 +93,26 @@
     {
       "root": "pages-sub",
       "pages": [
-        {
-          "path": "button-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-button按钮",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "border-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-border边框",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "picker-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-picker选择器",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "tabs-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-tabs标签",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "swiper-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-swiper轮播图",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "navbar-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-navbar导航栏",
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "form-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-form表单",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "input-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-input输入框",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "checkbox-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-checkbox复选框",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "radio-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-radio单选框",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "popup-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-popup弹窗",
-            "navigationStyle": "default"
-          }
-        }
+        { "path": "button-demo/index", "type": "page", "style": { "navigationBarTitleText": "uve-button按钮", "navigationStyle": "default" } },
+        { "path": "border-demo/index", "type": "page", "style": { "navigationBarTitleText": "uve-border边框", "navigationStyle": "default" } },
+        { "path": "picker-demo/index", "type": "page", "style": { "navigationBarTitleText": "uve-picker选择器", "navigationStyle": "default" } },
+        { "path": "tabs-demo/index", "type": "page", "style": { "navigationBarTitleText": "uve-tabs标签", "navigationStyle": "default" } },
+        { "path": "swiper-demo/index", "type": "page", "style": { "navigationBarTitleText": "uve-swiper轮播图", "navigationStyle": "default" } },
+        { "path": "navbar-demo/index", "type": "page", "style": { "navigationBarTitleText": "uve-navbar导航栏", "navigationStyle": "custom" } },
+        { "path": "form-demo/index", "type": "page", "style": { "navigationBarTitleText": "uve-form表单", "navigationStyle": "default" } },
+        { "path": "input-demo/index", "type": "page", "style": { "navigationBarTitleText": "uve-input输入框", "navigationStyle": "default" } },
+        { "path": "checkbox-demo/index", "type": "page", "style": { "navigationBarTitleText": "uve-checkbox复选框", "navigationStyle": "default" } },
+        { "path": "radio-demo/index", "type": "page", "style": { "navigationBarTitleText": "uve-radio单选框", "navigationStyle": "default" } },
+        { "path": "popup-demo/index", "type": "page", "style": { "navigationBarTitleText": "uve-popup弹窗", "navigationStyle": "default" } },
+
+        { "path": "cart/index", "type": "page", "style": { "navigationBarTitleText": "购物车", "navigationStyle": "default" } },
+        { "path": "goods-list/index", "type": "page", "style": { "navigationBarTitleText": "商品列表", "navigationStyle": "default" } },
+        { "path": "goods-detail/index", "type": "page", "style": { "navigationBarTitleText": "商品详情", "navigationStyle": "default" } },
+        { "path": "checkout/index", "type": "page", "style": { "navigationBarTitleText": "确认订单", "navigationStyle": "default" } },
+        { "path": "order/index", "type": "page", "style": { "navigationBarTitleText": "我的订单", "navigationStyle": "default" } },
+        { "path": "address/index", "type": "page", "style": { "navigationBarTitleText": "收货地址", "navigationStyle": "default" } },
+        { "path": "address-edit/index", "type": "page", "style": { "navigationBarTitleText": "编辑地址", "navigationStyle": "default" } },
+        { "path": "coupon/index", "type": "page", "style": { "navigationBarTitleText": "优惠券", "navigationStyle": "default" } }
       ]
     }
   ]

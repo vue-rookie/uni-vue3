@@ -29,3 +29,37 @@ export interface IMiniWxLoginRes {
   /* */
   userId: number
 }
+
+// 电商通用
+export interface PageParams {
+  page: number
+  pageSize: number
+}
+
+export interface PageResult<T> {
+  list: T[]
+  total: number
+  page: number
+  pageSize: number
+}
+
+export interface SkuItemDTO {
+  skuId: string
+  spuId: string
+  title: string
+  picture: string
+  price: number
+  stock: number
+  attrsText?: string
+}
+
+export interface SpuItemDTO {
+  spuId: string
+  title: string
+  subTitle?: string
+  pictures: string[]
+  price: number
+  originPrice?: number
+  sales?: number
+  tags?: string[]
+}
