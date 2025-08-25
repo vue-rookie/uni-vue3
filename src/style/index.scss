@@ -1,4 +1,7 @@
+/* 使用现代 Sass 导入语法 */
+@use "@/style/theme.scss" as theme;
 @import "./iconfont.css";
+
 // 其他样式
 
 .test {
@@ -51,5 +54,5 @@ view {
   transform: translate(-50%, -50%);
 }
 .tab-shadow {
-  box-shadow: 0px 0px 16rpx 0px rgba(6, 11, 45, 0.04);
+  box-shadow: 0px 0px 16rpx 0px rgb(6 11 45 / 4%);
 }
