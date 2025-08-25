@@ -60,5 +60,6 @@
     ".eslintrc.cjs": ".eslintignore,.prettierignore,.stylelintignore,.commitlintrc.*,.prettierrc.*,.stylelintrc.*,.eslintrc-auto-import.json,.editorconfig,.commitlint.cjs",
     "vite.config.ts": "tsconfig.*.json,uno.config.ts,tsconfig.json,uni-pages.d.ts",
     "manifest.config.ts": "manifest.config.ts,pages.config.ts"
-  }
+  },
+  "i18n-ally.localesPaths": []
 }
