@@ -13,6 +13,9 @@ import viteImagemin from "vite-plugin-imagemin"
 import { printBuildInfo } from "./src/utils/logger"
 
 export default ({ command, mode }) => {
+  // 设置环境变量来抑制 Sass 警告
+  process.env.SASS_SILENCE_DEPRECATION_WARNINGS = "true"
+
   const UNI_PLATFORM = process.env.UNI_PLATFORM || "h5"
 
   const env = loadEnv(mode, path.resolve(process.cwd(), "env"))
@@ -107,19 +110,10 @@ export default ({ command, mode }) => {
       },
       preprocessorOptions: {
         scss: {
-          // https://github.com/vitejs/vite/issues/15474
-          additionalData: `@import "@/style/theme.scss";`,
-          sassOptions: {
-            quiet: true,
-            quietDeps: true,
-            charset: false,
-            sourceMap: false,
-            outputStyle: "compressed",
-            logger: {
-              warn: function () {},
-              debug: function () {},
-            },
-          },
+          // https://github.com/vitejs/vite/issues/1547
+          quietDeps: true,
+          api: "modern-compiler",
+          silenceDeprecations: ["legacy-js-api"],
         },
       },
     },
