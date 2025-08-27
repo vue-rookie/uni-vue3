@@ -73,6 +73,89 @@
       </view>
     </view>
 
+    <!-- 自定义按钮文案 -->
+    <view class="mb-8">
+      <view class="text-base font-medium mb-2">自定义按钮文案</view>
+      <view class="bg-gray-50 p-4 rounded-lg">
+        <view class="mb-3">
+          <text class="text-sm text-gray-600 mb-2">选择主题：</text>
+          <uve-picker
+            :columns="themes"
+            v-model="selectedTheme"
+            placeholder="请选择主题"
+            cancel-text="算了"
+            confirm-text="就这个"
+            @change="onThemeChange"
+          />
+        </view>
+        <view v-if="selectedTheme" class="mt-3 text-sm text-primary">
+          当前选择：{{ getThemeLabel(selectedTheme) }}
+        </view>
+      </view>
+      <view class="text-xs text-gray-500 mt-2 bg-gray-50 p-3 rounded">
+        通过 cancel-text 和 confirm-text 属性自定义按钮文案
+      </view>
+    </view>
+
+    <!-- 自定义按钮样式 -->
+    <view class="mb-8">
+      <view class="text-base font-medium mb-2">自定义按钮样式</view>
+      <view class="bg-gray-50 p-4 rounded-lg">
+        <view class="mb-3">
+          <text class="text-sm text-gray-600 mb-2">选择城市：</text>
+          <uve-picker
+            :columns="cities"
+            v-model="selectedCity"
+            placeholder="请选择城市"
+            @change="onCityChange"
+          >
+            <template #cancel>
+              <view class="flex items-center">
+                <text class="i-ri-arrow-left-line text-lg text-gray-500 mr-1"></text>
+                <text class="text-gray-500 text-base">返回</text>
+              </view>
+            </template>
+            <template #confirm>
+              <view class="flex items-center">
+                <text class="text-primary text-base font-medium mr-1">确认</text>
+                <text class="i-ri-check-line text-lg text-primary"></text>
+              </view>
+            </template>
+          </uve-picker>
+        </view>
+        <view v-if="selectedCity" class="mt-3 text-sm text-primary">
+          当前选择：{{ getCityLabel(selectedCity) }}
+        </view>
+      </view>
+      <view class="text-xs text-gray-500 mt-2 bg-gray-50 p-3 rounded">
+        通过具名插槽 #cancel 和 #confirm 自定义按钮样式
+      </view>
+    </view>
+
+    <!-- 隐藏按钮 -->
+    <view class="mb-8">
+      <view class="text-base font-medium mb-2">隐藏按钮</view>
+      <view class="bg-gray-50 p-4 rounded-lg">
+        <view class="mb-3">
+          <text class="text-sm text-gray-600 mb-2">选择年份：</text>
+          <uve-picker
+            :columns="[years]"
+            v-model="selectedYear"
+            placeholder="请选择年份"
+            :show-cancel="false"
+            confirm-text="完成"
+            @change="onYearChange"
+          />
+        </view>
+        <view v-if="selectedYear" class="mt-3 text-sm text-primary">
+          当前选择：{{ selectedYear }}年
+        </view>
+      </view>
+      <view class="text-xs text-gray-500 mt-2 bg-gray-50 p-3 rounded">
+        通过 show-cancel="false" 隐藏取消按钮，只显示确定按钮
+      </view>
+    </view>
+
     <!-- 自定义样式 -->
     <view class="mb-8">
       <view class="text-base font-medium mb-2">自定义样式</view>
@@ -162,6 +245,7 @@ const selectedCity = ref("")
 const selectedDate = ref([currentYear, 1, 1])
 const selectedFruit = ref("")
 const selectedTheme = ref("")
+const selectedYear = ref("")
 
 // 事件处理
 const onCityChange = (value) => {
@@ -180,6 +264,10 @@ const onThemeChange = (value) => {
   console.log("主题变更:", value)
 }
 
+const onYearChange = (value) => {
+  console.log("年份变更:", value)
+}
+
 // 辅助函数
 const getCityLabel = (value) => {
   const city = cities.find((item) => item.value === value)
@@ -189,5 +277,10 @@ const getCityLabel = (value) => {
 const getFruitLabel = (value) => {
   const fruit = fruitsWithDisabled.find((item) => item.value === value)
   return fruit ? fruit.label : ""
+}
+
+const getThemeLabel = (value) => {
+  const theme = themes.find((item) => item.value === value)
+  return theme ? theme.label : ""
 }
 </script>
