@@ -24,13 +24,28 @@
       <view class="bg-white w-full relative z-10">
         <!-- 顶部操作栏 -->
         <view class="flex justify-between items-center border-b border-gray-200 p-3">
-          <text @tap="closePicker" class="text-gray-500">
-            <text class="i-ri-close-line text-lg"></text>
-          </text>
+          <!-- 取消按钮 -->
+          <view v-if="showCancel" @tap="closePicker" class="flex items-center">
+            <slot name="cancel">
+              <text class="text-gray-500 text-base">
+                {{ cancelText || "取消" }}
+              </text>
+            </slot>
+          </view>
+          <view v-else class="w-16"></view>
+
+          <!-- 标题 -->
           <text class="text-base font-medium">{{ title || placeholder }}</text>
-          <text @tap="confirmSelection" class="text-primary">
-            <text class="i-ri-check-line text-lg"></text>
-          </text>
+
+          <!-- 确定按钮 -->
+          <view v-if="showConfirm" @tap="confirmSelection" class="flex items-center">
+            <slot name="confirm">
+              <text class="text-primary text-base font-medium">
+                {{ confirmText || "确定" }}
+              </text>
+            </slot>
+          </view>
+          <view v-else class="w-16"></view>
         </view>
 
         <!-- 选择器主体 - 使用immediate-change属性提高响应速度 -->
@@ -94,12 +109,38 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  // 自定义取消按钮文案
+  cancelText: {
+    type: String,
+    default: "",
+  },
+  // 自定义确定按钮文案
+  confirmText: {
+    type: String,
+    default: "",
+  },
+  // 是否显示取消按钮
+  showCancel: {
+    type: Boolean,
+    default: true,
+  },
+  // 是否显示确定按钮
+  showConfirm: {
+    type: Boolean,
+    default: true,
+  },
 })
 
 const emit = defineEmits(["update:modelValue", "change"])
 
 // 控制选择器显示
 const isOpen = ref(false)
+
+// 获取第一个可用项的索引
+const getFirstEnabledIndex = (column) => {
+  const index = column.findIndex((item) => !item.disabled)
+  return index >= 0 ? index : 0
+}
 
 // 用于 picker-view 的索引数组
 const pickerValue = ref([])
@@ -117,14 +158,11 @@ const normalizedColumns = computed(() => {
   return [props.columns]
 })
 
-// 初始化 pickerValue - 优化性能
+// 初始化 pickerValue - 确保不会选中禁用项
 const initPickerValue = () => {
   if (!props.modelValue) {
     // 默认选中每列的第一个非禁用项
-    pickerValue.value = normalizedColumns.value.map((column) => {
-      const firstEnabledIndex = column.findIndex((item) => !item.disabled)
-      return firstEnabledIndex >= 0 ? firstEnabledIndex : 0
-    })
+    pickerValue.value = normalizedColumns.value.map(getFirstEnabledIndex)
     return
   }
 
@@ -133,7 +171,16 @@ const initPickerValue = () => {
     pickerValue.value = props.modelValue.map((value, colIndex) => {
       if (colIndex < normalizedColumns.value.length) {
         const index = normalizedColumns.value[colIndex].findIndex((item) => item.value === value)
-        return index !== -1 ? index : 0
+        // 如果找到的项是禁用的，选择第一个可用项
+        if (
+          index !== -1 &&
+          normalizedColumns.value[colIndex][index] &&
+          !normalizedColumns.value[colIndex][index].disabled
+        ) {
+          return index
+        } else {
+          return getFirstEnabledIndex(normalizedColumns.value[colIndex])
+        }
       }
       return 0
     })
@@ -142,7 +189,16 @@ const initPickerValue = () => {
   else {
     const value = Array.isArray(props.modelValue) ? props.modelValue[0] : props.modelValue
     const index = normalizedColumns.value[0].findIndex((item) => item.value === value)
-    pickerValue.value = [index !== -1 ? index : 0]
+    // 如果找到的项是禁用的，选择第一个可用项
+    if (
+      index !== -1 &&
+      normalizedColumns.value[0][index] &&
+      !normalizedColumns.value[0][index].disabled
+    ) {
+      pickerValue.value = [index]
+    } else {
+      pickerValue.value = [getFirstEnabledIndex(normalizedColumns.value[0])]
+    }
   }
 }
 
@@ -199,12 +255,50 @@ const confirmSelection = () => {
   })
 }
 
-// 处理选择器变化 - 优化性能，减少不必要的计算
+// 处理选择器变化 - 检查禁用项并自动跳转到可用项
 const onPickerChange = (e) => {
-  pickerValue.value = e.detail.value
-  // 如果需要实时更新值，可以取消下面的注释
-  // const value = selectedValues.value
-  // emit("update:modelValue", value)
+  const newValues = e.detail.value
+  let hasChanged = false
+  const adjustedValues = [...newValues]
+
+  // 检查并调整每个列的选中项
+  newValues.forEach((index, colIndex) => {
+    const column = normalizedColumns.value[colIndex]
+    if (column && column[index] && column[index].disabled) {
+      // 找到下一个可用的选项
+      let nextIndex = index + 1
+      while (nextIndex < column.length && column[nextIndex] && column[nextIndex].disabled) {
+        nextIndex++
+      }
+
+      // 如果向后找不到，向前找
+      if (nextIndex >= column.length) {
+        nextIndex = index - 1
+        while (nextIndex >= 0 && column[nextIndex] && column[nextIndex].disabled) {
+          nextIndex--
+        }
+      }
+
+      // 如果找到了可用项，更新索引
+      if (nextIndex >= 0 && nextIndex < column.length && !column[nextIndex].disabled) {
+        adjustedValues[colIndex] = nextIndex
+        hasChanged = true
+
+        // uni.showToast({
+        //   title: "该选项不可用，已自动选择其他选项",
+        //   icon: "none",
+        //   duration: 1500,
+        // })
+      }
+    }
+  })
+
+  // 如果有调整，更新选择器值
+  if (hasChanged) {
+    pickerValue.value = adjustedValues
+  } else {
+    pickerValue.value = newValues
+  }
 }
 
 // 监听 modelValue 变化 - 添加防抖，避免频繁更新
