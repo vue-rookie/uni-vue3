@@ -121,17 +121,6 @@ const handleClick = (event: MouseEvent) => {
 
   emit("click", event)
 }
-
-// 按钮按下效果
-const handleTouchStart = () => {
-  if (!props.disabled && !props.loading) {
-    isPressed.value = true
-  }
-}
-
-const handleTouchEnd = () => {
-  isPressed.value = false
-}
 </script>
 <style lang="scss" scoped>
 // 修复拼写错误

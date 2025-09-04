@@ -88,6 +88,14 @@
       "root": "pages-sub",
       "pages": [
         {
+          "path": "ai-chat-demo/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "AI聊天助手",
+            "navigationStyle": "default"
+          }
+        },
+        {
           "path": "button-demo/index",
           "type": "page",
           "style": {
