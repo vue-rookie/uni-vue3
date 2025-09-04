@@ -117,6 +117,20 @@
       <view class="text-sm text-gray-500 px-4 py-2">数据展示</view>
       <view class="divide-y divide-gray-100">
         <view
+          @click="navigateTo('/pages-sub/ai-chat-demo/index')"
+          class="flex items-center justify-between px-4 py-3 active:bg-gray-50"
+        >
+          <view class="flex items-center flex-1">
+            <view class="w-5 h-5 mr-3 flex items-center justify-center">
+              <text class="i-ri-chat-1-line"></text>
+            </view>
+            <text>uve-ai-chat聊天</text>
+          </view>
+          <view class="text-gray-400">
+            <text class="i-ri-arrow-right-s-line inline-block"></text>
+          </view>
+        </view>
+        <view
           @click="navigateTo('/pages-sub/swiper-demo/index')"
           class="flex items-center justify-between px-4 py-3 active:bg-gray-50"
         >

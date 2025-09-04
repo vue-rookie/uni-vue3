@@ -1,13 +1,10 @@
 <template>
   <button
     :class="[
-      // 基础样式
       'inline-flex items-center justify-center font-medium text-center whitespace-nowrap transition-all duration-300 ease-in-out relative overflow-hidden',
-      // 默认按钮样式
       type === 'default'
         ? 'border border-gray-300 bg-white border-default text-defualt'
         : 'border border-transparent',
-      // 其他按钮类型
       {
         'text-white !bg-primary shadow-primary': type === 'primary' && !plain,
         'text-white !bg-success shadow-success': type === 'success' && !plain,
@@ -15,7 +12,6 @@
         'text-white !bg-danger shadow-danger': type === 'danger' && !plain,
         'text-white !bg-info shadow-info': type === 'info' && !plain,
       },
-      // 朴素按钮
       {
         'bg-white border-default': plain,
         'text-primary hover:bg-primary/10 hover:border-primary/50': plain && type === 'primary',
@@ -24,23 +20,17 @@
         'text-danger hover:bg-danger/10 hover:border-danger/50': plain && type === 'danger',
         'text-info hover:bg-info/10 hover:border-info/50': plain && type === 'info',
       },
-      // 按钮尺寸
       {
         'h-11 px-6 text-base rounded-lg': size === 'large',
         'h-10 px-4 text-sm rounded-md': size === 'normal',
         'h-8 px-3 text-xs rounded': size === 'small',
         'h-6 px-2 text-xs rounded': size === 'mini',
       },
-      // 圆角按钮
       { 'rounded-full': round },
-      // 块级按钮
       { 'flex w-full': block },
-      // 禁用状态
       { 'cursor-not-allowed opacity-50': disabled },
-      // 加载状态特殊样式
       { 'opacity-90': loading && !disabled },
       'after:border-none',
-      // 自定义类名
       customClass,
     ]"
     :style="customStyle"
@@ -130,17 +120,6 @@ const handleClick = (event: MouseEvent) => {
   }
 
   emit("click", event)
-}
-
-// 按钮按下效果
-const handleTouchStart = () => {
-  if (!props.disabled && !props.loading) {
-    isPressed.value = true
-  }
-}
-
-const handleTouchEnd = () => {
-  isPressed.value = false
 }
 </script>
 <style lang="scss" scoped>
