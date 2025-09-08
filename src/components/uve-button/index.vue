@@ -6,11 +6,11 @@
         ? 'border border-gray-300 bg-white border-default text-defualt'
         : 'border border-transparent',
       {
-        'text-white !bg-primary shadow-primary': type === 'primary' && !plain,
-        'text-white !bg-success shadow-success': type === 'success' && !plain,
-        'text-white !bg-warning shadow-warning': type === 'warning' && !plain,
-        'text-white !bg-danger shadow-danger': type === 'danger' && !plain,
-        'text-white !bg-info shadow-info': type === 'info' && !plain,
+        '!text-white !bg-primary shadow-primary': type === 'primary' && !plain,
+        '!text-white !bg-success shadow-success': type === 'success' && !plain,
+        '!text-white !bg-warning shadow-warning': type === 'warning' && !plain,
+        '!text-white !bg-danger shadow-danger': type === 'danger' && !plain,
+        '!text-white !bg-info shadow-info': type === 'info' && !plain,
       },
       {
         'bg-white border-default': plain,
@@ -28,7 +28,7 @@
       },
       { 'rounded-full': round },
       { 'flex w-full': block },
-      { 'cursor-not-allowed opacity-50': disabled },
+      { 'cursor-not-allowed': disabled },
       { 'opacity-90': loading && !disabled },
       'after:border-none',
       customClass,

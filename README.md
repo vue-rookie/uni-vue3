@@ -60,29 +60,6 @@ const selectedIndex = await showActionSheet({
 })
 ```
 
-#### useTheme - 主题管理
-
-支持动态切换明暗主题，可扩展自定义主题，支持系统主题自动跟随。
-
-```typescript
-import { useTheme } from "@/hooks"
-
-const { currentTheme, setTheme, toggleTheme, isDarkTheme, addTheme } = useTheme()
-
-// 切换主题
-toggleTheme() // 在明暗主题间切换
-
-// 设置指定主题
-setTheme("dark")
-
-// 添加自定义主题
-addTheme("custom", {
-  "--background-color": "#f0f0f0",
-  "--text-color": "#333333",
-  "--primary-color": "#4080ff",
-})
-```
-
 ### 数据处理类
 
 #### useStorage - 本地存储

@@ -182,6 +182,14 @@
             "navigationBarTitleText": "uve-popup弹窗",
             "navigationStyle": "default"
           }
+        },
+        {
+          "path": "steps-demo/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "uve-steps步骤条",
+            "navigationStyle": "default"
+          }
         }
       ]
     }
