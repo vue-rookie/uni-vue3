@@ -129,6 +129,13 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  // 自定义显示格式，用于多列选择器
+  // 支持占位符：{0} 第一列，{1} 第二列，{2} 第三列...
+  // 例如："{0}年{1}月{2}日" 或 "{0}-{1}-{2}" 或 "{0}/{1}/{2}"
+  format: {
+    type: String,
+    default: "",
+  },
 })
 
 const emit = defineEmits(["update:modelValue", "change"])
@@ -212,6 +219,23 @@ const selectedLabels = computed(() => {
       result.push(column[index].label)
     }
   })
+
+  // 如果设置了自定义格式，则使用格式化的显示
+  if (props.format && result.length > 0) {
+    try {
+      // 使用占位符替换格式字符串
+      let formattedText = props.format
+      result.forEach((label, index) => {
+        // 移除label中的"年"、"月"、"日"等后缀，只保留数字部分
+        const cleanLabel = label.replace(/[年月日]/g, "")
+        formattedText = formattedText.replace(new RegExp(`\\{${index}\\}`, "g"), cleanLabel)
+      })
+      return [formattedText]
+    } catch (error) {
+      console.warn("格式字符串解析错误:", error)
+      return result
+    }
+  }
 
   return result
 })

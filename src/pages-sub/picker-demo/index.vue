@@ -51,6 +51,80 @@
       </view>
     </view>
 
+    <!-- 自定义格式显示 -->
+    <view class="mb-8">
+      <view class="text-base font-medium mb-2">自定义格式显示</view>
+      <view class="bg-gray-50 p-4 rounded-lg">
+        <view class="mb-3">
+          <text class="text-sm text-gray-600 mb-2">选择日期（年-月-日格式）：</text>
+          <uve-picker
+            :columns="[years, months, days]"
+            v-model="selectedDateFormatted1"
+            placeholder="请选择日期"
+            title="选择日期"
+            format="{0}-{1}-{2}"
+            @change="onDateFormatted1Change"
+          />
+        </view>
+        <view
+          v-if="selectedDateFormatted1 && selectedDateFormatted1.length === 3"
+          class="mt-3 text-sm text-primary"
+        >
+          当前选择：{{ selectedDateFormatted1[0] }}-{{ selectedDateFormatted1[1] }}-{{
+            selectedDateFormatted1[2]
+          }}
+        </view>
+      </view>
+
+      <view class="bg-gray-50 p-4 rounded-lg mt-3">
+        <view class="mb-3">
+          <text class="text-sm text-gray-600 mb-2">选择日期（年/月/日格式）：</text>
+          <uve-picker
+            :columns="[years, months, days]"
+            v-model="selectedDateFormatted2"
+            placeholder="请选择日期"
+            title="选择日期"
+            format="{0}/{1}/{2}"
+            @change="onDateFormatted2Change"
+          />
+        </view>
+        <view
+          v-if="selectedDateFormatted2 && selectedDateFormatted2.length === 3"
+          class="mt-3 text-sm text-primary"
+        >
+          当前选择：{{ selectedDateFormatted2[0] }}/{{ selectedDateFormatted2[1] }}/{{
+            selectedDateFormatted2[2]
+          }}
+        </view>
+      </view>
+
+      <view class="bg-gray-50 p-4 rounded-lg mt-3">
+        <view class="mb-3">
+          <text class="text-sm text-gray-600 mb-2">选择日期（年月日格式）：</text>
+          <uve-picker
+            :columns="[years, months, days]"
+            v-model="selectedDateFormatted3"
+            placeholder="请选择日期"
+            title="选择日期"
+            format="{0}年{1}月{2}日"
+            @change="onDateFormatted3Change"
+          />
+        </view>
+        <view
+          v-if="selectedDateFormatted3 && selectedDateFormatted3.length === 3"
+          class="mt-3 text-sm text-primary"
+        >
+          当前选择：{{ selectedDateFormatted3[0] }}年{{ selectedDateFormatted3[1] }}月{{
+            selectedDateFormatted3[2]
+          }}日
+        </view>
+      </view>
+
+      <view class="text-xs text-gray-500 mt-2 bg-gray-50 p-3 rounded">
+        通过 format 属性自定义显示格式，支持占位符 {0}、{1}、{2} 等
+      </view>
+    </view>
+
     <!-- 禁用选项 -->
     <view class="mb-8">
       <view class="text-base font-medium mb-2">禁用选项</view>
@@ -247,6 +321,11 @@ const selectedFruit = ref("")
 const selectedTheme = ref("")
 const selectedYear = ref("")
 
+// 自定义格式的日期选择
+const selectedDateFormatted1 = ref([currentYear, 1, 1])
+const selectedDateFormatted2 = ref([currentYear, 1, 1])
+const selectedDateFormatted3 = ref([currentYear, 1, 1])
+
 // 事件处理
 const onCityChange = (value) => {
   console.log("城市变更:", value)
@@ -266,6 +345,18 @@ const onThemeChange = (value) => {
 
 const onYearChange = (value) => {
   console.log("年份变更:", value)
+}
+
+const onDateFormatted1Change = (value) => {
+  console.log("日期变更（年-月-日格式）:", value)
+}
+
+const onDateFormatted2Change = (value) => {
+  console.log("日期变更（年/月/日格式）:", value)
+}
+
+const onDateFormatted3Change = (value) => {
+  console.log("日期变更（年月日格式）:", value)
 }
 
 // 辅助函数

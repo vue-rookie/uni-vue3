@@ -3,7 +3,6 @@ export * from "./useModal"
 export * from "./useEvent"
 export * from "./useRequest"
 export * from "./useStorage"
-export * from "./useTheme"
 export * from "./useSystem"
 export * from "./useShare"
 export * from "./useCamera"
@@ -17,7 +16,6 @@ export * from "./useValidation"
  * - useEvent：事件相关功能
  * - useRequest：网络请求相关功能
  * - useStorage：本地存储相关功能
- * - useTheme：主题相关功能
  * - useSystem：系统API相关功能
  * - useShare：分享相关功能
  * - useCamera：相机相关功能

@@ -92,7 +92,6 @@ declare global {
   const useStorage: typeof import('../hooks/useStorage')['useStorage']
   const useSystem: typeof import('../hooks/useSystem')['useSystem']
   const useTemplateRef: typeof import('vue')['useTemplateRef']
-  const useTheme: typeof import('../hooks/useTheme')['useTheme']
   const useValidation: typeof import('../hooks/useValidation')['useValidation']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
@@ -197,7 +196,6 @@ declare module 'vue' {
     readonly useStorage: UnwrapRef<typeof import('../hooks/useStorage')['useStorage']>
     readonly useSystem: UnwrapRef<typeof import('../hooks/useSystem')['useSystem']>
     readonly useTemplateRef: UnwrapRef<typeof import('vue')['useTemplateRef']>
-    readonly useTheme: UnwrapRef<typeof import('../hooks/useTheme')['useTheme']>
     readonly useValidation: UnwrapRef<typeof import('../hooks/useValidation')['useValidation']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
