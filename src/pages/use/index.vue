@@ -23,7 +23,7 @@
       </view>
     </view>
 
-    <!-- 弹窗 -->
+    <!-- useModal 弹窗 -->
     <view
       v-if="modalVisible"
       class="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"
@@ -41,11 +41,59 @@
         </view>
       </view>
     </view>
+
+    <!-- useCountdown 弹窗 -->
+    <view
+      v-if="countdownVisible"
+      class="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"
+    >
+      <view class="bg-white rounded-lg w-4/5 p-5">
+        <view class="text-lg font-medium mb-3 text-[#060b2d]">useCountdown 示例</view>
+
+        <!-- 倒计时显示 -->
+        <view class="flex justify-center items-center my-6">
+          <view class="text-3xl font-bold text-[#06f]">
+            {{ countdown?.formattedTime || "00:00" }}
+          </view>
+        </view>
+
+        <!-- 操作按钮 -->
+        <view class="flex justify-center space-x-3 mb-4">
+          <view
+            class="px-4 py-2 bg-[#06f] text-white rounded-lg active:opacity-80 text-sm"
+            @click="handleAddTime"
+          >
+            +10秒
+          </view>
+          <view
+            class="px-4 py-2 bg-[#06f] text-white rounded-lg active:opacity-80 text-sm"
+            @click="handleSubtractTime"
+          >
+            -5秒
+          </view>
+          <view
+            class="px-4 py-2 bg-[#06f] text-white rounded-lg active:opacity-80 text-sm"
+            @click="handlePauseResume"
+          >
+            暂停/继续
+          </view>
+        </view>
+
+        <view class="flex justify-end">
+          <view
+            class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg active:opacity-80 text-sm"
+            @click="closeCountdown"
+          >
+            关闭
+          </view>
+        </view>
+      </view>
+    </view>
   </view>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue"
+import { ref, onMounted, nextTick } from "vue"
 import {
   useModal,
   useStorage,
@@ -54,6 +102,7 @@ import {
   useCamera,
   useShare,
   useSystem,
+  useCountdown,
 } from "@/hooks"
 import { useInputDataLimit } from "@/hooks/useInputLimit"
 
@@ -86,6 +135,10 @@ const hookCategories = ref([
       { name: "useValidation", icon: "i-ri-checkbox-line", action: "demoValidation" },
     ],
   },
+  {
+    title: "性能优化",
+    items: [{ name: "useCountdown", icon: "i-ri-time-line", action: "demoCountdown" }],
+  },
 ])
 
 onMounted(() => {
@@ -107,6 +160,7 @@ const callHookDemo = (actionName: string) => {
     demoSystem,
     demoShare,
     demoValidation,
+    demoCountdown,
   }
 
   // 安全地调用函数
@@ -285,5 +339,69 @@ const demoValidation = () => {
     手机号: ${isValidPhone ? "有效" : "无效"}
     密码: ${isValidPassword ? "有效" : "无效"}
   `)
+}
+
+// Demo: useCountdown - 使用改进的hook
+const countdownVisible = ref(false)
+const countdown = ref<any>(null)
+
+// 倒计时演示
+const demoCountdown = () => {
+  countdownVisible.value = true
+
+  // 创建倒计时实例
+  countdown.value = useCountdown({
+    totalSeconds: 60,
+    autoStart: true,
+    interval: 1000,
+    onFinish: () => {
+      const modal = useModal()
+      modal.showToast("倒计时结束！")
+    },
+    onTick: (seconds, formatted) => {
+      console.log("倒计时更新:", formatted, seconds)
+    },
+  })
+}
+
+// 增加时间
+const handleAddTime = () => {
+  if (!countdown.value) return
+
+  countdown.value.addTime(10)
+
+  const modal = useModal()
+  modal.showToast("已增加10秒")
+}
+
+// 减少时间
+const handleSubtractTime = () => {
+  if (!countdown.value) return
+
+  countdown.value.subtractTime(5)
+
+  const modal = useModal()
+  modal.showToast("已减少5秒")
+}
+
+// 暂停/继续
+const handlePauseResume = () => {
+  if (!countdown.value) return
+
+  if (countdown.value.isRunning.value) {
+    countdown.value.pause()
+  } else {
+    countdown.value.start()
+  }
+}
+
+// 关闭倒计时
+const closeCountdown = () => {
+  countdownVisible.value = false
+
+  if (countdown.value) {
+    countdown.value.stop()
+    countdown.value = null
+  }
 }
 </script>

@@ -106,6 +106,16 @@
     "watch": true,
     "watchEffect": true,
     "watchPostEffect": true,
-    "watchSyncEffect": true
+    "watchSyncEffect": true,
+    "createCountdown": true,
+    "createCountdownTo": true,
+    "useCountdown": true,
+    "useLazyBackground": true,
+    "useLazyImage": true,
+    "useLazyLoad": true,
+    "useDynamicVirtualList": true,
+    "useFixedVirtualList": true,
+    "useVirtualList": true,
+    "useCountdownFixed": true
   }
 }
