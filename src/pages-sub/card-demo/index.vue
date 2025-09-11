@@ -16,7 +16,7 @@
           <view class="section-desc">最简单的卡片使用方式</view>
         </view>
         <view class="demo-card">
-          <uve-card title="基础卡片" subtitle="这是一个基础的卡片组件">
+          <uve-card title="基础卡片" subtitle="这是一个基础的卡片组件" shadow>
             <text class="text-gray-600">这是卡片的内容区域，可以放置任何内容。</text>
           </uve-card>
         </view>
@@ -36,15 +36,15 @@
         </view>
         <view class="demo-card">
           <view class="space-y-4">
-            <uve-card size="small" title="小尺寸卡片">
+            <uve-card size="small" title="小尺寸卡片" variant="outlined" border>
               <text class="text-gray-600">小尺寸卡片内容，适合紧凑布局</text>
             </uve-card>
 
-            <uve-card size="medium" title="中等尺寸卡片">
+            <uve-card size="medium" title="中等尺寸卡片" shadow>
               <text class="text-gray-600">中等尺寸卡片内容，默认推荐尺寸</text>
             </uve-card>
 
-            <uve-card size="large" title="大尺寸卡片">
+            <uve-card size="large" title="大尺寸卡片" variant="filled" shadow>
               <text class="text-gray-600">大尺寸卡片内容，适合重要信息展示</text>
             </uve-card>
           </view>
@@ -63,20 +63,20 @@
         </view>
         <view class="demo-card">
           <view class="space-y-4">
-            <uve-card variant="default" title="默认样式">
-              <text class="text-gray-600">默认的卡片样式，简洁清爽</text>
+            <uve-card variant="default" title="默认样式" shadow>
+              <text class="text-gray-600">默认的卡片样式，简洁清爽，带轻微阴影</text>
             </uve-card>
 
-            <uve-card variant="outlined" title="边框样式">
-              <text class="text-gray-600">带边框的卡片样式，层次分明</text>
+            <uve-card variant="outlined" title="边框样式" border>
+              <text class="text-gray-600">带边框的卡片样式，层次分明，无阴影</text>
             </uve-card>
 
-            <uve-card variant="filled" title="填充样式">
-              <text class="text-gray-600">填充背景的卡片样式，温和舒适</text>
+            <uve-card variant="filled" title="填充样式" backgroundColor="#ccc">
+              <text class="text-gray-600">填充背景的卡片样式，温和舒适，灰色背景</text>
             </uve-card>
 
-            <uve-card variant="elevated" title="阴影样式">
-              <text class="text-gray-600">带阴影的卡片样式，立体感强</text>
+            <uve-card variant="elevated" title="阴影样式" shadow>
+              <text class="text-gray-600">带阴影的卡片样式，立体感强，突出显示</text>
             </uve-card>
           </view>
         </view>
@@ -94,7 +94,13 @@
         </view>
         <view class="demo-card">
           <view class="space-y-4">
-            <uve-card hover title="悬停效果" subtitle="鼠标悬停时有缩放效果">
+            <uve-card
+              hover
+              title="悬停效果"
+              subtitle="鼠标悬停时有缩放效果"
+              variant="outlined"
+              border
+            >
               <text class="text-gray-600">悬停时卡片会有缩放和阴影效果</text>
             </uve-card>
 
@@ -102,6 +108,8 @@
               clickable
               title="可点击卡片"
               subtitle="点击时有缩放效果"
+              variant="elevated"
+              shadow
               @click="handleCardClick"
             >
               <text class="text-gray-600">点击卡片会有缩放效果，并触发点击事件</text>
@@ -159,9 +167,9 @@
             </view>
 
             <template #footer>
-              <view class="flex justify-end space-x-2">
-                <view class="px-3 py-1 bg-gray-100 rounded text-sm text-gray-600">取消</view>
-                <view class="px-3 py-1 bg-blue-500 rounded text-sm text-white">确认</view>
+              <view class="space-x-2 text-right">
+                <uve-button size="small" plain>取消</uve-button>
+                <uve-button size="small" type="primary">确认</uve-button>
               </view>
             </template>
           </uve-card>
@@ -182,7 +190,7 @@
           <view class="section-desc">展示包含图片的卡片样式</view>
         </view>
         <view class="demo-card">
-          <uve-card title="图片卡片" subtitle="包含图片的卡片">
+          <uve-card title="图片卡片" subtitle="包含图片的卡片" variant="elevated" shadow>
             <view class="space-y-3">
               <view
                 class="w-full h-32 bg-gradient-to-r from-blue-400 to-purple-500 rounded-lg flex items-center justify-center"
@@ -225,6 +233,54 @@
           </view>
         </view>
         <view class="code-hint">卡片可以很好地适应网格布局，提供一致的用户体验</view>
+      </view>
+
+      <!-- 自定义颜色 -->
+      <view class="demo-section mb-8">
+        <view class="section-header">
+          <view class="section-title">🎨 自定义颜色</view>
+          <view class="section-desc">支持自定义背景色、边框色和文字色</view>
+        </view>
+        <view class="demo-card">
+          <view class="space-y-4">
+            <uve-card
+              title="自定义背景色"
+              subtitle="蓝色背景的卡片"
+              backgroundColor="#dbeafe"
+              borderColor="#3b82f6"
+            >
+              <text class="text-gray-700">这是一个自定义背景色的卡片示例</text>
+            </uve-card>
+
+            <uve-card
+              title="自定义边框色"
+              subtitle="绿色边框的卡片"
+              backgroundColor="#f0fdf4"
+              borderColor="#22c55e"
+              border
+            >
+              <text class="text-gray-700">这是一个自定义边框色的卡片示例</text>
+            </uve-card>
+
+            <uve-card
+              title="自定义文字色"
+              subtitle="紫色文字的卡片"
+              backgroundColor="#faf5ff"
+              textColor="#7c3aed"
+            >
+              <text>这是一个自定义文字色的卡片示例</text>
+            </uve-card>
+          </view>
+        </view>
+        <view class="code-hint">
+          使用
+          <text class="code-text">backgroundColor</text>
+          、
+          <text class="code-text">borderColor</text>
+          和
+          <text class="code-text">textColor</text>
+          属性自定义颜色
+        </view>
       </view>
 
       <!-- 底部提示 -->

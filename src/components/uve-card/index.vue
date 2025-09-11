@@ -1,18 +1,18 @@
 <template>
   <view
     :class="[
-      'bg-white rounded-lg overflow-hidden transition-all duration-200',
+      'rounded-lg overflow-hidden transition-all duration-200',
       sizeClasses,
-      variantClasses,
       {
         'shadow-sm': shadow && variant !== 'elevated',
         'shadow-lg': shadow && variant === 'elevated',
-        'border border-gray-200': border || variant === 'outlined',
+        '!border': border || variant === 'outlined',
         'hover:shadow-md hover:scale-105': hover,
         'cursor-pointer': clickable,
         'active:scale-95': clickable,
       },
     ]"
+    :style="customStyles"
     @click="handleClick"
   >
     <!-- 卡片头部 -->
@@ -55,6 +55,12 @@ interface Props {
   title?: string
   // 副标题
   subtitle?: string
+  // 自定义背景色
+  backgroundColor?: string
+  // 自定义边框色
+  borderColor?: string
+  // 自定义文字色
+  textColor?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -66,6 +72,9 @@ const props = withDefaults(defineProps<Props>(), {
   clickable: false,
   title: "",
   subtitle: "",
+  backgroundColor: "",
+  borderColor: "",
+  textColor: "",
 })
 
 const emit = defineEmits<{
@@ -81,14 +90,41 @@ const sizeClasses = computed(() => {
   return sizeMap[props.size]
 })
 
-const variantClasses = computed(() => {
-  const variantMap = {
-    default: "bg-white",
-    outlined: "bg-white border border-gray-200",
-    filled: "bg-gray-50",
-    elevated: "bg-white shadow-lg",
+// 自定义样式
+const customStyles = computed(() => {
+  const styles: Record<string, string> = {}
+
+  // 背景色
+  if (props.backgroundColor) {
+    styles.backgroundColor = props.backgroundColor
+  } else {
+    // 默认背景色
+    const defaultBgMap = {
+      default: "#ffffff",
+      outlined: "#ffffff",
+      filled: "#f9fafb",
+      elevated: "#ffffff",
+    }
+    styles.backgroundColor = defaultBgMap[props.variant]
   }
-  return variantMap[props.variant]
+
+  // 边框样式
+  if (props.border || props.variant === "outlined") {
+    styles.borderWidth = "1px"
+    styles.borderStyle = "solid"
+    if (props.borderColor) {
+      styles.borderColor = props.borderColor
+    } else {
+      styles.borderColor = "#e5e7eb"
+    }
+  }
+
+  // 文字色
+  if (props.textColor) {
+    styles.color = props.textColor
+  }
+
+  return styles
 })
 
 const handleClick = (event: Event) => {
