@@ -23,16 +23,10 @@
       </view>
     </view>
   </view>
-
-  <!-- 底部提示 -->
-  <view class="mt-6 mb-10 px-4 text-center pb-4">
-    <view class="text-sm text-gray-500">更多组件实现中......，欢迎您提建议和issues</view>
-  </view>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from "vue"
-
 // 组件分类配置
 const componentCategories = ref([
   {

@@ -31,7 +31,7 @@
       {
         "iconPath": "static/tabbar/tab1.png",
         "selectedIconPath": "static/tabbar/tab1-select.png",
-        "pagePath": "pages/use/index",
+        "pagePath": "pages/user/index",
         "text": "hooks"
       }
     ]
@@ -51,15 +51,6 @@
       "type": "page",
       "style": {
         "navigationBarTitleText": "用户中心",
-        "navigationStyle": "default"
-      },
-      "needLogin": false
-    },
-    {
-      "path": "pages/use/index",
-      "type": "page",
-      "style": {
-        "navigationBarTitleText": "hooks示例",
         "navigationStyle": "default"
       },
       "needLogin": false
@@ -86,112 +77,7 @@
   "subPackages": [
     {
       "root": "pages-sub",
-      "pages": [
-        {
-          "path": "ai-chat-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "AI聊天助手",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "button-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-button按钮",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "border-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-border边框",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "picker-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-picker选择器",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "tabs-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-tabs标签",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "swiper-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-swiper轮播图",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "navbar-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-navbar导航栏",
-            "navigationStyle": "custom"
-          }
-        },
-        {
-          "path": "form-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-form表单",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "input-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-input输入框",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "checkbox-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-checkbox复选框",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "radio-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-radio单选框",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "popup-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-popup弹窗",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "steps-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-steps步骤条",
-            "navigationStyle": "default"
-          }
-        }
-      ]
+      "pages": []
     }
   ]
 }

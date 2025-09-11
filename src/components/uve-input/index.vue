@@ -88,7 +88,7 @@
 <script setup lang="ts">
 import { computed, useSlots } from "vue"
 
-interface Props {
+export interface Props {
   /** 绑定值 */
   modelValue?: string
   /** 输入框类型 */
