@@ -190,6 +190,14 @@
             "navigationBarTitleText": "uve-steps步骤条",
             "navigationStyle": "default"
           }
+        },
+        {
+          "path": "card-demo/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "uve-card卡片",
+            "navigationStyle": "default"
+          }
         }
       ]
     }

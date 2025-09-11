@@ -40,6 +40,7 @@ const componentCategories = ref([
     items: [
       { name: "uve-button按钮", path: "/pages-sub/button-demo/index", icon: "i-ri-cursor-line" },
       { name: "uve-border边框", path: "/pages-sub/border-demo/index", icon: "i-ri-layout-line" },
+      { name: "uve-card卡片", path: "/pages-sub/card-demo/index", icon: "i-ri-id-card-fill" },
     ],
   },
   {
