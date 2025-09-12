@@ -1,5 +1,5 @@
 <template>
-  <view class="page-container min-h-screen bg-gray-50">
+  <view class="page-container min-h-screen bg-gray-50 demo-section">
     <uve-navbar
       title="自定义导航栏"
       :border="false"

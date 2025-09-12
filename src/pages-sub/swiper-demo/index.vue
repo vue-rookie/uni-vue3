@@ -1,5 +1,5 @@
 <template>
-  <view class="page-container min-h-screen bg-gray-50">
+  <view class="page-container min-h-screen bg-gray-50 demo-section">
     <view class="p-4">
       <view class="text-xl font-bold mb-6">uve-swiper 轮播组件</view>
       <view class="text-sm text-gray-500 mb-4">

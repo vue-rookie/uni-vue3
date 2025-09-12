@@ -1,5 +1,5 @@
 <template>
-  <view class="p-4 bg-gray-100 min-h-screen">
+  <view class="p-4 bg-gray-100 min-h-screen demo-section">
     <view class="text-xl font-bold mb-6">表单 Form</view>
     <view class="text-sm text-gray-500 mb-4">
       表单组件用于收集、验证和提交数据，包含多种输入控件。
