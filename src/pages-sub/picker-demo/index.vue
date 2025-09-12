@@ -1,5 +1,5 @@
 <template>
-  <view class="page-container bg-white min-h-screen p-4">
+  <view class="page-container bg-white min-h-screen p-4 demo-section">
     <view class="text-xl font-bold mb-6">uve-picker 选择器</view>
 
     <view class="text-sm text-gray-500 mb-4">

@@ -56,3 +56,74 @@ view {
 .tab-shadow {
   box-shadow: 0px 0px 16rpx 0px rgb(6 11 45 / 4%);
 }
+// 动画效果
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.demo-section {
+  animation: fade-in-up 0.6s ease-out forwards;
+
+  .section-header {
+    margin-bottom: 16px;
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-desc {
+      font-size: 14px;
+      color: #6b7280;
+    }
+  }
+
+  .demo-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow:
+      0 1px 3px rgb(0 0 0 / 10%),
+      0 1px 2px rgb(0 0 0 / 6%);
+    border: 1px solid #f3f4f6;
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow:
+        0 4px 6px rgb(0 0 0 / 10%),
+        0 2px 4px rgb(0 0 0 / 6%);
+      transform: translateY(-1px);
+    }
+  }
+
+  .code-hint {
+    margin-top: 12px;
+    padding: 8px 12px;
+    background: #f8fafc;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #64748b;
+
+    .code-text {
+      font-family: "SF Mono", Monaco, Inconsolata, "Roboto Mono", monospace;
+      background: #e2e8f0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 500;
+      color: #334155;
+    }
+  }
+}
