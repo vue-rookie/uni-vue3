@@ -1,20 +1,5 @@
 // @ts-expect-error import json file
-import { pages, subPackages, tabBar } from "@/pages.json"
-
-/** 判断当前页面是否是tabbar页  */
-export const getIsTabbar = () => {
-  if (!tabBar) {
-    return false
-  }
-  if (!tabBar.list.length) {
-    // 通常有tabBar的话，list不能有空，且至少有2个元素，这里其实不用处理
-    return false
-  }
-  // getCurrentPages() 至少有1个元素，所以不再额外判断
-  const lastPage = getCurrentPages().at(-1)
-  const currPath = lastPage.route
-  return !!tabBar.list?.find((e) => e.pagePath === currPath)
-}
+import { pages, subPackages } from "@/pages.json"
 
 export const currRoute = () => {
   // getCurrentPages() 至少有1个元素，所以不再额外判断

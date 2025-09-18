@@ -69,11 +69,9 @@
       >
         <slot name="right"></slot>
       </view>
+      <!-- 默认插槽区域 -->
+      <slot></slot>
     </view>
-
-    <!-- 默认插槽区域 -->
-    <slot></slot>
-
     <!-- 底部插槽，可用于放置tabs等 -->
     <slot name="bottom"></slot>
   </view>

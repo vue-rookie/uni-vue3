@@ -1,6 +1,6 @@
 {
   "globalStyle": {
-    "navigationStyle": "default",
+    "navigationStyle": "custom",
     "navigationBarTitleText": "uni-vue3",
     "navigationBarBackgroundColor": "#f8f8f8",
     "navigationBarTextStyle": "black",
@@ -12,64 +12,49 @@
       "^uve-(.*)": "@/components/uve-$1/index.vue"
     }
   },
-  "tabBar": {
-    "color": "#8f9ca2",
-    "selectedColor": "#000",
-    "backgroundColor": "#ffffff",
-    "borderStyle": "black",
-    "height": "64px",
-    "fontSize": "14px",
-    "iconWidth": "32px",
-    "spacing": "0px",
-    "list": [
-      {
-        "iconPath": "static/tabbar/home.png",
-        "selectedIconPath": "static/tabbar/home-select.png",
-        "pagePath": "pages/index/index",
-        "text": "components"
-      },
-      {
-        "iconPath": "static/tabbar/tab1.png",
-        "selectedIconPath": "static/tabbar/tab1-select.png",
-        "pagePath": "pages/use/index",
-        "text": "hooks"
-      }
-    ]
-  },
   "pages": [
     {
       "path": "pages/index/index",
       "type": "home",
       "style": {
         "navigationBarTitleText": "首页",
-        "navigationStyle": "default"
+        "navigationStyle": "custom"
       },
       "needLogin": false
     },
     {
-      "path": "pages/user/index",
+      "path": "pages/discover/index",
       "type": "page",
       "style": {
-        "navigationBarTitleText": "用户中心",
-        "navigationStyle": "default"
+        "navigationBarTitleText": "发现",
+        "navigationStyle": "custom"
       },
       "needLogin": false
     },
     {
-      "path": "pages/use/index",
+      "path": "pages/publish/index",
       "type": "page",
       "style": {
-        "navigationBarTitleText": "hooks示例",
-        "navigationStyle": "default"
+        "navigationBarTitleText": "发布",
+        "navigationStyle": "custom"
+      },
+      "needLogin": true
+    },
+    {
+      "path": "pages/message/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "消息",
+        "navigationStyle": "custom"
       },
       "needLogin": false
     },
     {
-      "path": "pages/settings/index",
+      "path": "pages/profile/index",
       "type": "page",
       "style": {
-        "navigationBarTitleText": "设置",
-        "navigationStyle": "default"
+        "navigationBarTitleText": "我",
+        "navigationStyle": "custom"
       },
       "needLogin": false
     },
@@ -95,108 +80,21 @@
             "navigationStyle": "default"
           }
         },
+       
         {
-          "path": "button-demo/index",
+          "path": "comment/index",
           "type": "page",
           "style": {
-            "navigationBarTitleText": "uve-button按钮",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "border-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-border边框",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "picker-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-picker选择器",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "tabs-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-tabs标签",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "swiper-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-swiper轮播图",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "navbar-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-navbar导航栏",
+            "navigationBarTitleText": "评论",
             "navigationStyle": "custom"
           }
         },
         {
-          "path": "form-demo/index",
+          "path": "chat/index",
           "type": "page",
           "style": {
-            "navigationBarTitleText": "uve-form表单",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "input-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-input输入框",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "checkbox-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-checkbox复选框",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "radio-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-radio单选框",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "popup-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-popup弹窗",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "steps-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-steps步骤条",
-            "navigationStyle": "default"
-          }
-        },
-        {
-          "path": "card-demo/index",
-          "type": "page",
-          "style": {
-            "navigationBarTitleText": "uve-card卡片",
-            "navigationStyle": "default"
+            "navigationBarTitleText": "聊天",
+            "navigationStyle": "custom"
           }
         }
       ]
