@@ -1,8 +1,9 @@
 # UniApp Vue3 企业级开发模板
 
 > 基于 Vue3 + Vite5 + TypeScript + Pinia + UnoCSS 的现代化跨端开发解决方案
+[框架集成组件和hooks](https://timebackward.com/uni-vue3/#/)
 
-![预览](https://qinqiang.oss-cn-beijing.aliyuncs.com/gh_0fb82a6dc9c4_344.jpg)
+![小程序预览](https://qinqiang.oss-cn-beijing.aliyuncs.com/gh_0fb82a6dc9c4_344.jpg)
 
 ## 🚀 技术栈
 
