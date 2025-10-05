@@ -1,5 +1,5 @@
 <template>
-  <view class="bg-black min-h-screen">
+  <view class="bg-black min-h-screen relative">
     <!-- 自定义导航栏 -->
     <uve-navbar transparent :leftWidth="0" :showBack="false">
       <view class="flex items-center w-full justify-center space-x-8 px-10">
@@ -10,8 +10,8 @@
     </uve-navbar>
     <!-- 视频滑动区域 -->
     <swiper
-      class="w-full"
-      :style="{ height: 'calc(100vh - 50px - env(safe-area-inset-bottom))' }"
+      class="absolute left-0 right-0 top-0"
+      :style="{ bottom: 'calc(50px + env(safe-area-inset-bottom))' }"
       vertical
       :current="currentIndex"
       @change="handleSwiperChange"

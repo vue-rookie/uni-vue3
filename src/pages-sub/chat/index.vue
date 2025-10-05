@@ -7,6 +7,7 @@
       :border="false"
       :show-back="true"
       title-color="text-gray-800"
+      transparent
     >
       <template #right>
         <view class="flex items-center pr-4">

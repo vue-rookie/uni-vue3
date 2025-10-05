@@ -7,6 +7,7 @@
       :border="false"
       :show-back="false"
       title-color="text-gray-800"
+      transparent
     >
       <template #right>
         <view class="flex items-center pr-4">
@@ -21,13 +22,6 @@
         <text class="i-ri-search-line text-gray-500 mr-2"></text>
         <text class="text-gray-400 text-sm">搜索</text>
       </view>
-    </view>
-
-    <!-- 消息通知区域 -->
-    <view class="bg-gray-50 px-4 py-2 flex items-center">
-      <text class="i-ri-error-warning-line text-gray-500 mr-2"></text>
-      <text class="text-gray-600 text-sm">当前无法接收朋友的消息提醒</text>
-      <text class="text-blue-500 text-sm ml-auto">打开提醒 ></text>
     </view>
 
     <!-- 联系人列表 -->
@@ -184,13 +178,13 @@ const tabList = ref<TabItem[]>(defaultTabList)
 const contacts = ref([
   {
     id: 1,
-    name: "浮生一阙",
+    name: "张三",
     avatar: "https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383_1280.jpg",
     badge: false,
   },
   {
     id: 2,
-    name: "溜一溜",
+    name: "李四",
     avatar: "https://cdn.pixabay.com/photo/2018/04/27/03/50/portrait-3353699_1280.jpg",
     badge: true,
   },
@@ -212,7 +206,7 @@ const contacts = ref([
 const groups = ref([
   {
     id: 101,
-    name: "问道手游小木的粉丝1群",
+    name: "张三的粉丝1群",
     avatar: "https://cdn.pixabay.com/photo/2017/01/31/21/23/avatar-2027366_1280.png",
     lastMessage: "[群主发言]之前1.399，刚改价，手慢无",
     time: "22分钟前",
@@ -221,7 +215,7 @@ const groups = ref([
   },
   {
     id: 102,
-    name: "陕南木子交流群",
+    name: "李四的交流群",
     avatar: "https://cdn.pixabay.com/photo/2016/03/31/20/27/avatar-1295773_1280.png",
     lastMessage: "[64条] 福建泉州明宏工艺品有限公司 通...",
     time: "09:40",
@@ -234,15 +228,15 @@ const groups = ref([
 const chats = ref([
   {
     id: 201,
-    name: "浮生一阙",
+    name: "张三",
     avatar: "https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383_1280.jpg",
-    lastMessage: "[分享视频]一旦出现胎停，应该怎么处...",
+    lastMessage: "[分享视频]",
     time: "刚刚",
     unread: 0,
   },
   {
     id: 202,
-    name: "管氏翅吧的粉丝群 1",
+    name: "xxx的粉丝群 1",
     avatar: "https://cdn.pixabay.com/photo/2016/03/31/20/27/avatar-1295773_1280.png",
     lastMessage: "[群主发言][直播预告]",
     time: "昨天 15:01",

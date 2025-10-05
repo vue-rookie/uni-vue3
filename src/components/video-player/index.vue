@@ -26,7 +26,7 @@
       v-if="showPlayBtn && !isPlaying"
       class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 flex items-center justify-center rounded-full bg-black bg-opacity-40"
     >
-      <text class="text-white text-4xl">▶</text>
+      <text class="text-white text-4xl i-ri-play-large-fill"></text>
     </view>
 
     <!-- 加载指示器 -->
@@ -42,7 +42,7 @@
     </view>
 
     <!-- 视频信息层 -->
-    <view class="absolute bottom-0 left-0 w-full p-4">
+    <view class="absolute bottom-15 left-0 w-full p-4">
       <slot name="info"></slot>
     </view>
 
