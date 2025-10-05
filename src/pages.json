@@ -80,7 +80,14 @@
             "navigationStyle": "default"
           }
         },
-       
+        {
+          "path": "add-friends/index",
+          "type": "page",
+          "style": {
+            "navigationBarTitleText": "添加朋友",
+            "navigationStyle": "custom"
+          }
+        },
         {
           "path": "comment/index",
           "type": "page",

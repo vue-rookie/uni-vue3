@@ -1,5 +1,19 @@
 <template>
   <view class="bg-black min-h-screen relative">
+    <!-- 顶部操作栏 -->
+    <view
+      class="absolute left-0 right-0 top-0 z-10 px-4 pt-10 pb-2 flex justify-between items-center"
+    >
+      <view class="w-10 h-10 flex items-center justify-center" @click="navigateToAddFriends">
+        <text class="i-ri-user-3-line text-white text-2xl"></text>
+      </view>
+      <view class="flex items-center" @click="navigateToPublish">
+        <view class="w-8 h-8 rounded-full bg-white flex items-center justify-center">
+          <text class="i-ri-add-line text-black text-xl"></text>
+        </view>
+      </view>
+    </view>
+
     <!-- 视频滑动区域 -->
     <swiper
       class="absolute left-0 right-0 top-0"
@@ -321,6 +335,20 @@ const submitComment = () => {
 // 处理底部导航栏切换
 const handleTabbarChange = (index: number, item: any) => {
   console.log("切换到:", item.text, item.path)
+}
+
+// 跳转到添加朋友页面
+const navigateToAddFriends = () => {
+  uni.navigateTo({
+    url: "/pages-sub/add-friends/index",
+  })
+}
+
+// 跳转到发布页面
+const navigateToPublish = () => {
+  uni.navigateTo({
+    url: "/pages/publish/index",
+  })
 }
 
 // 页面挂载时自动播放当前视频

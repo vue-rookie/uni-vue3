@@ -18,9 +18,14 @@
 
     <!-- 搜索栏 -->
     <view class="px-4 pt-2 pb-3 bg-white">
-      <view class="flex items-center bg-gray-100 rounded-full px-4 py-2">
+      <view class="flex items-center bg-gray-100 rounded-full px-4 py-2" @click="focusSearch">
         <text class="i-ri-search-line text-gray-500 mr-2"></text>
-        <text class="text-gray-400 text-sm">搜索</text>
+        <input
+          v-model="searchText"
+          class="flex-1 bg-transparent text-sm"
+          placeholder="搜索"
+          placeholder-class="text-gray-400 text-sm"
+        />
       </view>
     </view>
 
@@ -173,6 +178,14 @@ import { defaultTabList, type TabItem } from "@/config/tabbar.config"
 
 // 底部导航栏数据
 const tabList = ref<TabItem[]>(defaultTabList)
+
+// 搜索文本
+const searchText = ref("")
+
+// 聚焦搜索框
+const focusSearch = () => {
+  // 这里可以添加额外的搜索逻辑
+}
 
 // 联系人数据
 const contacts = ref([

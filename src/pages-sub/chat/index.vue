@@ -20,23 +20,31 @@
     <!-- 聊天消息列表 -->
     <scroll-view
       scroll-y
-      class="h-[calc(100vh-120px)] px-4 py-2"
+      class="h-[calc(100vh-120px)] px-4 py-4"
       :scroll-into-view="scrollToMessage"
       :scroll-with-animation="true"
+      :style="{ paddingBottom: 'env(safe-area-inset-bottom)' }"
     >
+      <!-- 系统消息 -->
+      <view v-if="systemMessage" class="flex justify-center my-4">
+        <view class="bg-black bg-opacity-20 rounded-full px-4 py-1">
+          <text class="text-white text-xs">{{ systemMessage }}</text>
+        </view>
+      </view>
+
       <!-- 消息项 -->
       <view
         v-for="message in messages"
         :key="message.id"
         :id="`message-${message.id}`"
-        class="mb-4"
+        class="mb-5"
         :class="{ 'flex justify-end': message.isMe, 'flex justify-start': !message.isMe }"
       >
-        <view class="flex max-w-[80%]" :class="{ 'flex-row-reverse': message.isMe }">
+        <view class="flex max-w-[70%]" :class="{ 'flex-row-reverse': message.isMe }">
           <!-- 头像 -->
           <image
             :src="message.isMe ? currentUser.avatar : chatInfo.avatar"
-            class="w-10 h-10 rounded-full mx-2"
+            class="w-10 h-10 rounded-full mx-2 flex-shrink-0"
             mode="aspectFill"
           ></image>
 
@@ -44,10 +52,10 @@
           <view class="flex flex-col">
             <!-- 消息气泡 -->
             <view
-              class="px-4 py-2 rounded-2xl"
+              class="px-4 py-2 rounded-lg"
               :class="{
                 'bg-blue-500 text-white': message.isMe,
-                'bg-white text-gray-800': !message.isMe,
+                'bg-white text-gray-800 border border-gray-100': !message.isMe,
               }"
             >
               <!-- 文本消息 -->
@@ -81,7 +89,7 @@
               <!-- 语音消息 -->
               <view v-else-if="message.type === 'voice'" class="flex items-center">
                 <text class="i-ri-mic-line mr-2"></text>
-                <text class="text-sm">{{ message.duration }}''</text>
+                <text class="text-sm">{{ (message as any).duration }}''</text>
                 <view class="ml-2 flex space-x-1">
                   <view
                     v-for="i in 5"
@@ -100,42 +108,19 @@
           </view>
         </view>
       </view>
-
-      <!-- 正在输入指示器 -->
-      <view v-if="isTyping" class="flex justify-start mb-4">
-        <view class="flex">
-          <image
-            :src="chatInfo.avatar"
-            class="w-10 h-10 rounded-full mx-2"
-            mode="aspectFill"
-          ></image>
-          <view class="flex flex-col">
-            <view class="bg-white px-4 py-2 rounded-2xl">
-              <view class="flex space-x-1">
-                <view class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></view>
-                <view
-                  class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                  style="animation-delay: 0.1s"
-                ></view>
-                <view
-                  class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                  style="animation-delay: 0.2s"
-                ></view>
-              </view>
-            </view>
-          </view>
-        </view>
-      </view>
     </scroll-view>
 
     <!-- 输入框区域 -->
-    <view class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4">
+    <view
+      class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-2 py-3"
+      :class="{ 'z-10': showActionsPanel }"
+    >
       <!-- 快捷回复 -->
-      <view v-if="showQuickReplies" class="mb-3">
+      <view v-if="showQuickReplies" class="mb-3 px-2">
         <scroll-view scroll-x class="whitespace-nowrap" :show-scrollbar="false">
           <view class="inline-flex space-x-2">
             <view
-              v-for="(reply, index) in quickReplies"
+              v-for="(reply, index) in quickRepliesOptions"
               :key="index"
               class="bg-gray-100 rounded-full px-3 py-1"
               @click="sendQuickReply(reply)"
@@ -147,18 +132,18 @@
       </view>
 
       <!-- 输入框和发送按钮 -->
-      <view class="flex items-end">
-        <!-- 更多功能按钮 -->
-        <view class="mr-3 flex items-center">
-          <text class="i-ri-add-circle-line text-gray-600 text-2xl" @click="showMoreActions"></text>
+      <view class="flex items-center px-2">
+        <!-- 语音/文字切换按钮 -->
+        <view class="mr-2 flex items-center">
+          <text class="i-ri-mic-line text-gray-600 text-xl"></text>
         </view>
 
         <!-- 文本输入框 -->
-        <view class="flex-1 bg-gray-100 rounded-full px-4 py-2 flex items-center">
+        <view class="flex-1 bg-gray-100 rounded-full px-3 py-1.5 flex items-center">
           <input
             v-model="inputText"
             class="flex-1 text-sm"
-            placeholder="输入消息..."
+            placeholder="发送消息..."
             :focus="inputFocus"
             confirm-type="send"
             @confirm="sendMessage"
@@ -168,19 +153,23 @@
           />
         </view>
 
+        <!-- 表情按钮 -->
+        <view class="ml-2 flex items-center">
+          <text class="i-ri-emotion-line text-gray-600 text-xl" @click="sendEmoji"></text>
+        </view>
+
+        <!-- 更多功能按钮 -->
+        <view class="ml-2 flex items-center">
+          <text class="i-ri-add-circle-line text-gray-600 text-xl" @click="showMoreActions"></text>
+        </view>
+
         <!-- 发送按钮 -->
         <view
-          class="ml-3 w-10 h-10 rounded-full flex items-center justify-center"
-          :class="{ 'bg-blue-500': inputText.trim(), 'bg-gray-300': !inputText.trim() }"
+          v-if="inputText.trim()"
+          class="ml-2 px-3 py-1 bg-blue-500 rounded-full flex items-center justify-center"
           @click="sendMessage"
         >
-          <text
-            :class="{
-              'i-ri-send-plane-fill text-white': inputText.trim(),
-              'i-ri-mic-line text-gray-500': !inputText.trim(),
-            }"
-            class="text-lg"
-          ></text>
+          <text class="text-white text-sm">发送</text>
         </view>
       </view>
     </view>
@@ -188,63 +177,69 @@
     <!-- 更多操作面板 -->
     <view
       v-if="showActionsPanel"
-      class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4"
+      class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-20"
+      style="padding-bottom: calc(env(safe-area-inset-bottom) + 16px)"
+      @click.stop
     >
-      <view class="grid grid-cols-4 gap-4">
+      <!-- 第一行功能按钮 -->
+      <view class="grid grid-cols-4 gap-6 mb-6">
         <view class="flex flex-col items-center" @click="selectImage">
-          <view class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2">
-            <text class="i-ri-image-line text-blue-500 text-xl"></text>
+          <view class="w-14 h-14 bg-gray-100 rounded-lg flex items-center justify-center mb-1">
+            <text class="i-ri-image-line text-gray-600 text-2xl"></text>
           </view>
           <text class="text-xs text-gray-600">相册</text>
         </view>
 
         <view class="flex flex-col items-center" @click="takePhoto">
-          <view class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
-            <text class="i-ri-camera-line text-green-500 text-xl"></text>
+          <view class="w-14 h-14 bg-gray-100 rounded-lg flex items-center justify-center mb-1">
+            <text class="i-ri-camera-line text-gray-600 text-2xl"></text>
           </view>
-          <text class="text-xs text-gray-600">拍照</text>
+          <text class="text-xs text-gray-600">拍摄</text>
         </view>
 
-        <view class="flex flex-col items-center" @click="recordVoice">
-          <view class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-2">
-            <text class="i-ri-mic-line text-purple-500 text-xl"></text>
+        <view class="flex flex-col items-center" @click="startVideoCall">
+          <view class="w-14 h-14 bg-gray-100 rounded-lg flex items-center justify-center mb-1">
+            <text class="i-ri-vidicon-line text-gray-600 text-2xl"></text>
           </view>
-          <text class="text-xs text-gray-600">语音</text>
+          <text class="text-xs text-gray-600">视频通话</text>
         </view>
 
-        <view class="flex flex-col items-center" @click="selectVideo">
-          <view class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-2">
-            <text class="i-ri-video-line text-orange-500 text-xl"></text>
+        <view class="flex flex-col items-center" @click="watchTogether">
+          <view class="w-14 h-14 bg-gray-100 rounded-lg flex items-center justify-center mb-1">
+            <text class="i-ri-tv-line text-gray-600 text-2xl"></text>
           </view>
-          <text class="text-xs text-gray-600">视频</text>
+          <text class="text-xs text-gray-600">一起看</text>
+        </view>
+      </view>
+
+      <!-- 第二行功能按钮 -->
+      <view class="grid grid-cols-4 gap-6">
+        <view class="flex flex-col items-center" @click="sendRedPacket">
+          <view class="w-14 h-14 bg-gray-100 rounded-lg flex items-center justify-center mb-1">
+            <text class="i-ri-red-packet-line text-gray-600 text-2xl"></text>
+          </view>
+          <text class="text-xs text-gray-600">红包</text>
         </view>
 
         <view class="flex flex-col items-center" @click="sendLocation">
-          <view class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-2">
-            <text class="i-ri-map-pin-line text-red-500 text-xl"></text>
+          <view class="w-14 h-14 bg-gray-100 rounded-lg flex items-center justify-center mb-1">
+            <text class="i-ri-map-pin-line text-gray-600 text-2xl"></text>
           </view>
           <text class="text-xs text-gray-600">位置</text>
         </view>
 
+        <view class="flex flex-col items-center" @click="sendTransfer">
+          <view class="w-14 h-14 bg-gray-100 rounded-lg flex items-center justify-center mb-1">
+            <text class="i-ri-exchange-line text-gray-600 text-2xl"></text>
+          </view>
+          <text class="text-xs text-gray-600">转账</text>
+        </view>
+
         <view class="flex flex-col items-center" @click="sendContact">
-          <view class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-2">
-            <text class="i-ri-user-line text-indigo-500 text-xl"></text>
+          <view class="w-14 h-14 bg-gray-100 rounded-lg flex items-center justify-center mb-1">
+            <text class="i-ri-user-line text-gray-600 text-2xl"></text>
           </view>
-          <text class="text-xs text-gray-600">名片</text>
-        </view>
-
-        <view class="flex flex-col items-center" @click="sendEmoji">
-          <view class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-2">
-            <text class="i-ri-emotion-line text-yellow-500 text-xl"></text>
-          </view>
-          <text class="text-xs text-gray-600">表情</text>
-        </view>
-
-        <view class="flex flex-col items-center" @click="sendFile">
-          <view class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-2">
-            <text class="i-ri-file-line text-gray-500 text-xl"></text>
-          </view>
-          <text class="text-xs text-gray-600">文件</text>
+          <text class="text-xs text-gray-600">个人名片</text>
         </view>
       </view>
     </view>
@@ -256,10 +251,10 @@ import { ref, onMounted, onUnmounted, nextTick } from "vue"
 
 // 聊天信息
 const chatInfo = ref({
-  id: "",
-  name: "",
-  avatar: "",
-  isOnline: false,
+  id: "spring_autumn",
+  name: "春秋",
+  avatar: "https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383_1280.jpg",
+  isOnline: true,
 })
 
 // 当前用户信息
@@ -273,83 +268,40 @@ const currentUser = ref({
 const inputText = ref("")
 // 输入框焦点状态
 const inputFocus = ref(false)
-// 是否正在输入
-const isTyping = ref(false)
 // 是否显示快捷回复
 const showQuickReplies = ref(false)
 // 是否显示更多操作面板
 const showActionsPanel = ref(false)
 // 滚动到消息ID
 const scrollToMessage = ref("")
-
+// 系统消息
+const systemMessage = ref("回复或关注对方之前，对方只能发送一条消息")
 // 快捷回复选项
-const quickReplies = ref(["好的", "收到", "谢谢", "哈哈", "👍", "😊", "好的，没问题", "稍等"])
+const quickRepliesOptions = ref([
+  "好的",
+  "收到",
+  "谢谢",
+  "哈哈",
+  "👍",
+  "😊",
+  "好的，没问题",
+  "稍等",
+])
 
 // 聊天消息列表
 const messages = ref([
   {
     id: "m1",
     type: "text",
-    content: "你好！",
+    content:
+      "??厉害了城市道友你好，问遵，手油0.01折版，上线1000个648，改10套，神兽齐天大圣，打怪掉所有，集市珍宝全开，可搬砖，扣qun: 761728024",
     timestamp: Date.now() - 3600000,
     isMe: false,
-  },
-  {
-    id: "m2",
-    type: "text",
-    content: "你好！很高兴认识你",
-    timestamp: Date.now() - 3500000,
-    isMe: true,
-  },
-  {
-    id: "m3",
-    type: "text",
-    content: "你发的那个视频很好看，是在哪里拍的？",
-    timestamp: Date.now() - 3000000,
-    isMe: false,
-  },
-  {
-    id: "m4",
-    type: "text",
-    content: "谢谢！是在太原的迎泽公园拍的，那里的夜景很美",
-    timestamp: Date.now() - 2900000,
-    isMe: true,
-  },
-  {
-    id: "m5",
-    type: "image",
-    content: "https://cdn.pixabay.com/photo/2019/05/04/15/24/woman-4178302_1280.jpg",
-    timestamp: Date.now() - 1800000,
-    isMe: false,
-  },
-  {
-    id: "m6",
-    type: "text",
-    content: "哇，这张照片拍得真好！",
-    timestamp: Date.now() - 1700000,
-    isMe: true,
-  },
-  {
-    id: "m7",
-    type: "voice",
-    content: "",
-    duration: 8,
-    timestamp: Date.now() - 600000,
-    isMe: false,
-  },
-  {
-    id: "m8",
-    type: "text",
-    content: "好的，我明白了",
-    timestamp: Date.now() - 300000,
-    isMe: true,
   },
 ])
 
 // 输入定时器
 let typingTimer: number | null = null
-// 自动回复定时器
-let autoReplyTimer: number | null = null
 
 // 获取页面参数
 onMounted(() => {
@@ -370,18 +322,12 @@ onMounted(() => {
   nextTick(() => {
     scrollToBottom()
   })
-
-  // 模拟对方正在输入
-  simulateTyping()
 })
 
 // 组件卸载时清理定时器
 onUnmounted(() => {
   if (typingTimer) {
     clearTimeout(typingTimer)
-  }
-  if (autoReplyTimer) {
-    clearTimeout(autoReplyTimer)
   }
 })
 
@@ -391,49 +337,6 @@ const scrollToBottom = () => {
     const lastMessage = messages.value[messages.value.length - 1]
     scrollToMessage.value = `message-${lastMessage.id}`
   }
-}
-
-// 模拟对方正在输入
-const simulateTyping = () => {
-  // 随机时间后显示正在输入
-  const delay = Math.random() * 10000 + 5000 // 5-15秒
-  autoReplyTimer = setTimeout(() => {
-    if (!isTyping.value && messages.value.length > 0) {
-      isTyping.value = true
-
-      // 2-5秒后发送自动回复
-      const replyDelay = Math.random() * 3000 + 2000
-      setTimeout(() => {
-        isTyping.value = false
-        sendAutoReply()
-      }, replyDelay)
-    }
-  }, delay) as unknown as number
-}
-
-// 发送自动回复
-const sendAutoReply = () => {
-  const autoReplies = ["哈哈，是的", "我也这么觉得", "好的", "👍", "😊", "确实不错", "谢谢分享"]
-
-  const randomReply = autoReplies[Math.floor(Math.random() * autoReplies.length)]
-
-  const newMessage = {
-    id: `m${Date.now()}`,
-    type: "text",
-    content: randomReply,
-    timestamp: Date.now(),
-    isMe: false,
-  }
-
-  messages.value.push(newMessage)
-
-  // 滚动到底部
-  nextTick(() => {
-    scrollToBottom()
-  })
-
-  // 继续模拟输入
-  simulateTyping()
 }
 
 // 发送消息
@@ -468,19 +371,14 @@ const sendQuickReply = (reply: string) => {
 
 // 输入事件处理
 const onInput = () => {
-  // 显示正在输入状态
-  if (!isTyping.value) {
-    // 实际应用中，这里应该发送"正在输入"状态给服务器
-  }
-
   // 清除之前的定时器
   if (typingTimer) {
     clearTimeout(typingTimer)
   }
 
-  // 3秒后停止显示正在输入
+  // 实际应用中，这里可以添加输入状态处理逻辑
   typingTimer = setTimeout(() => {
-    // 实际应用中，这里应该发送"停止输入"状态给服务器
+    // 输入状态处理
   }, 3000) as unknown as number
 }
 
@@ -562,7 +460,7 @@ const sendLocation = () => {
 // 发送联系人
 const sendContact = () => {
   uni.showToast({
-    title: "名片功能开发中",
+    title: "个人名片功能开发中",
     icon: "none",
   })
   showActionsPanel.value = false
@@ -577,10 +475,37 @@ const sendEmoji = () => {
   showActionsPanel.value = false
 }
 
-// 发送文件
-const sendFile = () => {
+// 开始视频通话
+const startVideoCall = () => {
   uni.showToast({
-    title: "文件功能开发中",
+    title: "视频通话功能开发中",
+    icon: "none",
+  })
+  showActionsPanel.value = false
+}
+
+// 一起看功能
+const watchTogether = () => {
+  uni.showToast({
+    title: "一起看功能开发中",
+    icon: "none",
+  })
+  showActionsPanel.value = false
+}
+
+// 发送红包
+const sendRedPacket = () => {
+  uni.showToast({
+    title: "红包功能开发中",
+    icon: "none",
+  })
+  showActionsPanel.value = false
+}
+
+// 发送转账
+const sendTransfer = () => {
+  uni.showToast({
+    title: "转账功能开发中",
     icon: "none",
   })
   showActionsPanel.value = false

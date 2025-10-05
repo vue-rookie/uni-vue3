@@ -34,7 +34,7 @@
             @click="handleBack"
           >
             <text
-              class="i-ri-arrow-left-s-line text-lg"
+              class="i-ri-arrow-left-line text-lg"
               :class="titleColor ? titleColor : 'text-gray-700'"
             ></text>
             <text
@@ -75,13 +75,6 @@
     <!-- 底部插槽，可用于放置tabs等 -->
     <slot name="bottom"></slot>
   </view>
-
-  <!-- 占位元素，当navbar固定时，保持内容不被遮挡 -->
-  <view
-    v-if="fixed && !transparent && placeholder"
-    class="navbar-placeholder w-full"
-    :style="{ height: `${height}px` }"
-  ></view>
 </template>
 
 <script setup lang="ts">

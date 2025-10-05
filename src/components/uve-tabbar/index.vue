@@ -2,7 +2,7 @@
   <view
     class="fixed bottom-0 left-0 right-0 z-[1000]"
     :style="{
-      backgroundColor: backgroundColor,
+      backgroundColor: currentIndex <= 1 ? '#000000' : backgroundColor,
       borderTop: borderTop ? '1px solid #333333' : 'none',
       paddingBottom: 'env(safe-area-inset-bottom)',
     }"
@@ -19,7 +19,16 @@
           <text
             :class="currentIndex === index ? item.selectedIcon : item.icon"
             class="text-[20px] transition-colors duration-300"
-            :style="{ color: currentIndex === index ? selectedColor : color }"
+            :style="{
+              color:
+                currentIndex === index
+                  ? currentIndex <= 1
+                    ? '#FFFFFF'
+                    : selectedColor
+                  : currentIndex <= 1
+                    ? '#999999'
+                    : color,
+            }"
           ></text>
           <!-- 红点提示 -->
           <view
@@ -36,7 +45,16 @@
         </view>
         <text
           class="text-[14px] transition-colors duration-300 font-bold"
-          :style="{ color: currentIndex === index ? selectedColor : color }"
+          :style="{
+            color:
+              currentIndex === index
+                ? currentIndex <= 1
+                  ? '#FFFFFF'
+                  : selectedColor
+                : currentIndex <= 1
+                  ? '#999999'
+                  : color,
+          }"
         >
           {{ item.text }}
         </text>
@@ -67,9 +85,9 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   current: 0,
-  backgroundColor: "#000000",
+  backgroundColor: "#FFFFFF",
   color: "#999999",
-  selectedColor: "#FFFFFF",
+  selectedColor: "#000000",
   borderTop: false,
 })
 
