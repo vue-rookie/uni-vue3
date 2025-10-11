@@ -5,13 +5,19 @@
   "description": "uni-vue3 基于vue3+vite5+ts+unocss搭建",
   "keywords": [
     "uniapp",
-    "vue3", 
+    "vue3",
     "unocss",
-    "mini-program",
     "vite",
     "typescript",
-    "starter",
-    "template"
+    "mini-program",
+    "wechat-miniprogram",
+    "starter-template",
+    "composition-api",
+    "atomic-css",
+    "vue3-setup",
+    "pinia",
+    "h5",
+    "app"
   ],
   "engines": {
     "node": ">=18",
