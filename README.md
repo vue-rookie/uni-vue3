@@ -1,6 +1,13 @@
-# UniApp Vue3 企业级开发模板
+# uni-vue3  
+> 专为 UniApp + Vue3 + UnoCSS 打造的 starter template
 
-> 基于 Vue3 + Vite5 + TypeScript + Pinia + UnoCSS 的现代化跨端开发解决方案
+## 🚀 特性
+- ✅ Vue3 + Composition API
+- ✅ UnoCSS 原子化CSS
+- ✅ TypeScript 支持
+- ✅ Vite 构建工具
+
+## 📦 快速开始
 
 ![小程序预览](https://qinqiang.oss-cn-beijing.aliyuncs.com/gh_0fb82a6dc9c4_344.jpg)
 
