@@ -3,6 +3,16 @@
   "type": "commonjs",
   "version": "1.0.0",
   "description": "uni-vue3 基于vue3+vite5+ts+unocss搭建",
+  "keywords": [
+    "uniapp",
+    "vue3", 
+    "unocss",
+    "mini-program",
+    "vite",
+    "typescript",
+    "starter",
+    "template"
+  ],
   "engines": {
     "node": ">=18",
     "pnpm": ">=7.30"
