@@ -9,7 +9,6 @@ import UnoCSS from "unocss/vite"
 import AutoImport from "unplugin-auto-import/vite"
 import { visualizer } from "rollup-plugin-visualizer"
 import ViteRestart from "vite-plugin-restart"
-import viteImagemin from "vite-plugin-imagemin"
 import { printBuildInfo } from "./src/utils/logger"
 
 export default ({ command, mode }) => {
@@ -54,35 +53,6 @@ export default ({ command, mode }) => {
         // 通过这个插件，在修改vite.config.js文件则不需要重新运行也生效配置
         restart: ["vite.config.js"],
       }),
-      // 图片压缩插件 (仅生产环境启用)
-      mode === "production" &&
-        viteImagemin({
-          gifsicle: {
-            optimizationLevel: 7,
-            interlaced: false,
-          },
-          optipng: {
-            optimizationLevel: 7,
-          },
-          mozjpeg: {
-            quality: 80,
-          },
-          pngquant: {
-            quality: [0.8, 0.9],
-            speed: 4,
-          },
-          svgo: {
-            plugins: [
-              {
-                name: "removeViewBox",
-              },
-              {
-                name: "removeEmptyAttrs",
-                active: false,
-              },
-            ],
-          },
-        }),
       // h5环境增加编译时间
       UNI_PLATFORM === "h5" && {
         name: "html-transform",
