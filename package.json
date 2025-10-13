@@ -3,6 +3,26 @@
   "type": "commonjs",
   "version": "1.0.0",
   "description": "uni-vue3 基于vue3+vite5+ts+unocss搭建",
+   "repository": {
+    "type": "git",
+    "url": "https://github.com/vue-rookie/uni-vue3.git"
+  },
+  "keywords": [
+    "uniapp",
+    "vue3",
+    "unocss",
+    "vite",
+    "typescript",
+    "mini-program",
+    "wechat-miniprogram",
+    "starter-template",
+    "composition-api",
+    "atomic-css",
+    "vue3-setup",
+    "pinia",
+    "h5",
+    "app"
+  ],
   "engines": {
     "node": ">=18",
     "pnpm": ">=7.30"
