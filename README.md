@@ -7,6 +7,27 @@
 - ✅ TypeScript 支持
 - ✅ Vite 构建工具
 
+## 🆕 小红书 App 原型
+
+本项目现已包含一个完整的**小红书风格应用原型**，实现了核心功能和界面：
+
+- 📱 **瀑布流首页** - 双列瀑布流展示笔记内容
+- 📝 **笔记详情** - 图片轮播、点赞、收藏、分享
+- ✍️ **发布功能** - 图片上传、标题内容、话题标签
+- 👤 **个人中心** - 用户信息、数据统计、笔记管理
+
+**快速开始**：
+```bash
+pnpm dev:h5
+```
+
+启动后默认进入小红书首页。详细文档请查看：
+- [完整功能文档](./docs/XIAOHONGSHU_README.md)
+- [快速开始指南](./docs/QUICKSTART_XIAOHONGSHU.md)
+- [项目总结](./XIAOHONGSHU_SUMMARY.md)
+
+---
+
 ## 📦 快速开始
 
 ![小程序预览](https://qinqiang.oss-cn-beijing.aliyuncs.com/gh_0fb82a6dc9c4_344.jpg)
@@ -15,6 +36,7 @@
 建议手机模式预览  
 [uni-vue3框架集成组件和hooks](https://timebackward.com/uni-vue3/#/)  
 [uni-vue3模仿抖音](https://timebackward.com/douyin/#/)  
+[uni-vue3模仿小红书](新增 - 查看 TabBar 第一个标签)  
 
 ## 🚀 技术栈
 
