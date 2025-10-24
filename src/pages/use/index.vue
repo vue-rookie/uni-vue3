@@ -1,32 +1,20 @@
 <template>
   <view class="page-container bg-white min-h-screen">
-    <!-- UI 交互 Hooks -->
-    <view class="mt-3 bg-white">
-      <view class="text-sm text-[#060b2d] px-4 py-2">UI 交互</view>
+    <!-- 使用配置化方式渲染Hooks列表 -->
+    <view v-for="(category, index) in hookCategories" :key="index" class="mt-3 bg-white">
+      <view class="text-sm text-[#060b2d] px-4 py-2">{{ category.title }}</view>
       <view class="divide-y divide-gray-100">
         <view
-          @click="demoModal"
+          v-for="(item, itemIndex) in category.items"
+          :key="itemIndex"
+          @click="callHookDemo(item.action)"
           class="flex items-center justify-between px-4 py-3 active:bg-gray-50"
         >
           <view class="flex items-center flex-1">
             <view class="w-5 h-5 mr-3 flex items-center justify-center">
-              <text class="i-ri-window-line"></text>
+              <text :class="item.icon"></text>
             </view>
-            <text class="text-[#060b2d]">useModal</text>
-          </view>
-          <view class="text-gray-400">
-            <text class="i-ri-arrow-right-s-line inline-block"></text>
-          </view>
-        </view>
-        <view
-          @click="demoTheme"
-          class="flex items-center justify-between px-4 py-3 active:bg-gray-50"
-        >
-          <view class="flex items-center flex-1">
-            <view class="w-5 h-5 mr-3 flex items-center justify-center">
-              <text class="i-ri-paint-brush-line"></text>
-            </view>
-            <text class="text-[#060b2d]">useTheme</text>
+            <text class="text-[#060b2d]">{{ item.name }}</text>
           </view>
           <view class="text-gray-400">
             <text class="i-ri-arrow-right-s-line inline-block"></text>
@@ -35,140 +23,7 @@
       </view>
     </view>
 
-    <!-- 数据处理 Hooks -->
-    <view class="mt-3 bg-white">
-      <view class="text-sm text-[#060b2d] px-4 py-2">数据处理</view>
-      <view class="divide-y divide-gray-100">
-        <view
-          @click="demoStorage"
-          class="flex items-center justify-between px-4 py-3 active:bg-gray-50"
-        >
-          <view class="flex items-center flex-1">
-            <view class="w-5 h-5 mr-3 flex items-center justify-center">
-              <text class="i-ri-database-2-line"></text>
-            </view>
-            <text class="text-[#060b2d]">useStorage</text>
-          </view>
-          <view class="text-gray-400">
-            <text class="i-ri-arrow-right-s-line inline-block"></text>
-          </view>
-        </view>
-        <view
-          @click="demoRequest"
-          class="flex items-center justify-between px-4 py-3 active:bg-gray-50"
-        >
-          <view class="flex items-center flex-1">
-            <view class="w-5 h-5 mr-3 flex items-center justify-center">
-              <text class="i-ri-cloud-line"></text>
-            </view>
-            <text class="text-[#060b2d]">useRequest</text>
-          </view>
-          <view class="text-gray-400">
-            <text class="i-ri-arrow-right-s-line inline-block"></text>
-          </view>
-        </view>
-        <view
-          @click="demoInputLimit"
-          class="flex items-center justify-between px-4 py-3 active:bg-gray-50"
-        >
-          <view class="flex items-center flex-1">
-            <view class="w-5 h-5 mr-3 flex items-center justify-center">
-              <text class="i-ri-input-method-line"></text>
-            </view>
-            <text class="text-[#060b2d]">useInputLimit</text>
-          </view>
-          <view class="text-gray-400">
-            <text class="i-ri-arrow-right-s-line inline-block"></text>
-          </view>
-        </view>
-      </view>
-    </view>
-
-    <!-- 设备能力 Hooks -->
-    <view class="mt-3 bg-white">
-      <view class="text-sm text-[#060b2d] px-4 py-2">设备能力</view>
-      <view class="divide-y divide-gray-100">
-        <view
-          @click="demoLocation"
-          class="flex items-center justify-between px-4 py-3 active:bg-gray-50"
-        >
-          <view class="flex items-center flex-1">
-            <view class="w-5 h-5 mr-3 flex items-center justify-center">
-              <text class="i-ri-map-pin-line"></text>
-            </view>
-            <text class="text-[#060b2d]">useLocation</text>
-          </view>
-          <view class="text-gray-400">
-            <text class="i-ri-arrow-right-s-line inline-block"></text>
-          </view>
-        </view>
-        <view
-          @click="demoCamera"
-          class="flex items-center justify-between px-4 py-3 active:bg-gray-50"
-        >
-          <view class="flex items-center flex-1">
-            <view class="w-5 h-5 mr-3 flex items-center justify-center">
-              <text class="i-ri-camera-line"></text>
-            </view>
-            <text class="text-[#060b2d]">useCamera</text>
-          </view>
-          <view class="text-gray-400">
-            <text class="i-ri-arrow-right-s-line inline-block"></text>
-          </view>
-        </view>
-        <view
-          @click="demoSystem"
-          class="flex items-center justify-between px-4 py-3 active:bg-gray-50"
-        >
-          <view class="flex items-center flex-1">
-            <view class="w-5 h-5 mr-3 flex items-center justify-center">
-              <text class="i-ri-smartphone-line"></text>
-            </view>
-            <text class="text-[#060b2d]">useSystem</text>
-          </view>
-          <view class="text-gray-400">
-            <text class="i-ri-arrow-right-s-line inline-block"></text>
-          </view>
-        </view>
-      </view>
-    </view>
-
-    <!-- 其他 Hooks -->
-    <view class="mt-3 mb-3 bg-white">
-      <view class="text-sm text-[#060b2d] px-4 py-2">其他功能</view>
-      <view class="divide-y divide-gray-100">
-        <view
-          @click="demoShare"
-          class="flex items-center justify-between px-4 py-3 active:bg-gray-50"
-        >
-          <view class="flex items-center flex-1">
-            <view class="w-5 h-5 mr-3 flex items-center justify-center">
-              <text class="i-ri-share-line"></text>
-            </view>
-            <text class="text-[#060b2d]">useShare</text>
-          </view>
-          <view class="text-gray-400">
-            <text class="i-ri-arrow-right-s-line inline-block"></text>
-          </view>
-        </view>
-        <view
-          @click="demoValidation"
-          class="flex items-center justify-between px-4 py-3 active:bg-gray-50"
-        >
-          <view class="flex items-center flex-1">
-            <view class="w-5 h-5 mr-3 flex items-center justify-center">
-              <text class="i-ri-checkbox-line"></text>
-            </view>
-            <text class="text-[#060b2d]">useValidation</text>
-          </view>
-          <view class="text-gray-400">
-            <text class="i-ri-arrow-right-s-line inline-block"></text>
-          </view>
-        </view>
-      </view>
-    </view>
-
-    <!-- 弹窗 -->
+    <!-- useModal 弹窗 -->
     <view
       v-if="modalVisible"
       class="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"
@@ -186,29 +41,133 @@
         </view>
       </view>
     </view>
+
+    <!-- useCountdown 弹窗 -->
+    <view
+      v-if="countdownVisible"
+      class="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"
+    >
+      <view class="bg-white rounded-lg w-4/5 p-5">
+        <view class="text-lg font-medium mb-3 text-[#060b2d]">useCountdown 示例</view>
+
+        <!-- 倒计时显示 -->
+        <view class="flex justify-center items-center my-6">
+          <view class="text-3xl font-bold text-[#06f]">
+            {{ countdown?.formattedTime || "00:00" }}
+          </view>
+        </view>
+
+        <!-- 操作按钮 -->
+        <view class="flex justify-center space-x-3 mb-4">
+          <view
+            class="px-4 py-2 bg-[#06f] text-white rounded-lg active:opacity-80 text-sm"
+            @click="handleAddTime"
+          >
+            +10秒
+          </view>
+          <view
+            class="px-4 py-2 bg-[#06f] text-white rounded-lg active:opacity-80 text-sm"
+            @click="handleSubtractTime"
+          >
+            -5秒
+          </view>
+          <view
+            class="px-4 py-2 bg-[#06f] text-white rounded-lg active:opacity-80 text-sm"
+            @click="handlePauseResume"
+          >
+            暂停/继续
+          </view>
+        </view>
+
+        <view class="flex justify-end">
+          <view
+            class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg active:opacity-80 text-sm"
+            @click="closeCountdown"
+          >
+            关闭
+          </view>
+        </view>
+      </view>
+    </view>
   </view>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue"
+import { ref, onMounted, nextTick } from "vue"
 import {
   useModal,
   useStorage,
   useRequest,
-  useTheme,
   useLocation,
   useCamera,
   useShare,
   useSystem,
-  useValidation,
+  useCountdown,
 } from "@/hooks"
 import { useInputDataLimit } from "@/hooks/useInputLimit"
+
+// Hooks分类配置
+const hookCategories = ref([
+  {
+    title: "UI 交互",
+    items: [{ name: "useModal", icon: "i-ri-window-line", action: "demoModal" }],
+  },
+  {
+    title: "数据处理",
+    items: [
+      { name: "useStorage", icon: "i-ri-database-2-line", action: "demoStorage" },
+      { name: "useRequest", icon: "i-ri-cloud-line", action: "demoRequest" },
+      { name: "useInputLimit", icon: "i-ri-input-method-line", action: "demoInputLimit" },
+    ],
+  },
+  {
+    title: "设备能力",
+    items: [
+      { name: "useLocation", icon: "i-ri-map-pin-line", action: "demoLocation" },
+      { name: "useCamera", icon: "i-ri-camera-line", action: "demoCamera" },
+      { name: "useSystem", icon: "i-ri-smartphone-line", action: "demoSystem" },
+    ],
+  },
+  {
+    title: "其他功能",
+    items: [
+      { name: "useShare", icon: "i-ri-share-line", action: "demoShare" },
+      { name: "useValidation", icon: "i-ri-checkbox-line", action: "demoValidation" },
+    ],
+  },
+  {
+    title: "性能优化",
+    items: [{ name: "useCountdown", icon: "i-ri-time-line", action: "demoCountdown" }],
+  },
+])
 
 onMounted(() => {
   uni.setNavigationBarTitle({
     title: "Hooks 使用示例",
   })
 })
+
+// 调用Hook演示函数
+const callHookDemo = (actionName: string) => {
+  // 使用函数映射对象代替eval
+  const functionMap: Record<string, () => void> = {
+    demoModal,
+    demoStorage,
+    demoRequest,
+    demoInputLimit,
+    demoLocation,
+    demoCamera,
+    demoSystem,
+    demoShare,
+    demoValidation,
+    demoCountdown,
+  }
+
+  // 安全地调用函数
+  if (typeof functionMap[actionName] === "function") {
+    functionMap[actionName]()
+  }
+}
 
 // Demo: useModal
 const modalVisible = ref(false)
@@ -278,26 +237,6 @@ const demoRequest = () => {
 
   const modal = useModal()
   modal.showToast("useRequest 示例: 发起网络请求，详情请看控制台")
-}
-
-// Demo: useTheme
-const demoTheme = () => {
-  const theme = useTheme()
-  const modal = useModal()
-
-  // 获取当前主题
-  const currentTheme = theme.currentTheme.value
-
-  // 切换主题
-  theme.toggleTheme()
-
-  modal.showToast(`主题已从 ${currentTheme} 切换为 ${theme.currentTheme.value}`)
-
-  // 3秒后切换回原主题
-  setTimeout(() => {
-    theme.setTheme(currentTheme)
-    modal.showToast(`已恢复原主题: ${currentTheme}`)
-  }, 3000)
 }
 
 // Demo: useInputLimit
@@ -382,16 +321,18 @@ const demoShare = () => {
 
 // Demo: useValidation
 const demoValidation = () => {
-  const validation = useValidation()
+  // 简单的验证示例，不使用复杂的API
   const modal = useModal()
 
-  // 手机号验证
+  // 手机号验证正则
+  const phoneRegex = /^1[3-9]\d{9}$/
   const phone = "13800138000"
-  const isValidPhone = validation.validatePhone(phone)
+  const isValidPhone = phoneRegex.test(phone)
 
-  // 密码验证
+  // 密码验证正则 (包含大小写字母和数字)
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/
   const password = "Password123"
-  const isValidPassword = validation.validatePassword(password)
+  const isValidPassword = passwordRegex.test(password)
 
   modal.showToast(`
     验证结果:
@@ -400,18 +341,67 @@ const demoValidation = () => {
   `)
 }
 
-// Demo: usePageScroll
-const demoPageScroll = () => {
-  const pageScroll = usePageScroll()
-  const modal = useModal()
+// Demo: useCountdown - 使用改进的hook
+const countdownVisible = ref(false)
+const countdown = ref<any>(null)
 
-  pageScroll.scrollToTop()
+// 倒计时演示
+const demoCountdown = () => {
+  countdownVisible.value = true
 
-  modal.showToast("已滚动到页面顶部")
-
-  // 监听滚动位置
-  pageScroll.onPageScroll((scrollTop) => {
-    console.log("滚动位置:", scrollTop)
+  // 创建倒计时实例
+  countdown.value = useCountdown({
+    totalSeconds: 60,
+    autoStart: true,
+    interval: 1000,
+    onFinish: () => {
+      const modal = useModal()
+      modal.showToast("倒计时结束！")
+    },
+    onTick: (seconds, formatted) => {
+      console.log("倒计时更新:", formatted, seconds)
+    },
   })
+}
+
+// 增加时间
+const handleAddTime = () => {
+  if (!countdown.value) return
+
+  countdown.value.addTime(10)
+
+  const modal = useModal()
+  modal.showToast("已增加10秒")
+}
+
+// 减少时间
+const handleSubtractTime = () => {
+  if (!countdown.value) return
+
+  countdown.value.subtractTime(5)
+
+  const modal = useModal()
+  modal.showToast("已减少5秒")
+}
+
+// 暂停/继续
+const handlePauseResume = () => {
+  if (!countdown.value) return
+
+  if (countdown.value.isRunning.value) {
+    countdown.value.pause()
+  } else {
+    countdown.value.start()
+  }
+}
+
+// 关闭倒计时
+const closeCountdown = () => {
+  countdownVisible.value = false
+
+  if (countdown.value) {
+    countdown.value.stop()
+    countdown.value = null
+  }
 }
 </script>

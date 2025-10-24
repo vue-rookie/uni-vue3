@@ -8,6 +8,8 @@ declare global {
   const EffectScope: typeof import('vue')['EffectScope']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
+  const createCountdown: typeof import('../hooks/useCountdown')['createCountdown']
+  const createCountdownTo: typeof import('../hooks/useCountdown')['createCountdownTo']
   const customRef: typeof import('vue')['customRef']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
@@ -76,29 +78,31 @@ declare global {
   const unref: typeof import('vue')['unref']
   const useAttrs: typeof import('vue')['useAttrs']
   const useCamera: typeof import('../hooks/useCamera')['useCamera']
+  const useCountdown: typeof import('../hooks/useCountdown')['useCountdown']
+  const useCountdownFixed: typeof import('../hooks/useCountdown')['useCountdownFixed']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
-  const useDate: typeof import('../hooks/useDate')['useDate']
   const useDisplay: typeof import('../hooks/useDisplay')['useDisplay']
+  const useDynamicVirtualList: typeof import('../hooks/useVirtualList')['useDynamicVirtualList']
   const useEvent: typeof import('../hooks/useEvent')['useEvent']
+  const useFixedVirtualList: typeof import('../hooks/useVirtualList')['useFixedVirtualList']
   const useId: typeof import('vue')['useId']
   const useInputDataLimit: typeof import('../hooks/useInputLimit')['useInputDataLimit']
-  const useInputLimit: typeof import('../hooks/useInputLimit')['useInputLimit']
+  const useLazyBackground: typeof import('../hooks/useLazyLoad')['useLazyBackground']
+  const useLazyImage: typeof import('../hooks/useLazyLoad')['useLazyImage']
+  const useLazyLoad: typeof import('../hooks/useLazyLoad')['useLazyLoad']
   const useLocation: typeof import('../hooks/useLocation')['useLocation']
   const useModal: typeof import('../hooks/useModal')['useModal']
   const useModel: typeof import('vue')['useModel']
   const usePageScroll: typeof import('../hooks/usePageScroll')['usePageScroll']
-  const useQrcode: typeof import('../hooks/useQrcode')['useQrcode']
   const useRequest: typeof import('../hooks/useRequest')['useRequest']
   const useShare: typeof import('../hooks/useShare')['useShare']
   const useSlots: typeof import('vue')['useSlots']
   const useStorage: typeof import('../hooks/useStorage')['useStorage']
   const useSystem: typeof import('../hooks/useSystem')['useSystem']
   const useTemplateRef: typeof import('vue')['useTemplateRef']
-  const useTheme: typeof import('../hooks/useTheme')['useTheme']
-  const useTool: typeof import('../hooks/useTool')['useTool']
-  const useUpload: typeof import('../hooks/useUpload')['default']
   const useValidation: typeof import('../hooks/useValidation')['useValidation']
+  const useVirtualList: typeof import('../hooks/useVirtualList')['useVirtualList']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
   const watchPostEffect: typeof import('vue')['watchPostEffect']
@@ -118,6 +122,7 @@ declare module 'vue' {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
+    readonly createCountdown: UnwrapRef<typeof import('../hooks/useCountdown')['createCountdown']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
@@ -186,6 +191,7 @@ declare module 'vue' {
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useCamera: UnwrapRef<typeof import('../hooks/useCamera')['useCamera']>
+    readonly useCountdown: UnwrapRef<typeof import('../hooks/useCountdown')['useCountdown']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useDisplay: UnwrapRef<typeof import('../hooks/useDisplay')['useDisplay']>
@@ -202,7 +208,6 @@ declare module 'vue' {
     readonly useStorage: UnwrapRef<typeof import('../hooks/useStorage')['useStorage']>
     readonly useSystem: UnwrapRef<typeof import('../hooks/useSystem')['useSystem']>
     readonly useTemplateRef: UnwrapRef<typeof import('vue')['useTemplateRef']>
-    readonly useTheme: UnwrapRef<typeof import('../hooks/useTheme')['useTheme']>
     readonly useValidation: UnwrapRef<typeof import('../hooks/useValidation')['useValidation']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>

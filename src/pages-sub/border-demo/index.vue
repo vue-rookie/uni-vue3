@@ -1,5 +1,5 @@
 <template>
-  <view class="page-container bg-white min-h-screen p-4">
+  <view class="page-container bg-white min-h-screen p-4 demo-section">
     <view class="text-xl font-bold mb-6">uve-border 边框</view>
 
     <view class="text-sm text-gray-500 mb-4">边框样式展示，基于TailwindCSS的边框工具类实现。</view>

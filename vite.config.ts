@@ -9,10 +9,12 @@ import UnoCSS from "unocss/vite"
 import AutoImport from "unplugin-auto-import/vite"
 import { visualizer } from "rollup-plugin-visualizer"
 import ViteRestart from "vite-plugin-restart"
-import viteImagemin from "vite-plugin-imagemin"
 import { printBuildInfo } from "./src/utils/logger"
 
 export default ({ command, mode }) => {
+  // 设置环境变量来抑制 Sass 警告
+  process.env.SASS_SILENCE_DEPRECATION_WARNINGS = "true"
+
   const UNI_PLATFORM = process.env.UNI_PLATFORM || "h5"
 
   const env = loadEnv(mode, path.resolve(process.cwd(), "env"))
@@ -51,35 +53,6 @@ export default ({ command, mode }) => {
         // 通过这个插件，在修改vite.config.js文件则不需要重新运行也生效配置
         restart: ["vite.config.js"],
       }),
-      // 图片压缩插件 (仅生产环境启用)
-      mode === "production" &&
-        viteImagemin({
-          gifsicle: {
-            optimizationLevel: 7,
-            interlaced: false,
-          },
-          optipng: {
-            optimizationLevel: 7,
-          },
-          mozjpeg: {
-            quality: 80,
-          },
-          pngquant: {
-            quality: [0.8, 0.9],
-            speed: 4,
-          },
-          svgo: {
-            plugins: [
-              {
-                name: "removeViewBox",
-              },
-              {
-                name: "removeEmptyAttrs",
-                active: false,
-              },
-            ],
-          },
-        }),
       // h5环境增加编译时间
       UNI_PLATFORM === "h5" && {
         name: "html-transform",
@@ -107,19 +80,10 @@ export default ({ command, mode }) => {
       },
       preprocessorOptions: {
         scss: {
-          // https://github.com/vitejs/vite/issues/15474
-          additionalData: `@import "@/style/theme.scss";`,
-          sassOptions: {
-            quiet: true,
-            quietDeps: true,
-            charset: false,
-            sourceMap: false,
-            outputStyle: "compressed",
-            logger: {
-              warn: function () {},
-              debug: function () {},
-            },
-          },
+          // https://github.com/vitejs/vite/issues/1547
+          quietDeps: true,
+          api: "modern-compiler",
+          silenceDeprecations: ["legacy-js-api"],
         },
       },
     },
