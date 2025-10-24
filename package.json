@@ -109,7 +109,6 @@
     "@dcloudio/uni-quickapp-webview": "3.0.0-4050620250312001",
     "crypto-js": "^4.2.0",
     "dayjs": "1.11.10",
-    "highlight.js": "^11.11.1",
     "jsencrypt": "^3.5.4",
     "marked": "^16.4.0",
     "pinia": "2.0.36",

@@ -30,7 +30,7 @@
 
         <view class="text-lg font-bold text-text leading-1.4 mb-3">{{ note.title }}</view>
 
-        <view class="text-15px text-text leading-1.6 mb-4 whitespace-pre-wrap">{{ note.content }}</view>
+        <view class="text-15px text-text mb-4 whitespace-pre-wrap">{{ note.content }}</view>
 
         <view class="flex flex-wrap gap-2 mb-4">
           <view
@@ -47,9 +47,13 @@
         <view class="flex items-center gap-1">
           <text class="text-13px text-text-placeholder">{{ note.likes }} 点赞</text>
           <text class="text-13px text-gray-300 mx-1">·</text>
-          <text class="text-13px text-text-placeholder">{{ Math.floor(note.likes * 0.3) }} 收藏</text>
+          <text class="text-13px text-text-placeholder">
+            {{ Math.floor(note.likes * 0.3) }} 收藏
+          </text>
           <text class="text-13px text-gray-300 mx-1">·</text>
-          <text class="text-13px text-text-placeholder">{{ Math.floor(note.likes * 0.2) }} 评论</text>
+          <text class="text-13px text-text-placeholder">
+            {{ Math.floor(note.likes * 0.2) }} 评论
+          </text>
         </view>
       </view>
     </scroll-view>
@@ -66,13 +70,19 @@
       <view class="flex items-center gap-4">
         <view class="flex flex-col items-center gap-0.5" @click="handleLike">
           <text
-            :class="['text-22px', note.isLiked ? 'i-ri-heart-fill text-xhs' : 'i-ri-heart-line text-text']"
+            :class="[
+              'text-22px',
+              note.isLiked ? 'i-ri-heart-fill text-xhs' : 'i-ri-heart-line text-text',
+            ]"
           ></text>
           <text class="text-11px text-text-secondary">{{ formatCount(note.likes) }}</text>
         </view>
         <view class="flex flex-col items-center gap-0.5" @click="handleCollect">
           <text
-            :class="['text-22px', note.isCollected ? 'i-ri-star-fill text-warning' : 'i-ri-star-line text-text']"
+            :class="[
+              'text-22px',
+              note.isCollected ? 'i-ri-star-fill text-warning' : 'i-ri-star-line text-text',
+            ]"
           ></text>
           <text class="text-11px text-text-secondary">收藏</text>
         </view>

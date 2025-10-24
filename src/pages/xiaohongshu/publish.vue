@@ -16,7 +16,11 @@
       <view class="p-4">
         <view class="grid grid-cols-3 gap-2 mb-2">
           <view v-for="(img, index) in images" :key="index" class="relative w-full pb-100%">
-            <image :src="img" mode="aspectFill" class="absolute top-0 left-0 w-full h-full rounded-lg" />
+            <image
+              :src="img"
+              mode="aspectFill"
+              class="absolute top-0 left-0 w-full h-full rounded-lg"
+            />
             <view
               class="absolute top-1 right-1 w-20px h-20px bg-black/50 rounded-full flex-center text-white text-14px"
               @click="deleteImage(index)"
@@ -29,7 +33,9 @@
             class="relative w-full pb-100% bg-bg-light rounded-lg"
             @click="chooseImage"
           >
-            <view class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center gap-1">
+            <view
+              class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center gap-1"
+            >
               <text class="i-ri-add-line text-32px text-text-placeholder"></text>
               <text class="text-12px text-text-placeholder">添加图片</text>
             </view>
@@ -42,7 +48,7 @@
         <view class="pb-4 border-b border-border relative">
           <textarea
             v-model="title"
-            class="w-full pr-16 text-15px text-text leading-1.6 min-h-44px font-medium"
+            class="w-full pr-16 text-15px text-text min-h-44px font-medium"
             placeholder="填写标题，会有更多赞哦~"
             maxlength="100"
             :auto-height="true"
@@ -55,7 +61,7 @@
         <view class="py-4 border-b border-border relative">
           <textarea
             v-model="content"
-            class="w-full pr-16 text-15px text-text leading-1.6 min-h-44px"
+            class="w-full pr-16 text-15px text-text min-h-44px"
             placeholder="添加正文"
             maxlength="1000"
             :auto-height="true"
@@ -82,10 +88,15 @@
               <text>#{{ tag }}</text>
             </view>
           </view>
-          <text class="absolute right-4 top-1/2 -translate-y-1/2 i-ri-arrow-right-s-line text-18px text-gray-300"></text>
+          <text
+            class="absolute right-4 top-1/2 -translate-y-1/2 i-ri-arrow-right-s-line text-18px text-gray-300"
+          ></text>
         </view>
 
-        <view class="flex items-center justify-between py-4 border-b border-border" @click="showLocationPicker = true">
+        <view
+          class="flex items-center justify-between py-4 border-b border-border"
+          @click="showLocationPicker = true"
+        >
           <view class="flex items-center gap-2">
             <text class="i-ri-map-pin-line text-18px text-text"></text>
             <text class="text-15px text-text">添加地点</text>
