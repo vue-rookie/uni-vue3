@@ -15,11 +15,13 @@
       <!-- 分类标签 -->
       <view class="category-tabs">
         <scroll-view class="tabs-scroll" scroll-x show-scrollbar="false">
-          <view class="tab-item" 
-                v-for="(tab, index) in tabs" 
-                :key="tab.id"
-                :class="{ active: currentTab === tab.id }"
-                @click="switchTab(tab.id)">
+          <view
+            class="tab-item"
+            v-for="tab in tabs"
+            :key="tab.id"
+            :class="{ active: currentTab === tab.id }"
+            @click="switchTab(tab.id)"
+          >
             {{ tab.name }}
           </view>
         </scroll-view>
@@ -27,10 +29,7 @@
 
       <!-- 瀑布流内容 -->
       <view class="waterfall-wrapper">
-        <xhs-waterfall 
-          :notes="filteredNotes" 
-          @note-click="handleNoteClick"
-        />
+        <xhs-waterfall :notes="filteredNotes" @note-click="handleNoteClick" />
       </view>
 
       <!-- 加载更多 -->
@@ -42,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onReachBottom } from 'vue'
+import { ref, computed, onMounted } from "vue"
 
 interface Author {
   id: string
@@ -67,27 +66,27 @@ interface Tab {
 }
 
 const navbarHeight = ref(132) // 导航栏高度
-const currentTab = ref('recommend')
+const currentTab = ref("recommend")
 const loading = ref(false)
 const notes = ref<Note[]>([])
 
 const tabs: Tab[] = [
-  { id: 'recommend', name: '推荐' },
-  { id: 'follow', name: '关注' },
-  { id: 'fashion', name: '时尚' },
-  { id: 'beauty', name: '美妆' },
-  { id: 'food', name: '美食' },
-  { id: 'travel', name: '旅行' },
-  { id: 'fitness', name: '健身' },
-  { id: 'home', name: '居家' },
-  { id: 'pet', name: '萌宠' }
+  { id: "recommend", name: "推荐" },
+  { id: "follow", name: "关注" },
+  { id: "fashion", name: "时尚" },
+  { id: "beauty", name: "美妆" },
+  { id: "food", name: "美食" },
+  { id: "travel", name: "旅行" },
+  { id: "fitness", name: "健身" },
+  { id: "home", name: "居家" },
+  { id: "pet", name: "萌宠" },
 ]
 
 const filteredNotes = computed(() => {
-  if (currentTab.value === 'recommend') {
+  if (currentTab.value === "recommend") {
     return notes.value
   }
-  return notes.value.filter(note => note.category === currentTab.value)
+  return notes.value.filter((note) => note.category === currentTab.value)
 })
 
 const switchTab = (tabId: string) => {
@@ -98,19 +97,21 @@ const switchTab = (tabId: string) => {
 
 const handleNoteClick = (note: Note) => {
   uni.navigateTo({
-    url: `/pages/detail/index?id=${note.id}`
+    url: `/pages/detail/index?id=${note.id}`,
   })
 }
 
 const loadNotes = async () => {
   loading.value = true
-  
+
   // 模拟加载数据
   setTimeout(() => {
     const mockNotes: Note[] = Array.from({ length: 20 }, (_, index) => ({
       id: `note_${Date.now()}_${index}`,
       title: `这是一篇很棒的笔记标题 ${index + 1}`,
-      coverImage: `https://picsum.photos/300/${300 + Math.floor(Math.random() * 200)}?random=${index}`,
+      coverImage: `https://picsum.photos/300/${
+        300 + Math.floor(Math.random() * 200)
+      }?random=${index}`,
       isVideo: Math.random() > 0.7,
       likes: Math.floor(Math.random() * 10000),
       comments: Math.floor(Math.random() * 1000),
@@ -118,23 +119,23 @@ const loadNotes = async () => {
       author: {
         id: `user_${index}`,
         name: `用户${index + 1}`,
-        avatar: `https://picsum.photos/100/100?random=user${index}`
-      }
+        avatar: `https://picsum.photos/100/100?random=user${index}`,
+      },
     }))
-    
+
     if (notes.value.length === 0) {
       notes.value = mockNotes
     } else {
       notes.value.push(...mockNotes)
     }
-    
+
     loading.value = false
   }, 1000)
 }
 
 onMounted(() => {
   loadNotes()
-  
+
   // 获取系统信息计算导航栏高度
   const systemInfo = uni.getSystemInfoSync()
   navbarHeight.value = (systemInfo.statusBarHeight || 0) + 44 + 40 // 状态栏 + 导航栏 + 标签栏
@@ -155,7 +156,7 @@ onReachBottom(() => {
 
   .content {
     height: 100%;
-    
+
     .category-tabs {
       background: #fff;
       padding: 0 24rpx;
@@ -163,20 +164,20 @@ onReachBottom(() => {
 
       .tabs-scroll {
         white-space: nowrap;
-        
+
         .tab-item {
           display: inline-block;
           padding: 24rpx 32rpx;
           font-size: 28rpx;
           color: #666;
           position: relative;
-          
+
           &.active {
             color: #ff2442;
             font-weight: 600;
-            
+
             &::after {
-              content: '';
+              content: "";
               position: absolute;
               bottom: 0;
               left: 50%;
@@ -199,7 +200,7 @@ onReachBottom(() => {
     .loading {
       padding: 40rpx;
       text-align: center;
-      
+
       .loading-text {
         color: #999;
         font-size: 28rpx;
