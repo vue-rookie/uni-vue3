@@ -29,14 +29,10 @@
             class="relative w-full pb-100% bg-bg-light rounded-lg"
             @click="chooseImage"
           >
-            <text
-              class="i-ri-add-line absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-15 text-32px text-text-placeholder"
-            ></text>
-            <text
-              class="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-5 text-12px text-text-placeholder"
-            >
-              添加图片
-            </text>
+            <view class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center gap-1">
+              <text class="i-ri-add-line text-32px text-text-placeholder"></text>
+              <text class="text-12px text-text-placeholder">添加图片</text>
+            </view>
           </view>
         </view>
         <view class="text-12px text-text-placeholder mb-4">最多添加9张图片</view>
@@ -46,7 +42,7 @@
         <view class="pb-4 border-b border-border relative">
           <textarea
             v-model="title"
-            class="w-full text-15px text-text leading-1.6 min-h-44px font-medium"
+            class="w-full pr-16 text-15px text-text leading-1.6 min-h-44px font-medium"
             placeholder="填写标题，会有更多赞哦~"
             maxlength="100"
             :auto-height="true"
@@ -59,7 +55,7 @@
         <view class="py-4 border-b border-border relative">
           <textarea
             v-model="content"
-            class="w-full text-15px text-text leading-1.6 min-h-44px"
+            class="w-full pr-16 text-15px text-text leading-1.6 min-h-44px"
             placeholder="添加正文"
             maxlength="1000"
             :auto-height="true"
