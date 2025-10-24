@@ -14,7 +14,7 @@
   },
   "tabBar": {
     "color": "#8f9ca2",
-    "selectedColor": "#000",
+    "selectedColor": "#ff2442",
     "backgroundColor": "#ffffff",
     "borderStyle": "black",
     "height": "64px",
@@ -25,18 +25,60 @@
       {
         "iconPath": "static/tabbar/home.png",
         "selectedIconPath": "static/tabbar/home-select.png",
-        "pagePath": "pages/index/index",
-        "text": "components"
+        "pagePath": "pages/xiaohongshu/index",
+        "text": "首页"
       },
       {
         "iconPath": "static/tabbar/tab1.png",
         "selectedIconPath": "static/tabbar/tab1-select.png",
-        "pagePath": "pages/use/index",
-        "text": "hooks"
+        "pagePath": "pages/xiaohongshu/profile",
+        "text": "我"
+      },
+      {
+        "iconPath": "static/tabbar/home.png",
+        "selectedIconPath": "static/tabbar/home-select.png",
+        "pagePath": "pages/index/index",
+        "text": "组件"
       }
     ]
   },
   "pages": [
+    {
+      "path": "pages/xiaohongshu/index",
+      "type": "home",
+      "style": {
+        "navigationBarTitleText": "小红书",
+        "navigationStyle": "custom"
+      },
+      "needLogin": false
+    },
+    {
+      "path": "pages/xiaohongshu/profile",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "我",
+        "navigationStyle": "custom"
+      },
+      "needLogin": false
+    },
+    {
+      "path": "pages/xiaohongshu/detail",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "笔记详情",
+        "navigationStyle": "default"
+      },
+      "needLogin": false
+    },
+    {
+      "path": "pages/xiaohongshu/publish",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "发布笔记",
+        "navigationStyle": "custom"
+      },
+      "needLogin": false
+    },
     {
       "path": "pages/index/index",
       "type": "home",
