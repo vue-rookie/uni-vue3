@@ -1,93 +1,120 @@
 <template>
-  <view class="publish-page">
-    <view class="header">
-      <view class="header-btn" @click="handleCancel">取消</view>
-      <view class="header-title">发布笔记</view>
-      <view class="header-btn publish-btn" :class="{ active: canPublish }" @click="handlePublish">
+  <view class="w-full h-screen bg-white flex flex-col">
+    <view class="flex items-center justify-between px-4 py-3 border-b border-border">
+      <view class="text-15px text-text-secondary" @click="handleCancel">取消</view>
+      <view class="text-16px font-medium text-text">发布笔记</view>
+      <view
+        class="text-15px"
+        :class="canPublish ? 'text-xhs' : 'text-gray-300'"
+        @click="handlePublish"
+      >
         发布
       </view>
     </view>
 
-    <scroll-view class="content" scroll-y>
-      <view class="image-section">
-        <view class="image-grid">
-          <view v-for="(img, index) in images" :key="index" class="image-item">
-            <image :src="img" mode="aspectFill" class="uploaded-image" />
-            <view class="delete-btn" @click="deleteImage(index)">
+    <scroll-view class="flex-1 overflow-y-auto" scroll-y>
+      <view class="p-4">
+        <view class="grid grid-cols-3 gap-2 mb-2">
+          <view v-for="(img, index) in images" :key="index" class="relative w-full pb-100%">
+            <image :src="img" mode="aspectFill" class="absolute top-0 left-0 w-full h-full rounded-lg" />
+            <view
+              class="absolute top-1 right-1 w-20px h-20px bg-black/50 rounded-full flex-center text-white text-14px"
+              @click="deleteImage(index)"
+            >
               <text class="i-ri-close-line"></text>
             </view>
           </view>
-          <view v-if="images.length < 9" class="add-image" @click="chooseImage">
-            <text class="i-ri-add-line add-icon"></text>
-            <text class="add-text">添加图片</text>
+          <view
+            v-if="images.length < 9"
+            class="relative w-full pb-100% bg-bg-light rounded-lg"
+            @click="chooseImage"
+          >
+            <text
+              class="i-ri-add-line absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-15 text-32px text-text-placeholder"
+            ></text>
+            <text
+              class="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-5 text-12px text-text-placeholder"
+            >
+              添加图片
+            </text>
           </view>
         </view>
-        <view class="image-tip">最多添加9张图片</view>
+        <view class="text-12px text-text-placeholder mb-4">最多添加9张图片</view>
       </view>
 
-      <view class="form-section">
-        <view class="form-item">
+      <view class="px-4">
+        <view class="pb-4 border-b border-border relative">
           <textarea
             v-model="title"
-            class="title-input"
+            class="w-full text-15px text-text leading-1.6 min-h-44px font-medium"
             placeholder="填写标题，会有更多赞哦~"
             maxlength="100"
             :auto-height="true"
           />
-          <view class="char-count">{{ title.length }}/100</view>
+          <view class="absolute bottom-4 right-0 text-12px text-text-placeholder">
+            {{ title.length }}/100
+          </view>
         </view>
 
-        <view class="form-item">
+        <view class="py-4 border-b border-border relative">
           <textarea
             v-model="content"
-            class="content-input"
+            class="w-full text-15px text-text leading-1.6 min-h-44px"
             placeholder="添加正文"
             maxlength="1000"
             :auto-height="true"
           />
-          <view class="char-count">{{ content.length }}/1000</view>
+          <view class="absolute bottom-4 right-0 text-12px text-text-placeholder">
+            {{ content.length }}/1000
+          </view>
         </view>
 
-        <view class="form-item tags-item" @click="showTagPicker = true">
-          <view class="label">
-            <text class="i-ri-price-tag-3-line label-icon"></text>
-            <text>添加话题</text>
+        <view class="py-4 border-b border-border" @click="showTagPicker = true">
+          <view class="flex items-center gap-2 mb-3">
+            <text class="i-ri-price-tag-3-line text-18px text-text"></text>
+            <text class="text-15px text-text">添加话题</text>
           </view>
-          <view class="tags-display">
-            <text v-if="tags.length === 0" class="placeholder">选择话题可以获得更多曝光</text>
-            <view v-else class="selected-tags">
-              <view v-for="tag in tags" :key="tag" class="tag-chip">
-                <text>#{{ tag }}</text>
-              </view>
+          <view v-if="tags.length === 0" class="text-right text-14px text-text-placeholder mr-2">
+            选择话题可以获得更多曝光
+          </view>
+          <view v-else class="flex flex-wrap gap-2">
+            <view
+              v-for="tag in tags"
+              :key="tag"
+              class="px-3 py-1 bg-bg-light rounded-12px text-13px text-text-secondary"
+            >
+              <text>#{{ tag }}</text>
             </view>
           </view>
-          <text class="i-ri-arrow-right-s-line arrow-icon"></text>
+          <text class="absolute right-4 top-1/2 -translate-y-1/2 i-ri-arrow-right-s-line text-18px text-gray-300"></text>
         </view>
 
-        <view class="form-item" @click="showLocationPicker = true">
-          <view class="label">
-            <text class="i-ri-map-pin-line label-icon"></text>
-            <text>添加地点</text>
+        <view class="flex items-center justify-between py-4 border-b border-border" @click="showLocationPicker = true">
+          <view class="flex items-center gap-2">
+            <text class="i-ri-map-pin-line text-18px text-text"></text>
+            <text class="text-15px text-text">添加地点</text>
           </view>
-          <text v-if="location" class="value">{{ location }}</text>
-          <text v-else class="placeholder">你在哪里？</text>
-          <text class="i-ri-arrow-right-s-line arrow-icon"></text>
+          <view class="flex items-center gap-2">
+            <text v-if="location" class="text-14px text-text">{{ location }}</text>
+            <text v-else class="text-14px text-text-placeholder">你在哪里？</text>
+            <text class="i-ri-arrow-right-s-line text-18px text-gray-300"></text>
+          </view>
         </view>
       </view>
     </scroll-view>
 
     <uve-popup v-model:show="showTagPicker" position="bottom" :round="true">
-      <view class="tag-picker">
-        <view class="picker-header">
-          <view class="picker-title">选择话题</view>
-          <view class="picker-close" @click="showTagPicker = false">完成</view>
+      <view class="bg-white rounded-t-16px max-h-60vh">
+        <view class="flex items-center justify-between px-4 py-4 border-b border-border">
+          <view class="text-16px font-medium text-text">选择话题</view>
+          <view class="text-15px text-xhs" @click="showTagPicker = false">完成</view>
         </view>
-        <view class="tag-list">
+        <view class="px-4 py-4 flex flex-wrap gap-3">
           <view
             v-for="tag in availableTags"
             :key="tag"
-            class="tag-option"
-            :class="{ selected: tags.includes(tag) }"
+            class="px-4 py-2 rounded-16px text-14px"
+            :class="tags.includes(tag) ? 'bg-xhs-100 text-xhs' : 'bg-bg-light text-text-secondary'"
             @click="toggleTag(tag)"
           >
             <text>#{{ tag }}</text>
@@ -197,258 +224,3 @@ const handlePublish = () => {
   }, 1500)
 }
 </script>
-
-<style scoped lang="scss">
-.publish-page {
-  width: 100%;
-  height: 100vh;
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.header-btn {
-  font-size: 15px;
-  color: #666;
-}
-
-.publish-btn {
-  color: #ccc;
-
-  &.active {
-    color: #ff2442;
-  }
-}
-
-.header-title {
-  font-size: 16px;
-  font-weight: 500;
-  color: #333;
-}
-
-.content {
-  flex: 1;
-  overflow-y: auto;
-}
-
-.image-section {
-  padding: 16px;
-}
-
-.image-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.image-item {
-  position: relative;
-  width: 100%;
-  padding-bottom: 100%;
-}
-
-.uploaded-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 8px;
-}
-
-.delete-btn {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 20px;
-  height: 20px;
-  background: rgb(0 0 0 / 50%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 14px;
-}
-
-.add-image {
-  width: 100%;
-  padding-bottom: 100%;
-  position: relative;
-  background: #f5f5f5;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.add-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -60%);
-  font-size: 32px;
-  color: #999;
-}
-
-.add-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, 20%);
-  font-size: 12px;
-  color: #999;
-}
-
-.image-tip {
-  font-size: 12px;
-  color: #999;
-}
-
-.form-section {
-  padding: 0 16px;
-}
-
-.form-item {
-  padding: 16px 0;
-  border-bottom: 1px solid #f0f0f0;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  position: relative;
-}
-
-.title-input,
-.content-input {
-  flex: 1;
-  font-size: 15px;
-  color: #333;
-  line-height: 1.6;
-  min-height: 44px;
-  width: 100%;
-}
-
-.title-input {
-  font-weight: 500;
-}
-
-.char-count {
-  position: absolute;
-  bottom: 16px;
-  right: 0;
-  font-size: 12px;
-  color: #999;
-}
-
-.tags-item {
-  flex-direction: column;
-  align-items: stretch;
-  gap: 12px;
-}
-
-.label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 15px;
-  color: #333;
-}
-
-.label-icon {
-  font-size: 18px;
-}
-
-.tags-display {
-  flex: 1;
-}
-
-.selected-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.tag-chip {
-  padding: 4px 12px;
-  background: #f5f5f5;
-  border-radius: 12px;
-  font-size: 13px;
-  color: #666;
-}
-
-.value {
-  flex: 1;
-  text-align: right;
-  color: #333;
-  font-size: 14px;
-  margin-right: 8px;
-}
-
-.placeholder {
-  flex: 1;
-  text-align: right;
-  color: #999;
-  font-size: 14px;
-  margin-right: 8px;
-}
-
-.arrow-icon {
-  font-size: 18px;
-  color: #ccc;
-}
-
-.tag-picker {
-  background: #fff;
-  border-radius: 16px 16px 0 0;
-  max-height: 60vh;
-}
-
-.picker-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.picker-title {
-  font-size: 16px;
-  font-weight: 500;
-  color: #333;
-}
-
-.picker-close {
-  font-size: 15px;
-  color: #ff2442;
-}
-
-.tag-list {
-  padding: 16px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.tag-option {
-  padding: 8px 16px;
-  background: #f5f5f5;
-  border-radius: 16px;
-  font-size: 14px;
-  color: #666;
-
-  &.selected {
-    background: #ffe5e9;
-    color: #ff2442;
-  }
-}
-</style>
