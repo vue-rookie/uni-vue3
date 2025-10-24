@@ -33,12 +33,6 @@
         "selectedIconPath": "static/tabbar/tab1-select.png",
         "pagePath": "pages/xiaohongshu/profile",
         "text": "我"
-      },
-      {
-        "iconPath": "static/tabbar/home.png",
-        "selectedIconPath": "static/tabbar/home-select.png",
-        "pagePath": "pages/index/index",
-        "text": "组件"
       }
     ]
   },
@@ -80,47 +74,11 @@
       "needLogin": false
     },
     {
-      "path": "pages/index/index",
-      "type": "home",
-      "style": {
-        "navigationBarTitleText": "首页",
-        "navigationStyle": "default"
-      },
-      "needLogin": false
-    },
-    {
-      "path": "pages/user/index",
+      "path": "pages/xiaohongshu/search",
       "type": "page",
       "style": {
-        "navigationBarTitleText": "用户中心",
-        "navigationStyle": "default"
-      },
-      "needLogin": false
-    },
-    {
-      "path": "pages/use/index",
-      "type": "page",
-      "style": {
-        "navigationBarTitleText": "hooks示例",
-        "navigationStyle": "default"
-      },
-      "needLogin": false
-    },
-    {
-      "path": "pages/settings/index",
-      "type": "page",
-      "style": {
-        "navigationBarTitleText": "设置",
-        "navigationStyle": "default"
-      },
-      "needLogin": false
-    },
-    {
-      "path": "pages/login/index",
-      "type": "page",
-      "style": {
-        "navigationBarTitleText": "登录注册",
-        "navigationStyle": "default"
+        "navigationBarTitleText": "搜索",
+        "navigationStyle": "custom"
       },
       "needLogin": false
     }

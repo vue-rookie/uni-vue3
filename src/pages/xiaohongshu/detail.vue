@@ -1,79 +1,84 @@
 <template>
-  <view class="detail-page">
-    <scroll-view class="scroll-content" scroll-y>
-      <view class="image-swiper">
+  <view class="w-full h-screen bg-white flex flex-col">
+    <scroll-view class="flex-1 overflow-y-auto" scroll-y>
+      <view class="w-full bg-black">
         <swiper
-          class="swiper"
+          class="w-full h-500px"
           :indicator-dots="note.images.length > 1"
           indicator-color="rgba(255,255,255,0.5)"
           indicator-active-color="#fff"
         >
           <swiper-item v-for="(img, index) in note.images" :key="index">
-            <image :src="img" mode="aspectFill" class="swiper-image" />
+            <image :src="img" mode="aspectFill" class="w-full h-full" />
           </swiper-item>
         </swiper>
       </view>
 
-      <view class="detail-content">
-        <view class="author-info">
-          <view class="author-left">
-            <image :src="note.author.avatar" class="author-avatar" />
-            <view class="author-text">
-              <text class="author-name">{{ note.author.name }}</text>
-              <text class="publish-time">{{ note.createTime }}</text>
+      <view class="p-4">
+        <view class="flex items-center justify-between mb-4">
+          <view class="flex items-center gap-2">
+            <image :src="note.author.avatar" class="w-40px h-40px rounded-full" />
+            <view class="flex flex-col gap-0.5">
+              <text class="text-15px font-medium text-text">{{ note.author.name }}</text>
+              <text class="text-12px text-text-placeholder">{{ note.createTime }}</text>
             </view>
           </view>
-          <view class="follow-btn" @click="handleFollow">
+          <view class="px-4 py-1.5 bg-xhs text-white rounded-16px text-sm" @click="handleFollow">
             <text>+ 关注</text>
           </view>
         </view>
 
-        <view class="note-title">{{ note.title }}</view>
+        <view class="text-lg font-bold text-text leading-1.4 mb-3">{{ note.title }}</view>
 
-        <view class="note-content">{{ note.content }}</view>
+        <view class="text-15px text-text leading-1.6 mb-4 whitespace-pre-wrap">{{ note.content }}</view>
 
-        <view class="note-tags">
-          <view v-for="tag in note.tags" :key="tag" class="tag-item">
+        <view class="flex flex-wrap gap-2 mb-4">
+          <view
+            v-for="tag in note.tags"
+            :key="tag"
+            class="px-3 py-1 bg-bg-light rounded-12px text-13px text-text-secondary"
+          >
             <text>#{{ tag }}</text>
           </view>
         </view>
 
-        <view class="divider"></view>
+        <view class="h-1px bg-border my-4"></view>
 
-        <view class="interaction-info">
-          <text class="info-text">{{ note.likes }} 点赞</text>
-          <text class="info-divider">·</text>
-          <text class="info-text">{{ Math.floor(note.likes * 0.3) }} 收藏</text>
-          <text class="info-divider">·</text>
-          <text class="info-text">{{ Math.floor(note.likes * 0.2) }} 评论</text>
+        <view class="flex items-center gap-1">
+          <text class="text-13px text-text-placeholder">{{ note.likes }} 点赞</text>
+          <text class="text-13px text-gray-300 mx-1">·</text>
+          <text class="text-13px text-text-placeholder">{{ Math.floor(note.likes * 0.3) }} 收藏</text>
+          <text class="text-13px text-gray-300 mx-1">·</text>
+          <text class="text-13px text-text-placeholder">{{ Math.floor(note.likes * 0.2) }} 评论</text>
         </view>
       </view>
     </scroll-view>
 
-    <view class="bottom-bar">
-      <view class="bottom-left">
-        <view class="input-placeholder" @click="handleComment">
+    <view class="flex items-center px-4 py-3 border-t border-border bg-white gap-3">
+      <view class="flex-1">
+        <view
+          class="h-36px bg-bg-light rounded-18px flex items-center px-4 text-sm text-text-placeholder"
+          @click="handleComment"
+        >
           <text>说点什么...</text>
         </view>
       </view>
-      <view class="bottom-actions">
-        <view class="action-btn" @click="handleLike">
+      <view class="flex items-center gap-4">
+        <view class="flex flex-col items-center gap-0.5" @click="handleLike">
           <text
-            :class="['action-icon', note.isLiked ? 'i-ri-heart-fill' : 'i-ri-heart-line']"
-            :style="{ color: note.isLiked ? '#ff2442' : '#333' }"
+            :class="['text-22px', note.isLiked ? 'i-ri-heart-fill text-xhs' : 'i-ri-heart-line text-text']"
           ></text>
-          <text class="action-text">{{ formatCount(note.likes) }}</text>
+          <text class="text-11px text-text-secondary">{{ formatCount(note.likes) }}</text>
         </view>
-        <view class="action-btn" @click="handleCollect">
+        <view class="flex flex-col items-center gap-0.5" @click="handleCollect">
           <text
-            :class="['action-icon', note.isCollected ? 'i-ri-star-fill' : 'i-ri-star-line']"
-            :style="{ color: note.isCollected ? '#ffc107' : '#333' }"
+            :class="['text-22px', note.isCollected ? 'i-ri-star-fill text-warning' : 'i-ri-star-line text-text']"
           ></text>
-          <text class="action-text">收藏</text>
+          <text class="text-11px text-text-secondary">收藏</text>
         </view>
-        <view class="action-btn" @click="handleShare">
-          <text class="action-icon i-ri-share-line"></text>
-          <text class="action-text">分享</text>
+        <view class="flex flex-col items-center gap-0.5" @click="handleShare">
+          <text class="i-ri-share-line text-22px text-text"></text>
+          <text class="text-11px text-text-secondary">分享</text>
         </view>
       </view>
     </view>
@@ -181,182 +186,3 @@ onLoad((options: any) => {
   }
 })
 </script>
-
-<style scoped lang="scss">
-.detail-page {
-  width: 100%;
-  height: 100vh;
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-}
-
-.scroll-content {
-  flex: 1;
-  overflow-y: auto;
-}
-
-.image-swiper {
-  width: 100%;
-  background: #000;
-}
-
-.swiper {
-  width: 100%;
-  height: 500px;
-}
-
-.swiper-image {
-  width: 100%;
-  height: 100%;
-}
-
-.detail-content {
-  padding: 16px;
-}
-
-.author-info {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-}
-
-.author-left {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.author-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
-
-.author-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.author-name {
-  font-size: 15px;
-  font-weight: 500;
-  color: #333;
-}
-
-.publish-time {
-  font-size: 12px;
-  color: #999;
-}
-
-.follow-btn {
-  padding: 6px 16px;
-  background: #ff2442;
-  color: #fff;
-  border-radius: 16px;
-  font-size: 14px;
-}
-
-.note-title {
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
-  line-height: 1.4;
-  margin-bottom: 12px;
-}
-
-.note-content {
-  font-size: 15px;
-  color: #333;
-  line-height: 1.6;
-  margin-bottom: 16px;
-  white-space: pre-wrap;
-}
-
-.note-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.tag-item {
-  padding: 4px 12px;
-  background: #f5f5f5;
-  border-radius: 12px;
-  font-size: 13px;
-  color: #666;
-}
-
-.divider {
-  height: 1px;
-  background: #f0f0f0;
-  margin: 16px 0;
-}
-
-.interaction-info {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.info-text {
-  font-size: 13px;
-  color: #999;
-}
-
-.info-divider {
-  font-size: 13px;
-  color: #ddd;
-  margin: 0 4px;
-}
-
-.bottom-bar {
-  display: flex;
-  align-items: center;
-  padding: 12px 16px;
-  border-top: 1px solid #f0f0f0;
-  background: #fff;
-  gap: 12px;
-}
-
-.bottom-left {
-  flex: 1;
-}
-
-.input-placeholder {
-  height: 36px;
-  background: #f5f5f5;
-  border-radius: 18px;
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  font-size: 14px;
-  color: #999;
-}
-
-.bottom-actions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.action-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-}
-
-.action-icon {
-  font-size: 22px;
-  color: #333;
-}
-
-.action-text {
-  font-size: 11px;
-  color: #666;
-}
-</style>

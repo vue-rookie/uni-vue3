@@ -1,14 +1,33 @@
 <template>
-  <view class="xhs-home">
-    <view class="search-bar" :style="{ paddingTop: statusBarHeight + 'px' }">
-      <view class="search-input" @click="handleSearch">
-        <text class="i-ri-search-line search-icon"></text>
-        <text class="search-placeholder">搜索你感兴趣的内容</text>
+  <view class="w-full h-screen bg-bg-light">
+    <view
+      class="fixed top-0 left-0 right-0 z-999 bg-white shadow-sm"
+      :style="{ paddingTop: statusBarHeight + 'px' }"
+    >
+      <view class="px-3 py-2">
+        <view
+          class="bg-bg-light rounded-20px h-36px flex items-center px-4 gap-2"
+          @click="handleSearch"
+        >
+          <text class="i-ri-search-line text-18px text-text-placeholder"></text>
+          <text class="text-sm text-text-placeholder">搜索你感兴趣的内容</text>
+        </view>
+      </view>
+      <view class="flex items-center px-3 pb-2">
+        <view
+          v-for="tab in tabs"
+          :key="tab.id"
+          class="px-3 py-1 text-15px transition-all"
+          :class="currentTab === tab.id ? 'text-text font-medium' : 'text-text-secondary'"
+          @click="switchTab(tab.id)"
+        >
+          {{ tab.name }}
+        </view>
       </view>
     </view>
 
     <scroll-view
-      class="scroll-container"
+      class="pt-100px"
       scroll-y
       :style="{ height: scrollHeight + 'px' }"
       @scrolltolower="loadMore"
@@ -33,17 +52,21 @@
         </template>
       </uve-waterfall>
 
-      <view v-if="loading" class="loading-more">
+      <view v-if="loading" class="text-center py-5 text-text-placeholder text-sm">
         <text>加载中...</text>
       </view>
 
-      <view v-if="!hasMore && noteList.length > 0" class="no-more">
+      <view v-if="!hasMore && noteList.length > 0" class="text-center py-5 text-text-placeholder text-sm">
         <text>没有更多了</text>
       </view>
     </scroll-view>
 
-    <view class="publish-fab" @click="goToPublish">
-      <text class="i-ri-add-line fab-icon"></text>
+    <view
+      class="fixed right-5 bottom-80px w-56px h-56px rounded-full bg-gradient-to-br from-xhs to-xhs-400 shadow-lg flex-center z-100"
+      style="box-shadow: 0 4px 12px rgba(255, 36, 66, 0.4)"
+      @click="goToPublish"
+    >
+      <text class="i-ri-add-line text-28px text-white"></text>
     </view>
   </view>
 </template>
@@ -59,6 +82,13 @@ const noteList = ref<NoteItem[]>([])
 const loading = ref(false)
 const hasMore = ref(true)
 const page = ref(1)
+const currentTab = ref("follow")
+
+const tabs = [
+  { id: "follow", name: "关注" },
+  { id: "explore", name: "发现" },
+  { id: "nearby", name: "附近" },
+]
 
 const leftColumn = computed(() => {
   return noteList.value.filter((_, index) => index % 2 === 0)
@@ -101,9 +131,8 @@ const goToDetail = (note: NoteItem) => {
 }
 
 const handleSearch = () => {
-  uni.showToast({
-    title: "搜索功能开发中",
-    icon: "none",
+  uni.navigateTo({
+    url: "/pages/xiaohongshu/search",
   })
 }
 
@@ -111,6 +140,14 @@ const goToPublish = () => {
   uni.navigateTo({
     url: "/pages/xiaohongshu/publish",
   })
+}
+
+const switchTab = (tabId: string) => {
+  currentTab.value = tabId
+  noteList.value = []
+  page.value = 1
+  hasMore.value = true
+  loadData()
 }
 
 onMounted(async () => {
@@ -127,75 +164,3 @@ onMounted(async () => {
   await loadData()
 })
 </script>
-
-<style scoped lang="scss">
-.xhs-home {
-  width: 100%;
-  height: 100vh;
-  background: #f8f8f8;
-}
-
-.search-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 999;
-  background: #fff;
-  padding-bottom: 8px;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 5%);
-}
-
-.search-input {
-  margin: 0 12px;
-  background: #f5f5f5;
-  border-radius: 20px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  gap: 8px;
-}
-
-.search-icon {
-  font-size: 18px;
-  color: #999;
-}
-
-.search-placeholder {
-  font-size: 14px;
-  color: #999;
-}
-
-.scroll-container {
-  padding-top: 52px;
-}
-
-.loading-more,
-.no-more {
-  text-align: center;
-  padding: 20px 0;
-  color: #999;
-  font-size: 14px;
-}
-
-.publish-fab {
-  position: fixed;
-  right: 20px;
-  bottom: 80px;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #ff2442 0%, #ff6b6b 100%);
-  box-shadow: 0 4px 12px rgb(255 36 66 / 40%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-}
-
-.fab-icon {
-  font-size: 28px;
-  color: #fff;
-}
-</style>

@@ -34,6 +34,20 @@ export default defineConfig({
   ],
   theme: {
     colors: {
+      // 小红书主题色
+      xhs: {
+        DEFAULT: "#ff2442",
+        50: "#fff0f3",
+        100: "#ffe5e9",
+        200: "#ffccd4",
+        300: "#ff99a8",
+        400: "#ff5c77",
+        500: "#ff2442",
+        600: "#e60028",
+        700: "#cc001f",
+        800: "#99001a",
+        900: "#660012",
+      },
       // 主题色
       primary: {
         DEFAULT: "#06f",
@@ -195,6 +209,15 @@ export default defineConfig({
     // 自定义规则
     [/^fs-(\d+)$/, ([, d]) => ({ "font-size": `${d}rpx` })],
     [/^lh-(\d+)$/, ([, d]) => ({ "line-height": `${d}rpx` })],
+    // 支持任意数值的padding-bottom (用于实现固定宽高比)
+    [/^pb-(\d+)%$/, ([, d]) => ({ "padding-bottom": `${d}%` })],
+    // 支持行截断
+    [/^line-clamp-(\d+)$/, ([, d]) => ({
+      overflow: "hidden",
+      display: "-webkit-box",
+      "-webkit-box-orient": "vertical",
+      "-webkit-line-clamp": d,
+    })],
   ],
   safelist: [
     // 安全列表，确保这些类始终可用
@@ -202,9 +225,14 @@ export default defineConfig({
     "text-success",
     "text-warning",
     "text-error",
+    "text-xhs",
     "bg-primary",
     "bg-success",
     "bg-warning",
     "bg-error",
+    "bg-xhs",
+    "bg-xhs-100",
+    "line-clamp-2",
+    "line-clamp-3",
   ],
 })
