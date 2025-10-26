@@ -28,7 +28,7 @@
           </view>
         </view>
 
-        <view class="text-lg font-bold text-text leading-1.4 mb-3">{{ note.title }}</view>
+        <view class="text-lg font-bold text-text mb-3">{{ note.title }}</view>
 
         <view class="text-15px text-text mb-4 whitespace-pre-wrap">{{ note.content }}</view>
 

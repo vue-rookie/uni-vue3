@@ -9,10 +9,7 @@
             <view class="text-13px text-text-placeholder">{{ userProfile.signature }}</view>
           </view>
         </view>
-        <view
-          class="px-4 py-1.5 bg-bg-light rounded-16px text-sm text-text"
-          @click="editProfile"
-        >
+        <view class="px-4 py-1.5 bg-bg-light rounded-16px text-sm text-text" @click="editProfile">
           编辑资料
         </view>
       </view>
@@ -60,9 +57,9 @@
           <image :src="note.cover" mode="aspectFill" class="absolute top-0 left-0 w-full h-full" />
           <view
             class="absolute bottom-0 left-0 right-0 px-2 py-2 text-white"
-            style="background: linear-gradient(transparent, rgba(0, 0, 0, 0.6))"
+            style="background: linear-gradient(transparent, rgb(0 0 0 / 60%))"
           >
-            <view class="text-12px leading-1.3 mb-1 overflow-hidden text-ellipsis line-clamp-2">
+            <view class="text-12px mb-1 overflow-hidden text-ellipsis line-clamp-2">
               {{ note.title }}
             </view>
             <view class="flex items-center gap-1 text-11px">
@@ -73,12 +70,18 @@
         </view>
       </view>
 
-      <view v-if="currentTab === 'liked'" class="flex flex-col items-center justify-center py-20 gap-3">
+      <view
+        v-if="currentTab === 'liked'"
+        class="flex flex-col items-center justify-center py-20 gap-3"
+      >
         <text class="i-ri-heart-line text-48px text-gray-300"></text>
         <text class="text-sm text-text-placeholder">还没有点赞的笔记</text>
       </view>
 
-      <view v-if="currentTab === 'collected'" class="flex flex-col items-center justify-center py-20 gap-3">
+      <view
+        v-if="currentTab === 'collected'"
+        class="flex flex-col items-center justify-center py-20 gap-3"
+      >
         <text class="i-ri-star-line text-48px text-gray-300"></text>
         <text class="text-sm text-text-placeholder">还没有收藏的笔记</text>
       </view>

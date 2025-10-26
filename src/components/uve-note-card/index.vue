@@ -10,13 +10,15 @@
       </view>
     </view>
     <view class="p-2">
-      <view class="text-sm leading-1.4 text-text overflow-hidden text-ellipsis line-clamp-2 mb-2">
+      <view class="text-sm text-text overflow-hidden text-ellipsis line-clamp-2 mb-2">
         {{ note.title }}
       </view>
       <view class="flex items-center justify-between">
         <view class="flex items-center gap-1 flex-1 min-w-0">
           <image :src="note.author.avatar" class="w-20px h-20px rounded-full" />
-          <text class="text-12px text-text-secondary overflow-hidden text-ellipsis whitespace-nowrap">
+          <text
+            class="text-12px text-text-secondary overflow-hidden text-ellipsis whitespace-nowrap"
+          >
             {{ note.author.name }}
           </text>
         </view>
