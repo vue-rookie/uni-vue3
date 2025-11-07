@@ -27,11 +27,12 @@
     </view>
 
     <scroll-view
-      class="pt-100px"
+      class="waterfall-scroll-view"
       scroll-y
-      :style="{ height: scrollHeight + 'px' }"
+      :style="{ height: scrollHeight + 'px', top: headerHeight + 'px' }"
       @scrolltolower="loadMore"
       :lower-threshold="100"
+      :enable-back-to-top="true"
     >
       <uve-waterfall>
         <template #left>
@@ -56,14 +57,17 @@
         <text>加载中...</text>
       </view>
 
-      <view v-if="!hasMore && noteList.length > 0" class="text-center py-5 text-text-placeholder text-sm">
+      <view
+        v-if="!hasMore && noteList.length > 0"
+        class="text-center py-5 text-text-placeholder text-sm"
+      >
         <text>没有更多了</text>
       </view>
     </scroll-view>
 
     <view
-      class="fixed right-5 bottom-80px w-56px h-56px rounded-full bg-gradient-to-br from-xhs to-xhs-400 shadow-lg flex-center z-100"
-      style="box-shadow: 0 4px 12px rgba(255, 36, 66, 0.4)"
+      class="fixed right-5 w-56px h-56px rounded-full bg-gradient-to-br from-xhs to-xhs-400 shadow-lg flex-center z-100 publish-btn"
+      style="box-shadow: 0 4px 12px rgb(255 36 66 / 40%)"
       @click="goToPublish"
     >
       <text class="i-ri-add-line text-28px text-white"></text>
@@ -72,12 +76,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue"
+import { ref, computed, onMounted, nextTick } from "vue"
 import { getNoteList } from "@/api/xiaohongshu"
 import type { NoteItem } from "@/types/xiaohongshu"
 
 const statusBarHeight = ref(0)
 const scrollHeight = ref(0)
+const headerHeight = ref(0)
 const noteList = ref<NoteItem[]>([])
 const loading = ref(false)
 const hasMore = ref(true)
@@ -150,17 +155,56 @@ const switchTab = (tabId: string) => {
   loadData()
 }
 
-onMounted(async () => {
+const calculateLayout = () => {
   const systemInfo = uni.getSystemInfoSync()
   statusBarHeight.value = systemInfo.statusBarHeight || 0
 
   const menuButtonInfo = uni.getMenuButtonBoundingClientRect?.()
-  const searchBarHeight = menuButtonInfo
-    ? menuButtonInfo.bottom + menuButtonInfo.top - statusBarHeight.value
-    : 44
+  // 搜索栏区域高度（包含 padding）
+  const searchBarArea = menuButtonInfo
+    ? menuButtonInfo.bottom + 8 // 搜索栏底部 + 下方 padding
+    : statusBarHeight.value + 52 // 默认值：状态栏 + 搜索栏高度
 
-  scrollHeight.value = systemInfo.windowHeight - searchBarHeight - 50
+  // tabs 区域高度约为 44px（包含 padding）
+  const tabsArea = 44
 
+  // 计算顶部固定区域的总高度
+  headerHeight.value = searchBarArea + tabsArea
+
+  // tabBar 高度（从 pages.json 配置中得知是 64px）
+  const tabBarHeight = 64
+
+  // scroll-view 应该填充满整个可视区域，减去顶部和底部
+  scrollHeight.value = systemInfo.windowHeight - headerHeight.value
+}
+
+onMounted(async () => {
+  calculateLayout()
   await loadData()
+
+  // 使用 nextTick 确保 DOM 渲染完成后再重新计算
+  await nextTick()
+  calculateLayout()
 })
 </script>
+
+<style scoped>
+.waterfall-scroll-view {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.waterfall-scroll-view ::v-deep(.uve-waterfall) {
+  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 8px; /* 内容区域底部留一点间距 */
+}
+
+.publish-btn {
+  bottom: 80px; /* tabBar 上方留出空间 */
+}
+</style>
