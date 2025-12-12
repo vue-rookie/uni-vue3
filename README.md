@@ -1,3 +1,4 @@
+# 广告：安利一个靠谱的AI模型中转站 [fast-code](http://api.timebackward.com)  
 # uni-vue3  
 > 专为 UniApp + Vue3 + UnoCSS 打造的 starter template
 
