@@ -1,4 +1,4 @@
-# 广告：安利一个靠谱的AI模型中转站 [fast-code](http://api.timebackward.com)  
+# 广告：安利一个靠谱的AI模型批发站 [引图-AI](http://api.yintu.cc) ，自建号池，基本都是程序员在用
 # uni-vue3  
 > 专为 UniApp + Vue3 + UnoCSS 打造的 starter template
 
