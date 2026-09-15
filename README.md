@@ -10,7 +10,7 @@
 
 ## 📦 快速开始
 
-![小程序预览](https://qinqiang.oss-cn-beijing.aliyuncs.com/gh_0fb82a6dc9c4_344.jpg)
+![uni-vue3 简单demo预览](https://qinqiang.oss-cn-beijing.aliyuncs.com/gh_0fb82a6dc9c4_344.jpg)
 
 ## 产品
 建议手机模式预览  
