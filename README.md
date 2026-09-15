@@ -1,4 +1,4 @@
-# 广告：安利一个靠谱的AI模型批发站 [引图-AI](http://api.yintu.cc) ，自建号池，基本都是程序员在用
+# 广告：安利一个自建的AI中转站 [tokenshop](http://tokenshop.dev) ，自建号池，gpt-pro号池是官方200$原价订阅。基本都是身边程序员在用
 # uni-vue3  
 > 专为 UniApp + Vue3 + UnoCSS 打造的 starter template
 
