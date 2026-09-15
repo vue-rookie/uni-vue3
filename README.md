@@ -8,7 +8,7 @@
 - ✅ TypeScript 支持
 - ✅ Vite 构建工具
 
-## 📦 快速开始
+## 📦 基于uni-vue3开发的一个简单微信小程序demo
 
 ![uni-vue3 简单demo预览](https://qinqiang.oss-cn-beijing.aliyuncs.com/gh_0fb82a6dc9c4_344.jpg)
 
