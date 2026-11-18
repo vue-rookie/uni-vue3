@@ -1,4 +1,4 @@
-# 广告：安利一个自建的AI中转站 [tokenshop](http://tokenshop.dev) ，自建号池，gpt-pro号池是官方200$原价订阅。基本都是身边程序员在用
+# 广告：朋友做了一个AI自动写公众号的站 [灵鸟](http://lingnio.com) ，我也把荒废几年的公众号让它写起来了。每天就在微信后台点一下发表就行，一天几块钱广告费还可以的。
 # uni-vue3  
 > 专为 UniApp + Vue3 + UnoCSS 打造的 starter template
 
